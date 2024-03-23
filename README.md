@@ -1,4 +1,4 @@
-# EZStay - Online Hotel Booking Platform
+# EZStay - Online Hotel & Venue Booking Platform
 > Group 35
 
 ## Screenshots
