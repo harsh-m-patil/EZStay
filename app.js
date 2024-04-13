@@ -50,4 +50,5 @@ app.use('/', hotelroutes);
 const userroutes = require('./routes/user');
 app.use('/', userroutes);
 
-
+const businessroutes = require('./routes/business');
+app.use('/', businessroutes);
