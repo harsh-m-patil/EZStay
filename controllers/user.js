@@ -88,16 +88,22 @@ exports.index = async (req, res) => {
 };
 
 // root
-exports.root = async (req, res) => {
+// exports.root = async (req, res) => {
 
-    res.render('index', { user: req.user });
+//     res.render('index', { user: req.user });
 
-};
+// };
 
 //personalinfo
 exports.personalinfo = async (req, res) => {
   
   res.render('personalinfo', { user: req.user });
+}
+
+//security
+exports.security = async (req, res) => {
+  
+  res.render('security', { user: req.user });
 }
 
 // fuction for update
@@ -189,6 +195,63 @@ exports.updatePhone = async (req, res) => {
       res.status(500).send(`Error updating name: ${err.message}`);
   }
 };
+
+
+// updating the password
+exports.updatepassword = async (req, res) => {
+  try {
+      const { oldPassword, newPassword } = req.body;
+      const userId = req.user.id;
+
+      // Find the user by ID
+      const user = await User.findById(userId);
+
+      // Check if the old password matches
+      const isMatch = await bcrypt.compare(oldPassword, user.password);
+      if (!isMatch) {
+          return res.status(401).send('Incorrect old password');
+      }
+
+      // Hash the new password
+      const salt = await bcrypt.genSalt();
+      const newPasswordHash = await bcrypt.hash(newPassword, salt);
+
+      // Update the password in the database
+      await User.findByIdAndUpdate(userId, { password: newPasswordHash });
+
+      // res.status(200).send('Password updated successfully');
+      res.render('security');
+  } catch (err) {
+      console.error(err);
+      res.status(500).send(`Error updating password: ${err.message}`);
+  }
+};
+
+// Route for deleting the user
+exports.deleteuser = async (req, res) => {
+  try {
+      const userId = req.user.id;
+
+      // Find the user by ID
+      const user = await User.findById(userId);
+
+      if (!user) {
+          return res.status(404).send('User not found');
+      }
+
+      // Perform any necessary cleanup or additional actions here
+
+      // Delete the user from the database
+      await User.findByIdAndDelete(userId);
+
+      // res.status(200).send('User deleted successfully');
+      res.clearCookie('token').redirect('/login');
+  } catch (err) {
+      console.error(err);
+      res.status(500).send(`Error deleting user: ${err.message}`);
+  }
+};
+
 
 // Logout
 exports.logout = async (req, res) => {

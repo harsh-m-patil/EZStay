@@ -91,6 +91,31 @@ h1{
     border-radius: 10px;
 }
 
+.modal{
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    border: 1px solid black;
+    height: 4rem;
+}
+
 .deactivate{
     margin-left: -1.7rem;
+}
+
+input {
+    margin-left: 2vh;
+    margin-top: 2vh;
+}
+
+.updatebtn{
+   
+    margin-left: 41vh;
+    margin-top: 1.5vh;
+    position: absolute;
+
+}
+
+.hidden{
+    display: none;
 }
