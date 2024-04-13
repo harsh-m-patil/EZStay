@@ -38,5 +38,8 @@ router.post('/updatePhone', verifyToken, user.updatePhone);
 router.post('/updatepassword', verifyToken, user.updatepassword);
 router.post('/deleteuser', verifyToken, user.deleteuser);
 
+//search
+// router.post('/search', searchHotel)
+
 
 module.exports = router;

@@ -109,29 +109,28 @@
         <!-- Search, Date, Time Booking Bar -->
 
         <!-- ************************************************************************ -->
-
         <div class="search">
-          <form action="">
+          <form action="/search" method="get">
             <div class="search-bar-divs">
               <label>Where</label>
-              <input type="text" placeholder="Destination" />
+              <input type="text" placeholder="Destination" name="destination" />
             </div>
-
+        
             <div class="search-bar-divs">
               <label>Check in</label>
-              <input type="date" placeholder="Add dates" />
+              <input type="date" placeholder="Add dates" name="checkIn" />
             </div>
-
+        
             <div class="search-bar-divs">
-              <label>Check out<output></output></label>
-              <input type="date" placeholder="add dates" />
+              <label>Check out</label>
+              <input type="date" placeholder="Add dates" name="checkOut" />
             </div>
-
+        
             <div class="search-bar-divs Who">
               <label>Who</label>
-              <input type="text" placeholder="guest" />
+              <input type="text" placeholder="Guests" name="guests" />
             </div>
-
+        
             <div>
               <button class="search-logo" type="submit">
                 <i class="ri-search-line"></i>
@@ -139,6 +138,7 @@
             </div>
           </form>
         </div>
+        
 
         <!-- ******************************************************************* -->
 
