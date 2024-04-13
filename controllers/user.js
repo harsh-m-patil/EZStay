@@ -72,10 +72,6 @@ exports.accessUser = async (req, res) => {
       expiresIn: "1h",
     });
 
-    // req.session.user = user;
-    // res.setHeader('Authorization', `Bearer ${token}`);
-
-    // res.status(200).json({token, user});
 
     res.cookie("token", token, {
       httpOnly: true,
@@ -91,41 +87,44 @@ exports.accessUser = async (req, res) => {
 
 //index
 exports.index = async (req, res) => {
-  // if (!req.session.user) {
-  //   res.redirect('/login');
-  // } else {
-
-  //   res.render('index', { user: req.session.user });
-
-  // }
-  res.render("index", { user: req.user });
+  
+  res.render('index', { user: req.user });
 };
 
 // root
-exports.root = async (req, res) => {
-  // if (!req.session.user) {
-  //   res.redirect('/login');
-  // } else {
+// exports.root = async (req, res) => {
 
-  //   res.render('index', { user: req.session.user });
+//     res.render('index', { user: req.user });
 
-  // }
-  // Assuming root page requires authentication
-  res.render("index", { user: req.user });
-};
+// };
 
 //personalinfo
 exports.personalinfo = async (req, res) => {
-  // if (!req.session.user) {
-  //   res.redirect('/login');
-  // } else {
+  
+  res.render('personalinfo', { user: req.user });
+}
 
-  //   res.render('personalinfo', { user: req.session.user });
+//security
+exports.security = async (req, res) => {
+  
+  res.render('security', { user: req.user });
+}
 
-  // }
-  // Assuming personalinfo page requires authentication
-  res.render("personalinfo", { user: req.user });
-};
+// fuction for update
+
+const updating = function(req, res){
+
+       // Create a new payload without the 'exp' property
+       const { exp, ...userPayload } = req.user;
+
+       // Generate a new token with updated user payload
+       const token = jwt.sign(userPayload, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+      // Set the new token in the cookie
+      res.cookie("token", token, {
+          httpOnly: true,
+      });
+}
 
 // Updates
 exports.updateName = async (req, res) => {
@@ -140,49 +139,12 @@ exports.updateName = async (req, res) => {
     // Update the name in the user payload
     req.user.fullname = fullname;
 
-    // Create a new payload without the 'exp' property
-    const { exp, ...userPayload } = req.user;
-
-    // Generate a new token with updated user payload
-    const token = jwt.sign(userPayload, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
-
-    // Set the new token in the cookie
-    res.cookie("token", token, {
-      httpOnly: true,
-    });
-
-    // Render personalinfo.ejs with updated information
-    res.render("personalinfo", { user: updatedUser });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send(`Error updating name: ${err.message}`);
-  }
-};
-
-exports.updateUsername = async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const { username } = req.body;
-
-    const existingUser = await User.findOne({ username });
-    if (existingUser) {
-      return res
-        .status(400)
-        .send("Username already exists. Please choose a different username.");
-    }
-
-    await User.findByIdAndUpdate(userId, { username });
-
-    // Update name in session
-    req.user.username = username;
-
-    // Fetch updated user information
-    const updatedUser = await User.findById(userId);
-
-    // Render personalinfo.ejs with updated information
-    res.render("personalinfo", { user: updatedUser });
+      // function call
+      updating(req, res);
+      
+  
+      // Render personalinfo.ejs with updated information
+      res.render('personalinfo', { user: updatedUser });
   } catch (err) {
     console.error(err);
     res.status(500).send(`Error updating name: ${err.message}`);
@@ -191,18 +153,21 @@ exports.updateUsername = async (req, res) => {
 
 exports.updateEmail = async (req, res) => {
   try {
-    const userId = req.user.id;
-    const { email } = req.body;
-    await User.findByIdAndUpdate(userId, { email });
+      const userId = req.user.id;
+      const { email } = req.body;
+      await User.findByIdAndUpdate(userId, { email });
+      
+      // Fetch updated user information
+      const updatedUser = await User.findById(userId);
 
-    // Update name in session
-    req.user.email = email;
+      // Update name 
+      req.user.email = email;
 
-    // Fetch updated user information
-    const updatedUser = await User.findById(userId);
-
-    // Render personalinfo.ejs with updated information
-    res.render("personalinfo", { user: updatedUser });
+      // function call
+      updating(req, res);
+      
+      // Render personalinfo.ejs with updated information
+      res.render('personalinfo', { user: updatedUser });
   } catch (err) {
     console.error(err);
     res.status(500).send(`Error updating name: ${err.message}`);
@@ -211,35 +176,87 @@ exports.updateEmail = async (req, res) => {
 
 exports.updatePhone = async (req, res) => {
   try {
-    const userId = req.user.id;
-    const { phone } = req.body;
-    await User.findByIdAndUpdate(userId, { phone });
+      const userId = req.user.id;
+      const { phone } = req.body;
+      await User.findByIdAndUpdate(userId, { phone });
+      
+      // Fetch updated user information
+      const updatedUser = await User.findById(userId);
 
-    // Update name in session
-    req.user.phone = phone;
 
-    // Fetch updated user information
-    const updatedUser = await User.findById(userId);
-
-    // Render personalinfo.ejs with updated information
-    res.render("personalinfo", { user: updatedUser });
+      // Update name
+      req.user.phone = phone;
+      
+      // function call
+      updating(req, res);
+      
+      // Render personalinfo.ejs with updated information
+      res.render('personalinfo', { user: updatedUser });
   } catch (err) {
     console.error(err);
     res.status(500).send(`Error updating name: ${err.message}`);
   }
 };
 
-// Logout
-exports.logout = async (req, res) => {
-  // req.session.destroy(err => {
-  //         if (err) {
-  //           console.error(err);
-  //           res.status(500).send('Error logging out');
-  //         } else {
-  //           res.redirect('/login');
-  //         }
-  //       });
-  res.clearCookie("token").redirect("/login");
+
+// updating the password
+exports.updatepassword = async (req, res) => {
+  try {
+      const { oldPassword, newPassword } = req.body;
+      const userId = req.user.id;
+
+      // Find the user by ID
+      const user = await User.findById(userId);
+
+      // Check if the old password matches
+      const isMatch = await bcrypt.compare(oldPassword, user.password);
+      if (!isMatch) {
+          return res.status(401).send('Incorrect old password');
+      }
+
+      // Hash the new password
+      const salt = await bcrypt.genSalt();
+      const newPasswordHash = await bcrypt.hash(newPassword, salt);
+
+      // Update the password in the database
+      await User.findByIdAndUpdate(userId, { password: newPasswordHash });
+
+      // res.status(200).send('Password updated successfully');
+      res.render('security');
+  } catch (err) {
+      console.error(err);
+      res.status(500).send(`Error updating password: ${err.message}`);
+  }
+};
+
+// Route for deleting the user
+exports.deleteuser = async (req, res) => {
+  try {
+      const userId = req.user.id;
+
+      // Find the user by ID
+      const user = await User.findById(userId);
+
+      if (!user) {
+          return res.status(404).send('User not found');
+      }
+
+      // Perform any necessary cleanup or additional actions here
+
+      // Delete the user from the database
+      await User.findByIdAndDelete(userId);
+
+      // res.status(200).send('User deleted successfully');
+      res.clearCookie('token').redirect('/login');
+  } catch (err) {
+      console.error(err);
+      res.status(500).send(`Error deleting user: ${err.message}`);
+  }
 };
 
 
+// Logout
+exports.logout = async (req, res) => {
+  
+    res.clearCookie('token').redirect('/login');
+}

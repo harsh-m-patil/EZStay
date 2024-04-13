@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Security</title>
+    <link rel="stylesheet" href="css/security.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <nav>
+        <div class="nav-leftside">
+            <a href="/userdashboard"> <img class="logo" src="images/logo.svg" alt="img" /></a>
+           
+          </div>
+    </nav>
+
+<section>
+    <div class="container">
+   <h1>Login & Security</h1>
+   <div class="box">
+    <div class="left-side">
+        <p class="title">Password</p>
+    </div>
+    <div class="right-side">
+        <button class="btn edit">Update</button>
+    </div>
+    <div class="modal hidden">
+        <form action="/updatepassword" method="post">
+            <input type="password" name="oldPassword" id="oldPassword" placeholder="old password">
+            <input type="password" name="newPassword" id="newPassword" placeholder="new password">
+            <button type="submit" class="btn updatebtn">Confirm</button>
+        </form>
+    </div>
+   </div>
+
+   <hr style="margin-top: 2.5%; border-color: rgba(149, 147, 147, 0.152);">
+
+
+   <div class="box">
+    <div class="left-side">
+        <p class="title">Account</p>
+        <p class="answer">Deactivate your account</p>
+    </div>
+    <div class="right-side">
+        <form id="deactivateForm" action="/deleteuser" method="post">
+
+            <button class="btn deactivate">Deactivate</button>
+
+        </form>
+    </div>
+   </div>
+
+
+    </div>
+</section>
+
+<script>
+    const editbtns = document.querySelectorAll('.edit');
+    const modals = document.querySelectorAll('.modal');
+    const container = document.querySelector('.container');
+
+    editbtns.forEach((btn, index) => {
+    btn.addEventListener('click', function(){
+        modals[index].classList.remove('hidden');
+    });
+});
+
+document.body.addEventListener('click', function(event) {
+    if (!container.contains(event.target)) {
+        modals.forEach(modal => {
+            modal.classList.add('hidden');
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const deactivateForm = document.getElementById('deactivateForm');
+
+    // Add event listener for form submission
+    deactivateForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent form submission
+        
+        // Show alert box when user tries to deactivate their account
+        const confirmMessage = 'Are you sure you want to deactivate your account? This action cannot be undone.';
+        if (confirm(confirmMessage)) {
+            // If user confirms, submit the form
+            this.submit();
+        } else {
+            // If user cancels, do nothing
+            return false;
+        }
+    });
+});
+
+
+  </script> 
+   
+    
+</body>
+</html>

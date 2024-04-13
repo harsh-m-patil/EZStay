@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const user = require('../controllers/user');
-const {verifyToken} = require('../middleware/user');
+const {verifyToken , checkGuestUser} = require('../middleware/auth');
 
 
 
@@ -18,21 +18,25 @@ router.post('/login', user.accessUser);
 //index
 router.get('/index', verifyToken, user.index);
 
-//root
-router.get('/', verifyToken,user.root);
+// //root
+// router.get('/', verifyToken,user.root);
 
 
 // Logout
 router.get('/logout', user.logout);
 
 //presonalinfo
-router.get('/personalinfo',verifyToken, user.personalinfo);
+router.get('/personalinfo',verifyToken,checkGuestUser, user.personalinfo);
+router.get('/security',verifyToken, user.security);
 
 // update
 router.post('/updateName',verifyToken, user.updateName);
-router.post('/updateUsername', user.updateUsername);
-router.post('/updateEmail', user.updateEmail);
-router.post('/updatePhone', user.updatePhone);
+router.post('/updateEmail', verifyToken, user.updateEmail);
+router.post('/updatePhone', verifyToken, user.updatePhone);
+
+
+router.post('/updatepassword', verifyToken, user.updatepassword);
+router.post('/deleteuser', verifyToken, user.deleteuser);
 
 //search
 // router.post('/search', searchHotel)
