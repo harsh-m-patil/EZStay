@@ -34,5 +34,8 @@ router.post('/updateUsername', user.updateUsername);
 router.post('/updateEmail', user.updateEmail);
 router.post('/updatePhone', user.updatePhone);
 
+//search
+// router.post('/search', searchHotel)
+
 
 module.exports = router;
