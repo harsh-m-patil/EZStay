@@ -11,45 +11,29 @@
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
   </head>
 
-  <body>
-    <div class="container-login">
-      <img src="images/logo.svg" alt="EZ Stay logo" />
-      <div class="login-form">
-        <h3 style="font-weight: 600; font-size: 25px">
-          Sign in or create your account
-        </h3>
-        <br />
-        <form action="/login" method="post">
-          <label for="username">Username</label><br />
-          <input
-            type="text"
-            name="username"
-            id="username"
-            placeholder="username"
-            required
-          />
-          <label for="password">Password</label><br />
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="password"
-            required
-          />
-          <button type="submit" class="btn-login">Sign in</button>
-          <div class="login-text">
-            <a href="signup.html">Create Account</a>
-            <a href="">Forgot Password?</a>
-          </div>
-          <p style="font-size: 12px; margin-top: 30px">
-            By signing in or creating an account, you agree with our
-            <span class="blue-text">Terms & conditions</span> and
-            <span class="blue-text">Privacy statement</span>
-          </p>
-        </form>
-      </div>
-    </div>
-    <img src="images/loginPageBackground.svg" alt="" id="background-login" />
+<body>
+  <div class="container-login">
+    <img src="images/logo.svg" alt="EZ Stay logo">
+    <div class="login-form">
+      <h3 style="font-weight: 600; font-size: 25px;">Sign in or create your account</h3>
+      <br>
+      <form action="/login" method="post">
+        <label for="username">Username</label><br>
+        <input type="text" name="username" id="username" placeholder="username" required>
+        <label for="password">Password</label><br>
+        <input type="password" name="password" id="password" placeholder="password" required>
+        <button type="submit" class="btn-login">Sign in</button>
+        <div class="login-text">
+          <a href="signup.html">Create Account</a>
+          <a href="/">As a Guest</a>
+          <a href="">Forgot Password?</a>
+        </div>
+        <p style="font-size: 12px; margin-top: 30px;">By signing in or creating an account, you agree with our <span class="blue-text">Terms & conditions</span> and <span class="blue-text">Privacy statement</span></p>
+    
+      </form>
+        </div>
+  </div>
+  <img src="images/loginPageBackground.svg" alt="" id="background-login">
 
     <!-- <script>
     const loginBtn = document.querySelector('.btn-login');
