@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Searched Hotel</title>
+    <link rel="stylesheet" href="/views/css/searchedHotel.css" />
+    <link rel="stylesheet" href="/views/css/style.css" />
+  </head>
+  <link rel="stylesheet" href="./css/searchedHotel.css" />
+  <body>
+    <!-- Navigation Bar Start -->
+    <nav>
+      <!-- Left side of navigation bar -->
+      <div class="nav-leftside">
+        <img class="logo" src="images/logo.svg" alt="img" />
+      </div>
+
+      <!-- Right side of navigation bar -->
+      <div class="nav-rightside">
+        <div class="bookmark">
+          <i class="ri-heart-fill"></i>
+        </div>
+
+        <!-- Replace EJS syntax with static HTML -->
+        <!-- Check if user is logged in -->
+        <!-- If user is logged in, show username -->
+        <!-- If user is not logged in, show Sign In button -->
+        <button class="btn sign-in-btn">Sign in</button>
+      </div>
+    </nav>
+    <!-- Navigation Bar End -->
+
+    <div class="card-container" id="hotels">
+      <% hotels.forEach(function(hotel) { %>
+      
+        <div class="card">
+
+        <div class="card-img-scroll">
+          <% hotel.imageLinks.forEach(function(link) { %>
+          <img class="card-img" src="<%= link %>" alt="" />
+          <% }); %>
+
+          <button class="card-img-scroll-right">></button>
+          <button class="card-img-scroll-left"><</button>
+          <button class="card-heart">
+            <i class="ri-heart-fill"></i>
+          </button>
+        </div>
+
+        
+        <div class="card-name">
+            <h4><%= hotel.hotelName %></h4>
+            
+            <div class="card-rating">
+              <i class="ri-star-line"></i>
+              <p><%= hotel.rating %></p>
+            </div>
+
+            <p class="card-address"><%= hotel.hotelAddress %></p>
+            <p class="card-price">₹ <%= hotel.hotelPrice %></p>
+            <% if (parseFloat(hotel.rating) < 4.7) { %>
+            <span class="card-comment">fabulous</span>
+            <% } %>
+        </div>
+       
+
+      </div>
+
+      <% }); %>
+    </div>
+
+    
+    <script src="/views/js/searchedHotel.js"></script>
+  </body>
+</html>

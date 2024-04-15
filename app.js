@@ -32,6 +32,7 @@ app.use(express.static(staticpath));
 
 
 
+
 // MongoDB connection setup
 const PORT = process.env.PORT || 6000 ;
 mongoose.connect(process.env.url, {
@@ -44,7 +45,7 @@ mongoose.connect(process.env.url, {
 
 
 // Routes setup
-const hotelroutes = require('./routes/hotel');
+const hotelroutes = require('./routes/hotel.route');
 app.use('/', hotelroutes);
 
 const userroutes = require('./routes/user');

@@ -1,0 +1,127 @@
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0 ;
+  padding: 0 ;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  scroll-behavior: smooth;
+}
+
+a {
+  color: #777777;
+  text-decoration: none;
+}
+/* css for navigation bar */
+
+nav {
+  background-color: #FFFFFF;
+  border: 1px solid #bcbcbc;
+  border-right: 0;
+  display: flex;
+
+  padding: 10px 0;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  top: 0;
+  width: 100%;
+  /* margin-top: -10%; */
+}
+
+/* logo image */
+.logo {
+  height: 35px;
+  width: auto;
+}
+
+/* menu bars */
+.menu-bar{
+  border: none;
+  padding: 50px;
+}
+
+/* navigation bar right side */
+.nav-rightside {
+  display: flex;
+  margin-right: 40px;
+  align-items: center;
+}
+
+/* heart image */
+.nav-rightside i {
+  font-size: 23px;
+  /* color: red; */
+}
+
+/* sign in button */
+.sign-in-btn {
+  padding: 5px 10px;
+  font-size: 20px;
+  margin-left: 10px;
+  background-color: #FDDB32;
+  border: none;
+  border-radius: 10px;
+}
+
+
+.username {
+  padding: 5px 10px;
+  font-size: 20px;
+  margin-left: 10px;
+  background-color: #FDDB32;
+  border: none;
+  border-radius: 10px;
+}
+
+
+/* navigation bar left side */
+.nav-leftside {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-left: 20px;
+
+}
+/* //******************************************************* */
+.card-container{
+  margin: 100px auto;
+}
+
+.card {
+  border: 1px solid black;
+  width: 50%;
+  height: 30vh;
+  margin: 20px auto;
+  border-radius: 8px;
+  display: flex;
+}
+
+.card-img-scroll {
+  display: flex;
+  max-width: 30%;
+  height: 100%; 
+ 
+}
+
+.card-img {
+  width: 100px; 
+  
+}
+
+.card-info {
+  flex: 1; /* Take remaining space */
+  padding: 20px;
+}
+
+.card-img-scroll-right {
+  align-self: center;
+}
+
+.card-img-scroll-left {
+  align-self: center;
+}
