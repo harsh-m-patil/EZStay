@@ -5,12 +5,12 @@ const handleSearchHotel = async (req, res) => {
     let { destination, checkIn, checkOut, guests, clickedHotelName } =
       req.query;
 
+      if (!destination) {
+        return res.redirect("index");
+      }
     destination =
       destination.charAt(0).toUpperCase() + destination.slice(1).toLowerCase();
 
-    // if (!destination) {
-    //   return res.redirect("index");
-    // }
     console.log(clickedHotelName);
 
     const searchedHotels = await Hotel.find({ hotelAddress: destination });
