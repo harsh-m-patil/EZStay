@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const nodemailer = require("nodemailer");
+const randomString = require("randomstring");
 
 // signup handler
 exports.newUsers = async (req, res) => {
@@ -43,7 +45,8 @@ exports.createUser = async (req, res) => {
 
 // login handler
 exports.getUsers = async (req, res) => {
-  res.sendFile("login.html", { root: global.staticpath });
+  res.sendFile("login.html", { root: global.staticpath }); 
+  
 };
 
 exports.accessUser = async (req, res) => {
@@ -85,18 +88,120 @@ exports.accessUser = async (req, res) => {
   }
 };
 
+
+// forget password
+exports.forgetpassword = async (req, res) => {
+ 
+  res.clearCookie('token').render('forget');
+ 
+}
+
+
+// function for forget password
+const sendresetpasswordmail = async (fullname, email, token) => {
+  try {
+    
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false, // Use `true` for port 465, `false` for all other ports
+      requireTLS: true,
+      auth: {
+        user: process.env.hotelemail,
+        pass: process.env.hotelpass,
+      },
+    });
+
+    const mailoptions = {
+        from: 'ezstay.hotels@gmail.com',
+        to: email,
+        subject: 'For Reset Password', 
+        html:'<p> Hi '+fullname+', please click here to <a href="http://localhost:3000/forget-password?token='+token+'"> reset </a> your password. </p>'
+    }
+
+    transporter.sendMail(mailoptions, function(err, info){
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log("Email has been sent:-",info.response);
+      }
+    })
+
+    
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
+exports.forgetverify = async (req, res) => {
+  try {
+    const {email} = req.body;
+    const userdata = await User.findOne({ email });
+    if(!userdata)  return res.status(401).send("user with this email not found");
+    
+    const randomstring = randomString.generate();
+    
+
+    const updatedata = await User.updateOne({email},{$set:{token:randomstring}});
+    sendresetpasswordmail(userdata.fullname, userdata.email, randomstring);
+    // res.render('forget', {message:"Please check your mail to reset your password."})
+    res.status(200).send('Please check your mail to reset your password.');
+    
+
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
+
+exports.forgetpaswordload = async (req, res) => {
+  try {
+
+    const token = req.query.token;
+    const tokendata = await User.findOne({token});
+    if(!tokendata)  return res.status(401).send("token is invalid");
+   
+    res.render('forget-password',{user_id:tokendata._id});
+
+    
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
+
+exports.resetpassword = async (req, res) => {
+  try {
+    const { password , _id} = req.body;
+    
+
+    const user = await User.findOne({ _id });
+
+
+    // Hash the new password
+    const salt = await bcrypt.genSalt();
+    const passwordHash = await bcrypt.hash(password, salt);
+
+    // Update the password in the database
+    await User.findByIdAndUpdate(user._id,{$set:{password:passwordHash, token:''}});
+
+          
+     res.redirect("/login");
+    
+  } catch (err) {
+    console.log(err.message);
+    
+  }
+}
+
 //index
 exports.index = async (req, res) => {
   
   res.render('index', { user: req.user });
 };
 
-// root
-// exports.root = async (req, res) => {
 
-//     res.render('index', { user: req.user });
-
-// };
 
 //personalinfo
 exports.personalinfo = async (req, res) => {

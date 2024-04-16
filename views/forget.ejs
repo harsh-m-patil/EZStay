@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Forget Password</title>
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link href="css/login.css" rel="stylesheet" />
+  
+
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+  </head>
+
+<body>
+  <div class="container-login">
+    <img src="images/logo.svg" alt="EZ Stay logo">
+    <div class="login-form">
+      <h3 style="font-weight: 600; font-size: 25px;">Forgot Password</h3>
+      <br>
+     
+      <form action="/forget" method="post">
+        <label for="email">Email</label><br>
+        <input type="email" name="email" id="email" placeholder="Enter Email" required>
+       
+        <button type="submit" class="btn-login">Send reset link</button>
+       
+    
+      </form>
+        </div>
+        <% if (typeof message !== 'undefined') { %>
+            <h4><%= message %></h4>
+          <% } %>
+  </div>
+  <img src="images/loginPageBackground.svg" alt="" id="background-login">
+
+   
+  </body>
+</html>

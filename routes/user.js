@@ -14,6 +14,12 @@ router.post('/signup', user.createUser);
 router.get('/login', user.getUsers);
 router.post('/login', user.accessUser);
 
+// forgot password
+router.get('/forget', user.forgetpassword);
+router.post('/forget', user.forgetverify);
+
+router.get('/forget-password', user.forgetpaswordload);
+router.post('/forget-password', user.resetpassword);
 
 //index
 router.get('/index', verifyToken, user.index);
