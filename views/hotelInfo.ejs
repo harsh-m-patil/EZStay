@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EZStay</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/hotelInfo.css" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation Bar Start -->
+    <nav>
+      <!-- Left side of navigation bar -->
+      <div class="nav-leftside">
+        <img class="logo" src="images/logo.svg" alt="img" />
+      </div>
+
+      <!-- Right side of navigation bar -->
+      <div class="nav-rightside">
+        <div class="bookmark">
+          <i class="icons ri-heart-fill"></i>
+        </div>
+        <button class="btn sign-in-btn">Sign in</button>
+      </div>
+    </nav>
+    <!-- Navigation Bar End -->
+
+    /* main body start after nav bar */
+    <section class="main-body">
+      <h1>Relax in luxurious comfort and hospitality.</h1>
+      <br />
+
+
+      <div class="image-container">
+        <img class="img" src=<%= clickedHotel.imageLinks[0] %> alt="" />
+          <img class="img" src=<%= clickedHotel.imageLinks[2] %> alt="" />
+          <img class="img" src=<%= clickedHotel.imageLinks[3] %> alt="" />
+       </div>
+
+      <div class="hotel-Name-Add">
+        <h1 id="hotelName"><%= clickedHotel.hotelName %></h1>
+        <p id="hotelAddress">
+          <span><i class="icons ri-map-pin-line"></i></span><%=
+          clickedHotel.hotelAddress %>
+        </p>
+      </div>
+
+      <div class="info">
+        <div class="info-text">
+          <div class="info-feature-box">
+            <div class="feature-one">
+              <div>
+                <i class="icons ri-parking-box-line"></i>
+              </div>
+              <div>
+                <h3>Park for free</h3>
+                <p>
+                  This is one of the few places in the area with free parking.
+                </p>
+              </div>
+            </div>
+            <div class="feature-one">
+              <div>
+                <i class="icons ri-star-line"></i>
+              </div>
+              <div>
+                <h3>Highly rated property</h3>
+                <p>This is one of the best property in the area.</p>
+              </div>
+            </div>
+            <div class="feature-one">
+              <div>
+                <i class="icons ri-trophy-line"></i>
+              </div>
+              <div>
+                <h3>Experienced staff</h3>
+                <p>Profesional and sxperienced staff of 500 people.</p>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+
+          <div class="info-hotel-para">
+            <p>
+              True to its name, Cowboy Castle is a spacious villa that will
+              transport you to a world like no other. Engulf yourself with
+              breathtaking views of the mountains and soft breeze while here.
+              With wooden interiors and ample space, guests are sure to have a
+              gala time here. What’s more? Guests can enjoy their morning cuppa
+              in the gazebo attached to the lawn amidst lush greenery, making it
+              a delightful retreat indeed!
+            </p>
+          </div>
+
+          <hr />
+
+          <div class="info-whatOffers">
+            <h1>What this place offers</h1>
+            <div class="offers">
+              <div>
+                <div class="offer-one">
+                  <i class="icons ri-wifi-line"></i>
+                  <p>Free WiFi</p>
+                </div>
+                <div class="offer-one">
+                  <i class="fa-solid fa-desktop"></i>
+                  <p>Dedicated workspace</p>
+                </div>
+                <div class="offer-one">
+                  <i class="icons ri-parking-box-line"></i>
+                  <p>Free parking on premises</p>
+                </div>
+                <div class="offer-one">
+                  <i class="icons ri-restaurant-fill"></i>
+                  <p>Breakfast</p>
+                </div>
+              </div>
+              <div>
+                <div class="offer-one">
+                  <i class="icons fa-solid fa-person-swimming"></i>
+                  <p>Swimming Pool</p>
+                </div>
+                <div class="offer-one">
+                  <i class="fa-solid fa-video"></i>
+                  <p>Security cameras</p>
+                </div>
+                <div class="offer-one">
+                  <i class="fa-solid fa-table-columns"></i>
+                  <p>Washing machine</p>
+                </div>
+                <div class="offer-one">
+                  <i class="icons fa-solid fa-ban-smoking"></i>
+                  <p>No Smoking</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr />
+
+          <div class="reviewContainer">
+            <div class="review">
+              <h1>Reviews</h1>
+
+              <div class="review-card">
+                <div class="img-name-div">
+                  <div class="name">
+                    <img src="images/man.jpg" alt="" />
+                    <div>
+                      <h3>Akshay Deshpande</h3>
+                      <p>Pune, Maharashtra</p>
+                    </div>
+                  </div>
+                  <div class="stars">
+                    <svg
+                      class="icon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="gold"
+                        d="M12 2l2.56 7.94H22l-6.63 4.82 2.55 7.88L12 17.27l-6.93 5.37 2.55-7.88L2 9.94h7.44L12 2z"
+                      />
+                    </svg>
+                    <h3>4.7</h3>
+                  </div>
+                </div>
+                <p>
+                  Fantastic hotel experience. Stayed for 2 nights, exceptional
+                  service, comfortable rooms, and delicious food. Highly
+                  recommended!
+                </p>
+              </div>
+            </div>
+
+            <div class="review-card">
+              <div class="img-name-div">
+                <div class="name">
+                  <img src="images/man2.jpg" alt="" />
+                  <div>
+                    <h3>Rahul Patel</h3>
+                    <p>Bangalore, Karnataka</p>
+                  </div>
+                </div>
+                <div class="stars">
+                  <svg
+                    class="icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="gold"
+                      d="M12 2l2.56 7.94H22l-6.63 4.82 2.55 7.88L12 17.27l-6.93 5.37 2.55-7.88L2 9.94h7.44L12 2z"
+                    />
+                  </svg>
+                  <h3>4.5</h3>
+                </div>
+              </div>
+              <p>
+                Amazing experience! The hotel exceeded our expectations.
+                Everything from check-in to check-out was smooth. Will recommend
+                to all!
+              </p>
+            </div>
+
+            <div class="review-card">
+              <div class="img-name-div">
+                <div class="name">
+                  <img src="images/woman.jpg" alt="" />
+                  <div>
+                    <h3>Sneha Gupta</h3>
+                    <p>Delhi, India</p>
+                  </div>
+                </div>
+                <div class="stars">
+                  <svg
+                    class="icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="gold"
+                      d="M12 2l2.56 7.94H22l-6.63 4.82 2.55 7.88L12 17.27l-6.93 5.37 2.55-7.88L2 9.94h7.44L12 2z"
+                    />
+                  </svg>
+                  <h3>4.7</h3>
+                </div>
+              </div>
+              <p>
+                Great hospitality! Enjoyed every moment of our stay. The
+                ambiance was pleasant, and the food was delightful. Highly
+                satisfied!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="priceCard">
+            <p><span>Rs <%= clickedHotel.hotelPrice %></span> night</p>
+
+            <div class="three-box">
+              <div class="priceCard-dates">
+                <div id="checkIn">
+                  <label for="">CHECK IN</label>
+                  <input type="date" />
+                </div>
+                <div id="checkOut">
+                  <label for="">CHECK OUT</label>
+                  <input type="date" />
+                </div>
+              </div>
+
+              <select name="Guests" id="">
+                <option value="">Guests</option>
+                <option value="">2</option>
+                <option value="">3</option>
+              </select>
+            </div>
+
+            <button>Book</button>
+
+            <div class="total-amt">
+              <p>₹ <%= clickedHotel.hotelPrice %> × 1 night</p>
+              <p>₹10,000</p>
+            </div>
+
+            <div class="amt-before-tax">
+              <p>Total before taxes</p>
+              <p>₹10,000</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col">
+            <h4>company</h4>
+            <ul>
+              <li>
+                <a href="./aboutus.html"> about us</a>
+              </li>
+              <li>
+                <a href="./services.html"> our services</a>
+              </li>
+              <li>
+                <a href="./business.html"> work with us</a>
+              </li>
+              <li>
+                <a href="#"> press key</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>get help</h4>
+            <ul>
+              <li>
+                <a href="#">FAQ</a>
+              </li>
+              <li>
+                <a href="#">booking status</a>
+              </li>
+              <li>
+                <a href="#">returns</a>
+              </li>
+              <li>
+                <a href="#">payment options</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>learn more</h4>
+            <ul>
+              <li>
+                <a href="./learnmore.html">privacy</a>
+              </li>
+              <li>
+                <a href="./learnmore.html">security</a>
+              </li>
+              <li>
+                <a href="./learnmore.html">terms</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>follow us</h4>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="hotelInfo.js"></script>
+    <script
+      src="https://kit.fontawesome.com/5050694ff5.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
+
+<!-- .ejs -->
