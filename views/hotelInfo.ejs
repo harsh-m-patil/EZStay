@@ -38,12 +38,12 @@
       <h1>Relax in luxurious comfort and hospitality.</h1>
       <br />
 
-
       <div class="image-container">
-        <img class="img" src=<%= clickedHotel.imageLinks[0] %> alt="" />
-          <img class="img" src=<%= clickedHotel.imageLinks[2] %> alt="" />
-          <img class="img" src=<%= clickedHotel.imageLinks[3] %> alt="" />
-       </div>
+        <img class="img" src="<%= clickedHotel.imageLinks[0] %>" alt="" />
+        <img class="img" src="<%= clickedHotel.imageLinks[1] %>" alt="" />
+        <img class="img" src="<%= clickedHotel.imageLinks[2] %>" alt="" />
+      </div>
+      
 
       <div class="hotel-Name-Add">
         <h1 id="hotelName"><%= clickedHotel.hotelName %></h1>
@@ -348,6 +348,12 @@
         </div>
       </div>
     </footer>
+
+    <!-- Inside the HTML body -->
+    <script type="text/javascript">
+      const checkInDate = "<%= checkIn %>";
+      const checkOutDate = "<%= checkOut %>";
+    </script>
 
     <script type="module" src="hotelInfo.js"></script>
     <script

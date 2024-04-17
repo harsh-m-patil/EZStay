@@ -214,24 +214,11 @@ const updateCardsWithData = (hotelData) => {
     Address[1].innerText = hotelData[index].hotelAddress;
     item.querySelector("span").innerText = "₹ " + hotelData[index].hotelPrice;
 
-    // cardImg[index * 4].addEventListener("click", () => {
-    //   // console.log(item);
-    //   // console.log(cardHotelName);
-    //   // console.log(cardHotelName[index].innerHTML);
-
-    //   const clickedHotelName =  cardHotelName[index].innerHTML
-    //   console.log(clickedHotelName);
-
-    //   window.open("hotelInfo.html", "_blank");
-    // });
-    // cardText[index].addEventListener("click", () => {
-    //   window.open("hotelInfo.html", "_blank");
-    // });
-
+  
 
     cardImg[index * 4].addEventListener("click", () => {
       const clickedHotelName = cardHotelName[index].innerHTML;
-      console.log(clickedHotelName);
+      // console.log(clickedHotelName);
     
       // Making an HTTP GET request to send clickedHotelName to the backend
       fetch(`/search?clickedHotelName=${clickedHotelName}`, {
@@ -378,3 +365,4 @@ Who.addEventListener("click", () => {
 crossCutGuestBox.addEventListener("click", () => {
   guestBox.style.display = "none";
 });
+

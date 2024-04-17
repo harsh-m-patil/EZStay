@@ -5,32 +5,28 @@ const handleSearchHotel = async (req, res) => {
     let { destination, checkIn, checkOut, guests, clickedHotelName } =
       req.query;
 
+      
+    // destination =
+    //   destination.charAt(0).toUpperCase() + destination.slice(1).toLowerCase();
+
       if (!destination) {
         return res.redirect("index");
       }
-    destination =
-      destination.charAt(0).toUpperCase() + destination.slice(1).toLowerCase();
 
-    console.log(clickedHotelName);
 
     const searchedHotels = await Hotel.find({ hotelAddress: destination });
+    
 
     let currDate = new Date();
     let checkInDate = new Date(checkIn);
     let checkOutDate = new Date(checkOut);
 
     if (checkInDate < currDate) {
-      console.log("Invalid check-in date");
+      console.log("Invalid check-in date"); 
     } else if (checkInDate >= checkOutDate) {
       console.log("Invalid check-out date");
     }
 
-    //handleClickedHotel method content start
-    // console.log("Clicked hotel :", clickedHotelName);
-    // const clickedHotel = await Hotel.findOne({ hotelName: clickedHotelName });
-    // console.log(clickedHotel);
-
-    //handleClickedHotel method content end
 
     return res.render("searchedHotel", { hotels: searchedHotels });
   } catch (error) {
@@ -45,7 +41,7 @@ async function handleClickedHotel(req, res) {
   let { clickedHotelName, checkIn, checkOut } = req.query;
   const clickedHotel = await Hotel.findOne({ hotelName: clickedHotelName });
 
-  return res.render("hotelInfo", { clickedHotel: clickedHotel });
+  return res.render("hotelInfo", { clickedHotel: clickedHotel, checkIn: checkIn, checkOut: checkOut })
 }
 
 module.exports = {

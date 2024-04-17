@@ -73,10 +73,10 @@ nav {
 }
 
 .image-container {
-  width: 100%;
-  /* overflow: hidden; */
+  width: 73vw;
+  overflow: hidden;
   /* border: 1px solid black; */
-  height: 250px;
+  height: 18vw;
   display: flex;
   gap: 30px;
   margin: 20px auto;
@@ -85,9 +85,11 @@ nav {
 }
 
 .image-container  .img {
-  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8); */
+ 
 border-radius: 8px;
   box-shadow: 0 8px 20px rgba(0.5, 0.8, 0.8, 0.5);
+  width: 350px;
+  /* border: 1px solid red; */
 
 }
 
