@@ -43,7 +43,6 @@
         <img class="img" src="<%= clickedHotel.imageLinks[1] %>" alt="" />
         <img class="img" src="<%= clickedHotel.imageLinks[2] %>" alt="" />
       </div>
-      
 
       <div class="hotel-Name-Add">
         <h1 id="hotelName"><%= clickedHotel.hotelName %></h1>
@@ -251,11 +250,11 @@
               <div class="priceCard-dates">
                 <div id="checkIn">
                   <label for="">CHECK IN</label>
-                  <input type="date" />
+                  <input type="date" value="<%=checkIn%>" />
                 </div>
                 <div id="checkOut">
                   <label for="">CHECK OUT</label>
-                  <input type="date" />
+                  <input type="date" value="<%=checkOut%>" />
                 </div>
               </div>
 
@@ -268,10 +267,16 @@
 
             <button>Book</button>
 
+            
             <div class="total-amt">
-              <p>₹ <%= clickedHotel.hotelPrice %> × 1 night</p>
-              <p>₹10,000</p>
-            </div>
+              <p>
+                  ₹ <%= clickedHotel.hotelPrice %> × <%= Math.round((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24)) %> nights
+              </p>
+              <p>
+                  ₹ <%= clickedHotel.hotelPrice * Math.round((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24)) %>
+              </p>
+          </div>
+          
 
             <div class="amt-before-tax">
               <p>Total before taxes</p>

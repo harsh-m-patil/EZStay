@@ -31,6 +31,10 @@
     </nav>
     <!-- Navigation Bar End -->
 
+
+    
+
+
     <div class="card-container" id="hotels">
       <% hotels.forEach(function(hotel) { %>
       
@@ -70,6 +74,13 @@
 
       <% }); %>
     </div>
+
+    <!-- Include hidden input fields to pass check-in and check-out dates to frontend JavaScript -->
+    <input class="checkInComing" type="hidden" id="checkInDate" value="<%= checkIn %>">
+    <input   class="checkOutComing"  type="hidden" id="checkOutDate" value="<%= checkOut %>">
+
+    <!-- Include your frontend JavaScript file -->
+    <!-- <script src="hotelInfo.ejs"></script> -->
 
     
     <script src="./js/searchedHotel.js"></script>

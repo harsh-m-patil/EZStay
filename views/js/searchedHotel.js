@@ -1,17 +1,27 @@
 const cards = document.querySelectorAll(".card");
 const hotelName = document.querySelectorAll(".hotelName");
+const checkInComing = document.querySelector(".checkInComing");
+const checkOutComing = document.querySelector(".checkOutComing");
 
-// console.log(cards);
+
 
 cards.forEach((card, index) => {
   card.addEventListener("click", () => {
+    const clickedHotelName = hotelName[index].innerHTML;
 
-    
-    // console.log(hotelName[index].innerHTML);
+    const checkInDate = checkInComing.value;
+    const checkOutDate = checkOutComing.value;
 
-    const clickedHotelName = hotelName[index].innerHTML
-    
+    // Construct the URL with parameters
+    var url =
+      "http://localhost:3000/hotelInfo?clickedHotelName=" +
+      encodeURIComponent(clickedHotelName) +
+      "&checkIn=" +
+      encodeURIComponent(checkInDate) +
+      "&checkOut=" +
+      encodeURIComponent(checkOutDate);
 
-    window.location.href = `/hotelInfo?clickedHotelName=${clickedHotelName}`;
+    // Navigate to the hotel info page
+    window.location.href = url;
   });
 });
