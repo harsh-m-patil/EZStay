@@ -93,23 +93,29 @@ nav {
 }
 
 .card {
-  border: 1px solid black;
+  border: 1px solid rgb(142, 142, 142);
   width: 50%;
-  height: 30vh;
+  height: 230px;
   margin: 20px auto;
   border-radius: 8px;
   display: flex;
+  gap: 15px;
 }
 
 .card-img-scroll {
   display: flex;
-  max-width: 30%;
-  height: 100%; 
- 
+  max-width: 35%;
+  height: 90%; 
+  margin: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 8px;
+  
 }
 
 .card-img {
-  width: 100px; 
+  width: 100%; 
+  border-radius: 8px;
   
 }
 
@@ -124,4 +130,41 @@ nav {
 
 .card-img-scroll-left {
   align-self: center;
+}
+
+
+/* ********************** */
+.card-name{
+  margin: 15px;
+
+}
+
+.card-name h3{
+  font-size: 1.8vw;
+}
+
+.card-name p{
+  
+}
+
+.card-address{
+  font-size: 1.3vw;
+  margin-top:  0.5vw; 
+}
+.card-price{
+  font-size: 1.2vw;
+  margin-top: 1vw; 
+}
+.card-rating{
+  font-size: 1.1vw;
+ margin-top: 0.5vw; 
+}
+.card-comment{
+  font-size: 1.1vw;
+  margin-top: 0.8vw; 
+  background-color: #FDDB32;
+  color: black;
+  padding: 5px;
+  border-radius: 5px;
+  width:65px ;
 }

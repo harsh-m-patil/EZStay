@@ -20,7 +20,6 @@ menu.addEventListener("click", function () {
   if (count == 0) {
     guestBox.style.display = "none";
 
-
     main.style.width = "95%";
     side.style.width = "5%";
     main.style.marginLeft = "0";
@@ -47,14 +46,12 @@ menu.addEventListener("click", function () {
   } else {
     // guestBox.style.display = "block";
 
-
     main.style.width = "83%";
     side.style.width = "15%";
     main.style.marginLeft = "0";
     cardContainer.style.gridTemplateColumns =
       "repeat(auto-fit,minmax(110px, 272px))";
     cardContainer.style.gridGap = "2rem";
-    // iconinfo.classList.remove('hidden');
     iconinfo.forEach(function (icon) {
       icon.classList.remove("hidden");
     });
@@ -81,7 +78,7 @@ menu.addEventListener("click", function () {
 // Function to fetch hotel data from JSON file
 // const fetchHotelData = async () => {
 //   try {
-//     const response = await fetch('../../HotelData/hotelData.json'); 
+//     const response = await fetch('../../HotelData/hotelData.json');
 //     const data = await response.json();
 //     return data;
 //   } catch (error) {
@@ -97,14 +94,14 @@ menu.addEventListener("click", function () {
 
 //******************************************************* */
 // Fetch hotel data from server
-fetch('/hoteldata')
-  .then(response => response.json())
-  .then(hotelData => {
+fetch("/hoteldata")
+  .then((response) => response.json())
+  .then((hotelData) => {
     // Call the function to update UI cards with the fetched data
     updateCardsWithData(hotelData);
   })
-  .catch(error => {
-    console.error('Error fetching hotel data:', error);
+  .catch((error) => {
+    console.error("Error fetching hotel data:", error);
   });
 // ***********************************************************
 
@@ -129,7 +126,7 @@ const createCard = () => {
                       </button>
 
                     <div class="card-name">
-                      <h4>ITC Grand Chola</h4>
+                      <h4 class='cardHotelName'>ITC Grand Chola</h4>
 
                       <div class="card-rating">
                         <i class="ri-star-line"></i>
@@ -154,59 +151,60 @@ for (let i = 0; i < 12; i++) {
 
 // slider ******************************************
 
-const sliders = document.querySelectorAll('.card-img-scroll');
+const sliders = document.querySelectorAll(".card-img-scroll");
 
 sliders.forEach((slider, index) => {
-const slides = slider.querySelectorAll('.card-img');
+  const slides = slider.querySelectorAll(".card-img");
 
-let curslide = 0;
-const maxslide = 4;
+  let curslide = 0;
+  const maxslide = 4;
 
-const btnRight = document.querySelectorAll(".card-img-scroll-right");
- const btnLeft = document.querySelectorAll(".card-img-scroll-left");
+  const btnRight = document.querySelectorAll(".card-img-scroll-right");
+  const btnLeft = document.querySelectorAll(".card-img-scroll-left");
 
-const goToSlide = function(slide){
-  slides.forEach((s, i) => (s.style.transform = `translateX(${100 * (i-slide) }%)`));
-}
+  const goToSlide = function (slide) {
+    slides.forEach(
+      (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+    );
+  };
 
-goToSlide(0);
+  goToSlide(0);
 
-const nextslide = function(){
-  if(curslide === maxslide - 1){
-    curslide = 0;
-  } else{
-    curslide++;
-  }
-  goToSlide(curslide);
-}
+  const nextslide = function () {
+    if (curslide === maxslide - 1) {
+      curslide = 0;
+    } else {
+      curslide++;
+    }
+    goToSlide(curslide);
+  };
 
+  const prevslide = function () {
+    if (curslide === 0) {
+      curslide = maxslide - 1;
+    } else {
+      curslide--;
+    }
+    goToSlide(curslide);
+  };
 
-const prevslide = function(){
-  if(curslide === 0){
-    curslide = maxslide-1;
-  } else{
-    curslide--;
-  }
-  goToSlide(curslide);
-}
-
-btnRight[index].addEventListener('click', nextslide);
-btnLeft[index].addEventListener('click', prevslide);
-
+  btnRight[index].addEventListener("click", nextslide);
+  btnLeft[index].addEventListener("click", prevslide);
 });
 
-// 
+//
 
-const bookmarked=[];
+const bookmarked = [];
 
 const updateCardsWithData = (hotelData) => {
   const cards = document.querySelectorAll(".card");
   const cardComment = document.querySelectorAll(".card-comment");
-  const cardImg = document.querySelectorAll('.card-img');
-  const cardText = document.querySelectorAll('.card-name');
+  const cardImg = document.querySelectorAll(".card-img");
+  const cardText = document.querySelectorAll(".card-name");
+  const cardHotelName = document.querySelectorAll(".cardHotelName");
 
-  console.log(cards);
   
+
   // console.log(cardImg);
 
   cards.forEach((item, index) => {
@@ -215,72 +213,83 @@ const updateCardsWithData = (hotelData) => {
     item.querySelector("p").innerText = hotelData[index].rating;
     Address[1].innerText = hotelData[index].hotelAddress;
     item.querySelector("span").innerText = "₹ " + hotelData[index].hotelPrice;
-  
-
-
-    cardImg[index * 4].addEventListener('click', ()=>{
-      window.open('hotelInfo.html', '_blank');
-    })
-    cardText[index].addEventListener('click', ()=>{
-      window.open('hotelInfo.html', '_blank');
-    })
 
   
 
+    cardImg[index * 4].addEventListener("click", () => {
+      const clickedHotelName = cardHotelName[index].innerHTML;
+      // console.log(clickedHotelName);
+    
+      // Making an HTTP GET request to send clickedHotelName to the backend
+      fetch(`/search?clickedHotelName=${clickedHotelName}`, {
+        method: 'GET',
+      }).then(response => {
+        if (response.ok) {
+          console.log('Clicked hotel name sent to the backend successfully');
+          // Redirect to hotelInfo route after sending the hotel name
+          window.location.href = `/hotelInfo?clickedHotelName=${clickedHotelName}`;
+        } else {
+          console.error('Failed to send clicked hotel name to the backend');
+        }
+      }).catch(error => {
+        console.error('Error sending clicked hotel name to the backend:', error);
+      });
+    });
+    
+    
 
-  for (let i = 0; i < 4; i++) {
-    cardImg[(index * 4) + i].src = hotelData[index].imageLinks[i];
-  }
+    for (let i = 0; i < 4; i++) {
+      cardImg[index * 4 + i].src = hotelData[index].imageLinks[i];
+    }
 
     if (item.querySelector("p").innerText < 4.7) {
       cardComment[index].style.display = "none";
     }
 
-  //  Bookmark js
+    //  Bookmark js
 
     const cardHeart = document.querySelectorAll(".card-heart");
     cardHeart[index].addEventListener("click", () => {
-    
-const foundElement = hotelData.find(element => element.hotelId === index+1);
-if (foundElement !== undefined && foundElement.flag === 0) {
-  bookmarked.push(foundElement);
-    console.log(bookmarked);
-    foundElement.flag = 1;
-    cardHeart[index].querySelector('i').style.color = "black";
-} else {
-   if(foundElement.flag === 1){
-    foundElement.flag =0;
-    const indexToRemove = bookmarked.findIndex(element => element.hotelId === foundElement.hotelId);
-    if (indexToRemove !== -1) {
-        bookmarked.splice(indexToRemove, 1);
-      console.log(bookmarked);
-      cardHeart[index].querySelector('i').style.color = "rgba(0, 0, 0, 0.3)";
-      
-      
-    }
-  }
-}
-
+      const foundElement = hotelData.find(
+        (element) => element.hotelId === index + 1
+      );
+      if (foundElement !== undefined && foundElement.flag === 0) {
+        bookmarked.push(foundElement);
+        console.log(bookmarked);
+        foundElement.flag = 1;
+        cardHeart[index].querySelector("i").style.color = "black";
+      } else {
+        if (foundElement.flag === 1) {
+          foundElement.flag = 0;
+          const indexToRemove = bookmarked.findIndex(
+            (element) => element.hotelId === foundElement.hotelId
+          );
+          if (indexToRemove !== -1) {
+            bookmarked.splice(indexToRemove, 1);
+            console.log(bookmarked);
+            cardHeart[index].querySelector("i").style.color =
+              "rgba(0, 0, 0, 0.3)";
+          }
+        }
+      }
     });
   });
 };
 
+const modal = document.querySelector(".modal");
+const bookmark = document.querySelector(".bookmark");
+const close = document.querySelector(".close-modal");
 
-const modal = document.querySelector('.modal');
-const bookmark = document.querySelector('.bookmark');
-const close = document.querySelector('.close-modal')
+bookmark.addEventListener("click", function () {
+  modal.classList.toggle("hidden");
+  close.classList.toggle("hidden");
 
-bookmark.addEventListener('click', function(){
-  
-  modal.classList.toggle('hidden');
-  close.classList.toggle('hidden');
-  
-  modal.innerHTML = '';
+  modal.innerHTML = "";
 
   // Iterate over bookmarked array and create HTML elements
-  bookmarked.forEach(item => {
-    const bookmarkedItem = document.createElement('div');
-    bookmarkedItem.classList.add('bookmarked-item');
+  bookmarked.forEach((item) => {
+    const bookmarkedItem = document.createElement("div");
+    bookmarkedItem.classList.add("bookmarked-item");
     bookmarkedItem.innerHTML = `
     
       <p>${item.hotelName}</p>
@@ -292,18 +301,15 @@ bookmark.addEventListener('click', function(){
     `;
     modal.appendChild(bookmarkedItem);
   });
+});
 
-})
+const closemodal = function () {
+  close.classList.add("hidden");
+  modal.classList.add("hidden");
+};
 
-const closemodal = function(){
-  close.classList.add('hidden');
-  modal.classList.add('hidden');
-}
-
-close.addEventListener('click', closemodal);
-main.addEventListener('click', closemodal);
-
-
+close.addEventListener("click", closemodal);
+main.addEventListener("click", closemodal);
 
 //************************************************* */
 // Drop down for guest in search bar
@@ -315,9 +321,19 @@ const noOfGuests = document.querySelectorAll(".noOfGuest");
 const Who = document.querySelector(".Who");
 const crossCutGuestBox = document.querySelector(".crossCut-guest-box");
 
+const who = document.querySelector(".Who");
+const adult = document.querySelector(".adult");
+const children = document.querySelector(".children");
+
 addGuestBtn.forEach((button, index) => {
   button.addEventListener("click", () => {
     noOfGuests[index].innerHTML++;
+
+    const guestInput = document.querySelector(
+      '.search-bar-divs.Who input[type="text"]'
+    );
+    guestInput.value = 1;
+    guestInput.value = adult.innerHTML;
   });
 });
 
@@ -333,6 +349,10 @@ let flag = 0;
 guestBox.style.display = "none";
 
 Who.addEventListener("click", () => {
+  const guestInput = document.querySelector(
+    '.search-bar-divs.Who input[type="text"]'
+  );
+  guestInput.value = 1;
   if (flag === 0) {
     guestBox.style.display = "block";
     flag = 1;
@@ -342,22 +362,7 @@ Who.addEventListener("click", () => {
   }
 });
 
-crossCutGuestBox.addEventListener('click',()=>{
+crossCutGuestBox.addEventListener("click", () => {
   guestBox.style.display = "none";
-})
-
-
-
-
-
-// Hotel info page JS
-
-
-// const hotelName = document.querySelector('#hotelName')
-// const hotelAddress = document.querySelector('#hotelAddress')
-// console.log(hotelName.innerHTML);
-
-// hotelName.innerHTML = hotelData[cardClickedIndex].hotelName;
-// console.log(hotelData[cardClickedIndex].hotelName);
-// console.log(cardClickedIndex);
+});
 

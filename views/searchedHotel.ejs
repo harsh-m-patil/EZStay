@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Searched Hotel</title>
-    <link rel="stylesheet" href="/views/css/searchedHotel.css" />
-    <link rel="stylesheet" href="/views/css/style.css" />
+    <link rel="stylesheet" href="./css/searchedHotel.css" />
+    
   </head>
   <link rel="stylesheet" href="./css/searchedHotel.css" />
   <body>
@@ -31,6 +31,10 @@
     </nav>
     <!-- Navigation Bar End -->
 
+
+    
+
+
     <div class="card-container" id="hotels">
       <% hotels.forEach(function(hotel) { %>
       
@@ -50,17 +54,18 @@
 
         
         <div class="card-name">
-            <h4><%= hotel.hotelName %></h4>
+            <h3 class="hotelName"><%= hotel.hotelName %></h3>
             
+            <p class="card-address"><%= hotel.hotelAddress %></p>
+            <p class="card-price">₹ <%= hotel.hotelPrice %> /night</p>
+
             <div class="card-rating">
               <i class="ri-star-line"></i>
               <p><%= hotel.rating %></p>
             </div>
 
-            <p class="card-address"><%= hotel.hotelAddress %></p>
-            <p class="card-price">₹ <%= hotel.hotelPrice %></p>
-            <% if (parseFloat(hotel.rating) < 4.7) { %>
-            <span class="card-comment">fabulous</span>
+            <% if (parseFloat(hotel.rating) > 4.7) { %>
+            <p class="card-comment">fabulous</p>
             <% } %>
         </div>
        
@@ -70,7 +75,14 @@
       <% }); %>
     </div>
 
+    <!-- Include hidden input fields to pass check-in and check-out dates to frontend JavaScript -->
+    <input class="checkInComing" type="hidden" id="checkInDate" value="<%= checkIn %>">
+    <input   class="checkOutComing"  type="hidden" id="checkOutDate" value="<%= checkOut %>">
+
+    <!-- Include your frontend JavaScript file -->
+    <!-- <script src="hotelInfo.ejs"></script> -->
+
     
-    <script src="/views/js/searchedHotel.js"></script>
+    <script src="./js/searchedHotel.js"></script>
   </body>
 </html>

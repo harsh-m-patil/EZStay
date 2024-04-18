@@ -77,3 +77,17 @@ addReviews();
 addReviews();
 addReviews();
 addReviews();
+
+
+
+
+// // Accessing the checkIn and checkOut dates passed from controller.js
+// const checkInDate = '<%= checkIn %>';
+// const checkOutDate = '<%= checkOut %>';
+
+// Logging the checkIn and checkOut dates
+console.log("Check-in Date:", checkInDate);
+console.log("Check-out Date:", checkOutDate);
+
+
+
