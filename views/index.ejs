@@ -118,12 +118,12 @@
         
             <div class="search-bar-divs">
               <label>Check in</label>
-              <input type="date" placeholder="Add dates" name="checkIn" />
+              <input id="checkInDate" type="date" placeholder="Add dates" name="checkIn" />
             </div>
         
             <div class="search-bar-divs">
               <label>Check out</label>
-              <input type="date" placeholder="Add dates" name="checkOut" />
+              <input id="checkOutDate" type="date" placeholder="Add dates" name="checkOut" />
             </div>
         
             <div class="search-bar-divs Who">
@@ -258,6 +258,26 @@
       </div>
     </footer>
     <!-- Script -->
+    <script>
+     
+      const checkInInput = document.getElementById('checkInDate');
+      const checkOutInput = document.getElementById('checkOutDate');
+  
+     
+      checkInInput.addEventListener('change', function() {
+         
+          const checkInDate = new Date(this.value);
+         
+          const minCheckOutDate = new Date(checkInDate);
+          minCheckOutDate.setDate(checkInDate.getDate() + 1);
+          
+          checkOutInput.min = minCheckOutDate.toISOString().split('T')[0];
+          
+          if (checkOutInput.value < checkOutInput.min) {
+              checkOutInput.value = checkOutInput.min;
+          }
+      });
+  </script>
 
     <script src="js/script.js"></script>
     <script

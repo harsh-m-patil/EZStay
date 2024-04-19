@@ -328,11 +328,15 @@ exports.updatepassword = async (req, res) => {
 
       // res.status(200).send('Password updated successfully');
       res.render('security');
+      
+
   } catch (err) {
       console.error(err);
       res.status(500).send(`Error updating password: ${err.message}`);
   }
 };
+
+
 
 // Route for deleting the user
 exports.deleteuser = async (req, res) => {

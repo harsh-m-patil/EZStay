@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { MongoClient } = require('mongodb');
-const {handleSearchHotel,handleClickedHotel} = require('../controllers/hotel.controller');
+const {handleSearchHotel,handleClickedHotel,handleHotelInfo} = require('../controllers/hotel.controller');
 
 
 // Fetch hotel data function
@@ -37,6 +37,8 @@ router.get('/hoteldata', async (req, res) => {
 router.get('/search', handleSearchHotel);
 
 router.get('/hotelInfo', handleClickedHotel);
+
+router.post('/hotelInfo',handleHotelInfo);
 
 
 module.exports = router;

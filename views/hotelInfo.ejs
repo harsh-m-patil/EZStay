@@ -29,6 +29,53 @@
           const checkInDate = new Date(checkInInput.value);
           const checkOutDate = new Date(checkOutInput.value);
 
+          // *******************************************
+          console.log(checkInDate);
+          console.log(checkOutDate);
+
+          // ***********************************************
+
+// passing data to backend(hotel.controller.js)**********************************************************************************************
+
+
+async function sendDataToServer(checkInDate, checkOutDate) {
+    const dataToSend = {
+      checkIn: checkInDate,
+      checkOut: checkOutDate
+    };
+
+    // console.log("Hi: ",dataToSend.checkIn);
+    // console.log("Hello: ",dataToSend.checkOut);
+
+    await fetch('/hotelInfo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataToSend)
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('Data sent successfully');
+      } else {
+        console.error('Failed to send data you want');
+      }
+    })
+    .catch(error => {
+      console.error('Error sending data:', error);
+    });
+  }
+
+  checkInInput.addEventListener("change", function () {
+    sendDataToServer(checkInInput.value, checkOutInput.value);
+  });
+
+  checkOutInput.addEventListener("change", function () {
+    sendDataToServer(checkInInput.value, checkOutInput.value);
+  });
+  
+// passing data to backend(hotel.controller.js)**********************************************************************************************
+
           
 
           // Calculate number of nights
@@ -78,9 +125,7 @@
 
       <!-- Right side of navigation bar -->
       <div class="nav-rightside">
-        <div class="bookmark">
-          <i class="icons ri-heart-fill"></i>
-        </div>
+        
         <button class="btn sign-in-btn">Sign in</button>
       </div>
     </nav>
