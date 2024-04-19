@@ -37,7 +37,7 @@ async function handleClickedHotel(req, res) {
   req.session.clickedHotel = clickedHotel;
 
   // return hotelId;
-  return res.render("hotelInfo", {
+ 
   console.log(checkIn);
   console.log(checkOut);
 
