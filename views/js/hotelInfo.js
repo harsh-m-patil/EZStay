@@ -1,15 +1,4 @@
 
-// import { hotelData, cardClickedIndex } from "./script.js";
-
-// const hotelName = document.querySelector('#hotelName')
-// const hotelAddress = document.querySelector('#hotelAddress')
-
-// console.log(hotelName.innerHTML);
-// console.log(cardClickedIndex);
-
-// // hotelName.innerHTML = hotelData[cardClickedIndex].hotelName;
-// // console.log(hotelData[cardClickedIndex].hotelName);
-// // console.log(cardClickedIndex);
 
 const reviewData = [
   {
@@ -81,11 +70,11 @@ addReviews();
 
 
 
-// // Accessing the checkIn and checkOut dates passed from controller.js
-// const checkInDate = '<%= checkIn %>';
-// const checkOutDate = '<%= checkOut %>';
 
-// Logging the checkIn and checkOut dates
+
+
+
+
 console.log("Check-in Date:", checkInDate);
 console.log("Check-out Date:", checkOutDate);
 

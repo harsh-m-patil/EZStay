@@ -212,7 +212,7 @@ const updateCardsWithData = (hotelData) => {
     item.querySelector("h4").innerText = hotelData[index].hotelName;
     item.querySelector("p").innerText = hotelData[index].rating;
     Address[1].innerText = hotelData[index].hotelAddress;
-    item.querySelector("span").innerText = "₹ " + hotelData[index].hotelPrice;
+    item.querySelector("span").innerText = "₹ " + hotelData[index].hotelPrice.toLocaleString('en-IN');
 
   
 

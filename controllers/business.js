@@ -31,7 +31,7 @@ exports.createBusiness = async (req, res) => {
     });
 
     await newBusiness.save();
-    res.redirect("/business_login");
+    res.redirect("/business/login");
   } catch (err) {
     console.error(err);
     res.status(500).send(`Error signing up: ${err.message}`);
@@ -70,7 +70,7 @@ exports.accessBusiness = async (req, res) => {
       httpOnly: true,
     });
 
-    return res.redirect("/dashboard");
+    return res.redirect("/business/dashboard");
   } catch (err) {
     console.error(err);
 
@@ -83,5 +83,5 @@ exports.businessDashboard = async (req, res) => {
 };
 // Logout
 exports.logout = async (req, res) => {
-  res.clearCookie("token").redirect("/business_login");
+  res.clearCookie("token").redirect("/business/login");
 };

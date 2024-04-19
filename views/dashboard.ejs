@@ -1,300 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <!-- Meta tags for character set and viewport -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Title of the webpage -->
-  <title>Dashboard</title>
-  <!-- Link to external CSS files -->
-  <link rel="stylesheet" href="css/fonts.css">
-  <link rel="stylesheet" href="css/dashboard.css">
-  <!-- Link to favicon -->
-  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-</head>
+  <head>
+    <!-- Meta tags for character set and viewport -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the webpage -->
+    <title>Dashboard</title>
+    <!-- Link to external CSS files -->
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <!-- Link to favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  </head>
 
-<body>
-  <!-- Sidebar section -->
-  <div class="sidebar">
-    <!-- Logo -->
-    <div class="logo">
-      
-      <img src="images/logo.svg" alt="">
-    </div>
-    <!-- Menu items -->
-    <ul class="menu">
-      <li class="active">
-        <a href="#">
-          <i class="fas fa-tachometer-alt"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="fas fa-user"></i>
-          <span>Profile</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="fa-solid fa-user-group"></i>
-          <span>Bookings</span>
-        </a>
-      </li>
-      <li>
-        <a href="hotelInfo.html">
-          <i class="fa-solid fa-circle-info"></i>
-          <span>Hotel Info</span>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="fas fa-star"></i>
-          <span>Reviews</span>
-        </a>
-      </li>
-      <!-- <li>
-        <a href="#">
-          <i class="fas fa-cog"></i>
-          <span>Setting</span>
-        </a>
-      </li> -->
-      <!-- Logout button -->
-      <li class="logout">
-        <a href="./business.html">
-          <i class="fas fa-sign-out-alt"></i>
-          <span>Sign Out</span>
-        </a>
-      </li>
-    </ul>
-  </div>
+  <body>
+    <!-- Sidebar section -->
+    <div class="sidebar">
+      <!-- Logo -->
+      <div class="logo">
 
-  <!-- Main section -->
-  <section class="main">
-    <!-- Header -->
-    <div class="header-wrapper">
-      <div class="header-title">
-        <h1>Hotel Admin Dashboard</h1>
+        <img src="images/logo.svg" alt="">
       </div>
-      <!-- Search bar -->
-      <div class="search hover-effect">
-        <input type="text" name="search" placeholder="Search">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </div>
+      <!-- Menu items -->
+      <ul class="menu">
+        <li class="active">
+          <a href="#">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa-solid fa-user-group"></i>
+            <span>Bookings</span>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Hotel Info</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fas fa-star"></i>
+            <span>Reviews</span>
+          </a>
+        </li>
+        <!-- <li>
+<a href="#">
+<i class="fas fa-cog"></i>
+<span>Setting</span>
+</a>
+</li> -->
+        <!-- Logout button -->
+        <li class="logout">
+          <a href="./business.html">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Sign Out</span>
+          </a>
+        </li>
+      </ul>
     </div>
-    <!-- Info cards -->
-    <div class="info-cards-container">
-      <!-- Info card: New Bookings -->
-      <div class="info-card hover-effect">
-        <div class="info-header">
-          <p>New Bookings</p>
-          <!-- Pill with percentage -->
-          <div class="pill">
-            <span class="circle">◭</span>
-            <p>20%</p>
-          </div>
-        </div>
-        <h1>24</h1>
-        <h4 class="bookings-details">Details ></h4>
-      </div>
-      <!-- Info card: Total Revenue -->
-      <div class="info-card hover-effect">
-        <div class="info-header">
-          <p>Total Revenue</p>
-          <!-- Pill with currency symbol and percentage -->
-          <div class="pill">
-            <span class="circle">₹</span>
-            <p>20%</p>
-          </div>
-          <h1>₹ 10,00,000</h1>
-          <h4 class="revenue-details">Details ></h4>
-        </div>
-      </div>
-      <!-- Info card: Total Customers -->
-      <div class="info-card hover-effect">
-        <div class="info-header">
-          <p>Total Customers</p>
-          <!-- Pill with symbol and percentage -->
-          <div class="pill">
-            <span class="circle">Ħ</span>
-            <p>20%</p>
-          </div>
-        </div>
-        <h1>10,000</h1>
-        <h4 class="customers-details">Details ></h4>
-      </div>
-    </div>
-    <!-- Additional info section -->
-    <div class="extra-info">
-      <!-- Recent bookings -->
-      <div class="recent ex-card hover-effect">
-        <h1>Recent Bookings</h1>
-        <div class="booking">
-          <p>Booking Name</p>
-          <p>Status</p>
-          <p>Payment Mode</p>
-        </div>
-        <div class="bookings-list" id="scrollbar1">
-          <!-- Bookings list will be populated dynamically -->
-        </div>
-      </div>
-      <!-- Additional cards (if any) -->
-      <div class="ex-card hover-effect"></div>
-    </div>
-  </section>
 
-  <!-- Sections for profile, all bookings, hotel info, reviews, and settings (all initially hidden) -->
-  <section class="profile hidden">
-    <!-- Profile section header and search bar -->
-    <div class="header-wrapper">
-      <div class="header-title">
-        <h1>Profile</h1>
+    <!-- Main section -->
+    <section class="main">
+      <!-- Header -->
+      <div class="header-wrapper">
+        <div class="header-title">
+          <h1>Hotel Admin Dashboard</h1>
+        </div>
+        <!-- Search bar -->
+        <div class="search hover-effect">
+          <input type="text" name="search" placeholder="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
       </div>
-      <div class="search">
-        <input type="text" name="search" placeholder="Search">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </div>
-    </div>
-    <div class="profile-grid">
-      <div class="profile-left">
-        <div>
-          <div class="hotel-profile">
-            <img src="images/HA1.webp" alt="">
-            <h1>ITC Chola,Chennai</h1>
+      <!-- Info cards -->
+      <div class="info-cards-container">
+        <!-- Info card: New Bookings -->
+        <div class="info-card hover-effect">
+          <div class="info-header">
+            <p>New Bookings</p>
+            <!-- Pill with percentage -->
+            <div class="pill">
+              <span class="circle">◭</span>
+              <p>20%</p>
+            </div>
+          </div>
+          <h1>24</h1>
+          <h4 class="bookings-details">Details ></h4>
+        </div>
+        <!-- Info card: Total Revenue -->
+        <div class="info-card hover-effect">
+          <div class="info-header">
+            <p>Total Revenue</p>
+            <!-- Pill with currency symbol and percentage -->
+            <div class="pill">
+              <span class="circle">₹</span>
+              <p>20%</p>
+            </div>
+            <h1>₹ 10,00,000</h1>
+            <h4 class="revenue-details">Details ></h4>
           </div>
         </div>
-        <div class="profile-extra-info">
-          <ul>
-            <li>
-              <h2><i class="fa-regular fa-circle-check"></i>&ThickSpace; Verified</h2>
-            </li>
-            <li>
-              <h2><i class="fa-regular fa-star"></i>&ThickSpace;Rating 4.5 </h2>
-            </li>
-            <li>
-              <h2><i class="fa-solid fa-hand-holding-dollar"></i>&ThickSpace;Luxury Experience</h2>
-            </li>
-            <li>
-              <h2><i class="fa-solid fa-clipboard-user"></i> &ThickSpace; Experienced Staff</h2>
-            </li>
-          </ul>
+        <!-- Info card: Total Customers -->
+        <div class="info-card hover-effect">
+          <div class="info-header">
+            <p>Total Customers</p>
+            <!-- Pill with symbol and percentage -->
+            <div class="pill">
+              <span class="circle">Ħ</span>
+              <p>20%</p>
+            </div>
+          </div>
+          <h1>10,000</h1>
+          <h4 class="customers-details">Details ></h4>
         </div>
       </div>
-      <div class="profile-right">
-        <div class="right-info ">
+      <!-- Additional info section -->
+      <div class="extra-info">
+        <!-- Recent bookings -->
+        <div class="recent ex-card hover-effect">
+          <h1>Recent Bookings</h1>
+          <div class="booking">
+            <p>Booking Name</p>
+            <p>Status</p>
+            <p>Payment Mode</p>
+          </div>
+          <div class="bookings-list" id="scrollbar1">
+            <!-- Bookings list will be populated dynamically -->
+          </div>
+        </div>
+        <!-- Additional cards (if any) -->
+        <div class="ex-card hover-effect"></div>
+      </div>
+    </section>
+
+    <!-- Sections for profile, all bookings, hotel info, reviews, and settings (all initially hidden) -->
+    <section class="profile hidden">
+      <!-- Profile section header and search bar -->
+      <div class="header-wrapper">
+        <div class="header-title">
+          <h1>Profile</h1>
+        </div>
+        <div class="search">
+          <input type="text" name="search" placeholder="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+      </div>
+      <div class="profile-grid">
+        <div class="profile-left">
           <div>
-            <h1>ITC Chola, Chennai</h1>
-            <h1>Experience An Era Of Magnificence & Splendour</h1>
+            <div class="hotel-profile">
+              <img src="images/HA1.webp" alt="">
+              <h1>ITC Chola,Chennai</h1>
+            </div>
           </div>
-          <p>
-            With its awe-inspiring size and grandeur, ITC Grand Chola is a veritable destination unto itself. Located in the heart of Chennai the hotel is a palatial tribute to Southern India’s greatest empires – the Imperial Cholas. There are four separate entry points, each with its distinct artistic identity.
-          </p>
+          <div class="profile-extra-info">
+            <ul>
+              <li>
+                <h2><i class="fa-regular fa-circle-check"></i>&ThickSpace; Verified</h2>
+              </li>
+              <li>
+                <h2><i class="fa-regular fa-star"></i>&ThickSpace;Rating 4.5 </h2>
+              </li>
+              <li>
+                <h2><i class="fa-solid fa-hand-holding-dollar"></i>&ThickSpace;Luxury Experience</h2>
+              </li>
+              <li>
+                <h2><i class="fa-solid fa-clipboard-user"></i> &ThickSpace; Experienced Staff</h2>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="pr-three-childs-container">
-          <div>
-            <h2>Location</h2>
+        <div class="profile-right">
+          <div class="right-info ">
+            <div>
+              <h1>ITC Chola, Chennai</h1>
+              <h1>Experience An Era Of Magnificence & Splendour</h1>
+            </div>
             <p>
-              63,<br> Anna Salai,<br> Little Mount,<br> Guindy, Chennai,<br> Tamil Nadu 600032,<br>India
+              With its awe-inspiring size and grandeur, ITC Grand Chola is a veritable destination unto itself. Located in the heart of Chennai the hotel is a palatial tribute to Southern India’s greatest empires – the Imperial Cholas. There are four separate entry points, each with its distinct artistic identity.
             </p>
           </div>
-          <div>
-            <h2>Contact</h2>
-            <p>
-              <br>
-              Contact Numbers <br>
-              +91 44 22200000 <br>
-              +91 44 22200200 <br>
-              Email id: <br>
-              reservations@itchotels.in
-            </p>
-          </div>
-          <div>
-            <h2>Toll Free</h2>
-            <p>
-              <br><br>
-              1-800-419-6444, <br>
-              1-800-102-2333
-            </p>
+          <div class="pr-three-childs-container">
+            <div>
+              <h2>Location</h2>
+              <p>
+                63,<br> Anna Salai,<br> Little Mount,<br> Guindy, Chennai,<br> Tamil Nadu 600032,<br>India
+              </p>
+            </div>
+            <div>
+              <h2>Contact</h2>
+              <p>
+                <br>
+                  Contact Numbers <br>
+                  +91 44 22200000 <br>
+                  +91 44 22200200 <br>
+                  Email id: <br>
+                  reservations@itchotels.in
+              </p>
+            </div>
+            <div>
+              <h2>Toll Free</h2>
+              <p>
+                <br><br>
+                  1-800-419-6444, <br>
+                  1-800-102-2333
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-  <section class="all-bookings hidden">
-    <!-- All bookings section header, search bar, and table -->
-    <div class="header-wrapper">
-      <div class="header-title">
-        <h1>Bookings</h1>
+    </section>
+    <section class="all-bookings hidden">
+      <!-- All bookings section header, search bar, and table -->
+      <div class="header-wrapper">
+        <div class="header-title">
+          <h1>Bookings</h1>
+        </div>
+        <div class="search">
+          <input type="text" name="search" placeholder="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
       </div>
-      <div class="search">
-        <input type="text" name="search" placeholder="Search">
-        <i class="fa-solid fa-magnifying-glass"></i>
+      <div id="all-bookings-list">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Email</th>
+              <th>Arrival</th>
+              <th>Departure</th>
+              <th>RoomType</th>
+              <th>Status</th>
+              <th>Payment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Booking details will be populated dynamically -->
+          </tbody>
+        </table>
       </div>
-    </div>
-    <div id="all-bookings-list">
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Email</th>
-            <th>Arrival</th>
-            <th>Departure</th>
-            <th>RoomType</th>
-            <th>Status</th>
-            <th>Payment</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Booking details will be populated dynamically -->
-        </tbody>
-      </table>
-    </div>
-  </section>
-  <section class="hotelInfo hidden">
-    <!-- Hotel info section header and search bar -->
-    <div class="header-wrapper">
-      <div class="header-title">
-        <h1>Hotel Info</h1>
+    </section>
+    <section class="hotelInfo hidden">
+      <!-- Hotel info section header and search bar -->
+      <div class="header-wrapper">
+        <div class="header-title">
+          <h1>Hotel Info</h1>
+        </div>
+        <div class="search">
+          <input type="text" name="search" placeholder="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
       </div>
-      <div class="search">
-        <input type="text" name="search" placeholder="Search">
-        <i class="fa-solid fa-magnifying-glass"></i>
+      <h2>Hotel Information</h2>
+      <ul>
+        <li><strong>Hotel ID:</strong> <%= hotelInfo.hotelId %></li>
+        <li><strong>Hotel Name:</strong> <%= hotelInfo.hotelName %></li>
+        <li><strong>Hotel Address:</strong> <%= hotelInfo.hotelAddress %></li>
+        <li><strong>Hotel Price:</strong> <%= hotelInfo.hotelPrice %></li>
+        <li><strong>Rating:</strong> <%= hotelInfo.rating %></li>
+        <li><strong>Flag:</strong> <%= hotelInfo.flag %></li>
+        <li><strong>Updated At:</strong> <%= hotelInfo.updatedAt %></li>
+      </ul>
+
+      <!-- Display image links -->
+      <h2>Image Links</h2>
+      <ul>
+        <% hotelInfo.imageLinks.forEach((link, index) => { %>
+        <li><strong>Image <%= index + 1 %>:</strong> <img src="<%= link %>" alt="Hotel Image"></li>
+        <% }) %>
+      </ul>
+    </section>
+    <section class="reviews hidden">
+      <!-- Reviews section header and search bar -->
+      <div class="header-wrapper">
+        <div class="header-title">
+          <h1>Reviews</h1>
+        </div>
+        <div class="search">
+          <input type="text" name="search" placeholder="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
       </div>
-    </div>
-  </section>
-  <section class="reviews hidden">
-    <!-- Reviews section header and search bar -->
-    <div class="header-wrapper">
-      <div class="header-title">
-        <h1>Reviews</h1>
+      <div class="grid-reviews">
+        <!-- reviews will be populated dynamically -->
       </div>
-      <div class="search">
-        <input type="text" name="search" placeholder="Search">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </div>
-    </div>
-    <div class="grid-reviews">
-      <!-- reviews will be populated dynamically -->
-    </div>
-  </section>
-  <!-- <section class="settings hidden">
-    Settings section header and search bar
-    <div class="header-wrapper">
-      <div class="header-title">
-        <h1>Settings</h1>
-      </div>
-      <div class="search">
-        <input type="text" name="search" placeholder="Search">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </div>
-    </div>
-  </section> -->
-  <!-- Font Awesome script -->
-  <script src="https://kit.fontawesome.com/5050694ff5.js" crossorigin="anonymous"></script>
-  <!-- Custom JavaScript file for dashboard functionality -->
-  <script src="js/dashboard.js"> </script>
-</body>
+    </section>
+    <!-- <section class="settings hidden">
+Settings section header and search bar
+<div class="header-wrapper">
+<div class="header-title">
+<h1>Settings</h1>
+</div>
+<div class="search">
+<input type="text" name="search" placeholder="Search">
+<i class="fa-solid fa-magnifying-glass"></i>
+</div>
+</div>
+</section> -->
+    <!-- Font Awesome script -->
+    <script src="https://kit.fontawesome.com/5050694ff5.js" crossorigin="anonymous"></script>
+    <!-- Custom JavaScript file for dashboard functionality -->
+    <script src="js/dashboard.js"> </script>
+  </body>
 
 </html>

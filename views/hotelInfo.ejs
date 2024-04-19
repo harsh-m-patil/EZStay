@@ -14,6 +14,59 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
       rel="stylesheet"
     />
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const checkInInput = document.querySelector(".checkInInput");
+        const checkOutInput = document.querySelector(".checkOutInput");
+        const hotelPriceInDB = document.querySelector(".hotelPriceInDB");
+        const nights = document.querySelector(".nights");
+        const  hotelPrice = hotelPriceInDB.innerHTML.replace(/,/g, '');
+
+
+        // Function to calculate and update total price and nights
+        function updatePriceAndNights() {
+          const checkInDate = new Date(checkInInput.value);
+          const checkOutDate = new Date(checkOutInput.value);
+
+          
+
+          // Calculate number of nights
+          const numberOfNights = Math.round(
+            (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24)
+          );
+
+
+          // Calculate total price
+          const totalPrice = hotelPrice * numberOfNights;
+          
+
+          // Update HTML elements with new values
+          document.querySelector(
+            ".total-amt p:last-child"
+          ).textContent = `₹ ${totalPrice.toLocaleString("en-IN")}`;
+          document.querySelector(
+            ".nights"
+          ).textContent = `${numberOfNights}`;
+          document.querySelector(
+            ".amt-before-tax p:last-child"
+          ).textContent = `₹ ${totalPrice.toLocaleString("en-IN")}`;
+        }
+
+        // Initial calculation when page loads
+        updatePriceAndNights();
+
+        // Event listener for checkInInput change
+        checkInInput.addEventListener("change", function () {
+          updatePriceAndNights();
+        });
+
+        // Event listener for checkOutInput change
+        checkOutInput.addEventListener("change", function () {
+          updatePriceAndNights();
+        });
+      });
+    </script>
   </head>
   <body>
     <!-- Navigation Bar Start -->
@@ -245,17 +298,29 @@
         <form action="/booked" method="post">
         <div class="info-card">
           <div class="priceCard">
-            <p><span>Rs <%= clickedHotel.hotelPrice %></span> night</p>
+            <p >
+              <span>₹ </span>
+              <span class="hotelPriceInDB"><%= clickedHotel.hotelPrice.toLocaleString('en-IN')%></span>
+              night
+            </p>
 
             <div class="three-box">
               <div class="priceCard-dates">
                 <div id="checkIn">
-                  <label for="checkin">CHECK IN</label>
-                  <input type="date" id="checkin" name="checkin" value="<%=checkIn%>" />
+                  <label for="">CHECK IN</label>
+                  <input
+                    class="checkInInput"
+                    type="date"
+                    value="<%=checkIn%>"
+                  />
                 </div>
                 <div id="checkOut">
-                  <label for="checkout">CHECK OUT</label>
-                  <input type="date" id="checkout" name="checkout" value="<%=checkOut%>" />
+                  <label for="">CHECK OUT</label>
+                  <input
+                    class="checkOutInput"
+                    type="date"
+                    value="<%=checkOut%>"
+                  />
                 </div>
               </div>
 
@@ -267,21 +332,39 @@
             </div>
             
             <button>Book</button>
-          </form>
-            
+
             <div class="total-amt">
+              <% if (checkOut && checkIn) { %>
               <p>
-                  ₹ <%= clickedHotel.hotelPrice %> × <%= Math.round((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24)) %> nights
+                ₹ <%= clickedHotel.hotelPrice.toLocaleString('en-IN') %> × <span class="nights"><%=
+                  Math.round((new Date(checkOut) - new Date(checkIn)) / (1000 * 60
+                  * 60 * 24)) %></span> nights
               </p>
               <p>
-                  ₹ <%= clickedHotel.hotelPrice * Math.round((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24)) %>
+                ₹ <%= (clickedHotel.hotelPrice * Math.round((new Date(checkOut)
+                - new Date(checkIn)) / (1000 * 60 * 60 *
+                24))).toLocaleString('en-IN') %>
               </p>
-          </div>
-          
+              <% } else { %>
+              <p>
+                ₹ <%= clickedHotel.hotelPrice.toLocaleString('en-IN') %> × 1
+                night
+              </p>
+              <p>₹ <%= clickedHotel.hotelPrice.toLocaleString('en-IN') %></p>
+              <% } %>
+            </div>
 
             <div class="amt-before-tax">
-              <p>Total before taxes</p>
-              <p>₹10,000</p>
+              <p id="txt">Total before taxes</p>
+              <% if (checkOut && checkIn) { %>
+              <p>
+                ₹ <%= (clickedHotel.hotelPrice * Math.round((new Date(checkOut)
+                - new Date(checkIn)) / (1000 * 60 * 60 *
+                24))).toLocaleString('en-IN') %>
+              </p>
+              <% } else {%>
+              <p>₹<%= clickedHotel.hotelPrice.toLocaleString('en-IN') %></p>
+              <% } %>
             </div>
           </div>
         </div>
