@@ -187,7 +187,6 @@ border-radius: 8px;
 }
 
 
-
 .priceCard p {
   margin: 0;
 }
@@ -300,6 +299,10 @@ border-radius: 8px;
 .amt-before-tax p {
   margin: 5px 0;
 }
+.amt-before-tax #txt {
+  margin: 5px 0;
+  font-weight: 500;
+}
 
 /* reviews */
 .review{
@@ -363,6 +366,10 @@ border-radius: 8px;
   display: flex;
   gap: 5px;
   align-items: center;
+}
+.total-amt span{
+  font-size: 16px;
+  font-weight: normal;
 }
 
 
