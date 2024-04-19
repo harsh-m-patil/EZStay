@@ -1,5 +1,6 @@
 const Hotel = require("../models/hotel.model");
 
+
 const handleSearchHotel = async (req, res) => {
   try {
     let { destination, checkIn, checkOut, guests, clickedHotelName } =
@@ -39,17 +40,22 @@ async function handleClickedHotel(req, res) {
   let { clickedHotelName, checkIn, checkOut } = req.query;
 
   const clickedHotel = await Hotel.findOne({ hotelName: clickedHotelName });
+  // const hotelId = clickedHotel.hotelId;
 
-  
+  // console.log(clickedHotel);
+  req.session.clickedHotel = clickedHotel;
 
+  // return hotelId;
   return res.render("hotelInfo", {
     clickedHotel: clickedHotel,
     checkIn: checkIn,
     checkOut: checkOut,
+    hotelId: clickedHotel._id
   });
 }
 
 module.exports = {
   handleSearchHotel,
   handleClickedHotel,
+  // clickedHotel
 };

@@ -75,13 +75,23 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Booking details will be populated dynamically -->
-        </tbody>
+          <% bookings.forEach(booking => { %>
+              <tr>
+                  <td><%= booking.hotel.hotelName %></td>
+                  <td><%= booking.user.email %></td>
+                  <!-- <td><%= booking.arrivalDate %></td>
+                  <td><%= booking.departureDate %></td>
+                  <td><%= booking.roomType %></td>
+                  <td><%= booking.status %></td>
+                  <td><%= booking.paymentMethod %></td> -->
+              </tr>
+          <% }); %>
+      </tbody>
       </table>
     </div>
   </section>
 
   <script src="https://kit.fontawesome.com/5050694ff5.js" crossorigin="anonymous"></script>
-  <script src="js/userdashboard.js"></script>
+  <!-- <script src="js/userdashboard.js"></script> -->
   </body>
   </html>

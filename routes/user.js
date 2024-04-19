@@ -31,6 +31,10 @@ router.get('/index', verifyToken, user.index);
 // Logout
 router.get('/logout', user.logout);
 
+
+// dashboard
+router.get('/userdashboard',verifyToken,checkGuestUser, user.userdashboard);
+
 //presonalinfo
 router.get('/personalinfo',verifyToken,checkGuestUser, user.personalinfo);
 router.get('/security',verifyToken, user.security);

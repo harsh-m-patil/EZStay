@@ -241,7 +241,8 @@
             </div>
           </div>
         </div>
-
+        
+        <form action="/booked" method="post">
         <div class="info-card">
           <div class="priceCard">
             <p><span>Rs <%= clickedHotel.hotelPrice %></span> night</p>
@@ -249,12 +250,12 @@
             <div class="three-box">
               <div class="priceCard-dates">
                 <div id="checkIn">
-                  <label for="">CHECK IN</label>
-                  <input type="date" value="<%=checkIn%>" />
+                  <label for="checkin">CHECK IN</label>
+                  <input type="date" id="checkin" name="checkin" value="<%=checkIn%>" />
                 </div>
                 <div id="checkOut">
-                  <label for="">CHECK OUT</label>
-                  <input type="date" value="<%=checkOut%>" />
+                  <label for="checkout">CHECK OUT</label>
+                  <input type="date" id="checkout" name="checkout" value="<%=checkOut%>" />
                 </div>
               </div>
 
@@ -264,9 +265,9 @@
                 <option value="">3</option>
               </select>
             </div>
-
+            
             <button>Book</button>
-
+          </form>
             
             <div class="total-amt">
               <p>

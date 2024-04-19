@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// const session = require('express-session');
+const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 const path = require('path');
@@ -19,6 +19,11 @@ app.use(cookieParser());
 //     saveUninitialized: true,
 //     cookie: { secure: false, maxAge: 60000 }
 //   }));
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true,
+}));
 
 
 
@@ -57,4 +62,7 @@ app.use('/', businessroutes);
 
 const guestroutes = require('./routes/guest');
 app.use('/', guestroutes);
+
+const bookingroutes = require('./routes/booking');
+app.use('/', bookingroutes);
 
