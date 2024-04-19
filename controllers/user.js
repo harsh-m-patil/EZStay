@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const Booking = require("../models/booking");
 const nodemailer = require("nodemailer");
 const randomString = require("randomstring");
 
@@ -201,6 +202,23 @@ exports.index = async (req, res) => {
   res.render('index', { user: req.user });
 };
 
+// dasboard
+exports.userdashboard = async (req, res) => {
+ 
+  try {
+    
+    const userId = req.user.id; 
+    
+    const bookings = await Booking.find({ user: userId }).populate('hotel').populate('user');
+
+    
+    
+    res.render('userdashboard', { bookings: bookings });
+} catch (error) {
+    console.error("Error fetching bookings:", error);
+    res.status(500).send('Internal server error');
+}
+};
 
 
 //personalinfo

@@ -1,25 +1,26 @@
 const Booking = require("../models/booking");
 const jwt = require('jsonwebtoken');
-const {handleClickedHotel} = require('./hotel.controller');
+
 
 
 exports.booked = async (req, res) => {
     try {
-       
+        // Get the token from the request cookies
         const token = req.cookies.token;
         
-        
+        // Verify the token
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
         
         const userId = decodedToken.id;
         console.log("User ID:", userId);
-          // console.log(clickedHotel);
-        // Extract hotel ID from the request parameters
-        // const { hotelId } = req.params.hotelId;
-        const { hotelId } = await handleClickedHotel(req, res);
+          
+        const clickedHotel = req.session.clickedHotel;
+
+        const hotelId = clickedHotel._id;
+
         console.log("Hotel ID:", hotelId);
     
-        // Perform any necessary validation on hotelId
+        
     
         // Create a new booking document
         const booking = new Booking({

@@ -28,8 +28,6 @@ function generateGuestUserId() {
 
 
 
-exports.userdashboard = async (req, res) => {
-    res.sendFile('userdashboard.html', { root: global.staticpath });
-};
+
 
 

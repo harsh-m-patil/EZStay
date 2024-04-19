@@ -339,7 +339,8 @@ async function sendDataToServer(checkInDate, checkOutDate) {
             </div>
           </div>
         </div>
-
+        
+        <form action="/booked" method="post">
         <div class="info-card">
           <div class="priceCard">
             <p >
@@ -374,7 +375,7 @@ async function sendDataToServer(checkInDate, checkOutDate) {
                 <option value="">3</option>
               </select>
             </div>
-
+            
             <button>Book</button>
 
             <div class="total-amt">
