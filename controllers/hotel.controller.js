@@ -8,10 +8,7 @@ const handleSearchHotel = async (req, res) => {
     if (!destination) {
       return res.redirect("index");
     }
-    }
-
-    destination =
-      destination.charAt(0).toUpperCase() + destination.slice(1).toLowerCase();
+    
     destination =
       destination.charAt(0).toUpperCase() + destination.slice(1).toLowerCase();
 
