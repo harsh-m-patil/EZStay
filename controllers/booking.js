@@ -10,20 +10,15 @@ exports.booked = async (req, res) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
     const userId = decodedToken.id;
-    // console.log("User ID:", userId);
+    
 
     const clickedHotel = req.session.clickedHotel;
     const dates = req.session.dates;
     const totalPrice = req.session.totalPrice;
-    // console.log("paisa:", totalPrice);
+  
 
     const hotelId = clickedHotel._id;
     
-
-    // console.log("Hotel ID:", hotelId);
-
-    // console.log("checkIn:", dates.checkIn);
-    // console.log("checkOut:", dates.checkOut);
 
     // Create a new booking document
     const booking = new Booking({
@@ -74,7 +69,7 @@ exports.cancelbooking = async (req, res) => {
     // Find the booking in the database by ID and update its status to "canceled"
     const updatedBooking = await Booking.findByIdAndUpdate(
       bookingId,
-      { status: "canceled" }
+      { status: "cancelled" }
       // { new: true }
     );
 
