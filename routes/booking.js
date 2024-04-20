@@ -5,6 +5,8 @@ const {verifyToken , checkGuestUser} = require('../middleware/auth');
 
 router.post('/booked',verifyToken,checkGuestUser, booking.booked);
 
+router.get('/bookingconfirm',booking.bookingconfirmed)
+
 
 
 module.exports = router;

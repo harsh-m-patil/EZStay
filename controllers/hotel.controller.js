@@ -50,8 +50,8 @@ const handleHotelInfo = async (req, res) => {
   try {
     const { checkIn, checkOut } = req.body;
 
-    console.log("Check-in date from client:", checkIn);
-    console.log("Check-out date from client:", checkOut);
+    // console.log("Check-in date from client:", checkIn);
+    // console.log("Check-out date from client:", checkOut);
 
     const dates = {
       checkIn:checkIn,

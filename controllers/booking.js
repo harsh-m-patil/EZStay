@@ -12,7 +12,7 @@ exports.booked = async (req, res) => {
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
         
         const userId = decodedToken.id;
-        console.log("User ID:", userId);
+        // console.log("User ID:", userId);
           
         const clickedHotel = req.session.clickedHotel;
         const dates = req.session.dates
@@ -21,10 +21,10 @@ exports.booked = async (req, res) => {
 
         const hotelId = clickedHotel._id;
 
-        console.log("Hotel ID:", hotelId);
+        // console.log("Hotel ID:", hotelId);
     
-        console.log("checkIn:",dates.checkIn);
-        console.log("checkOut:",dates.checkOut);
+        // console.log("checkIn:",dates.checkIn);
+        // console.log("checkOut:",dates.checkOut);
     
         // Create a new booking document
         const booking = new Booking({
@@ -37,9 +37,33 @@ exports.booked = async (req, res) => {
         // Save the booking to the database
         await booking.save();
     
-        res.status(201).send('Booking successful');
+        // res.status(201).send('Booking successful');
+        res.redirect("/bookingconfirm");
       } catch (error) {
         console.error(error);
         res.status(500).send('Internal server error');
       }
 }
+
+
+exports.bookingconfirmed = async (req, res) => {
+  try {
+    
+    // const userId = req.user.id; 
+    const token = req.cookies.token;
+        
+        // Verify the token
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        
+        const userId = decodedToken.id;
+    
+    const bookings = await Booking.find({ user: userId }).populate('hotel').populate('user');
+
+    
+    
+    res.render('bookingconfirm', { bookings: bookings });
+} catch (error) {
+    console.error("Error fetching bookings:", error);
+    res.status(500).send('Internal server error');
+}
+};
