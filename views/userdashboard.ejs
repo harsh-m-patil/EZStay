@@ -75,17 +75,43 @@
           </tr>
         </thead>
         <tbody>
-          <% bookings.forEach(booking => { %>
+          <% bookings.forEach(booking => {
+            if (new Date(booking.checkIn) > new Date()) { %>
               <tr>
                   <td><%= booking.hotel.hotelName %></td>
                   <td><%= booking.hotel.hotelAddress %></td>
-                  <td><%= booking.checkIn %></td>
-                  <td><%= booking.checkOut %></td>
+                  <td><%= new Date(booking.checkIn).toDateString() %></td>
+                  <td><%= new Date(booking.checkOut).toDateString() %></td>
                   <td><%= booking.roomType %></td>
                   <td><%= booking.status %></td>
-                  <td><%= booking.totalPrice %>
+                  <td><%= booking.totalPrice %></td>
+                  <!-- <td><button class="cancel-booking" data-booking-id="<%= booking._id %>">Cancel</button></td> -->
+                  <!-- <td><form action="/cancelbooking" method="post">
+                    <button class="btn">Cancel</button>
+                  </form></td> -->
+                  <% if (booking.status !== 'canceled') { %>
+                  <td>
+                    <form action="/cancelbooking" method="post">
+                      <input type="hidden" name="bookingId" value="<%= booking._id %>">
+                      <button type="submit" class="btn">Cancel</button>
+                    </form>
+                  </td>
+                  <% } %>
+                  
+                
               </tr>
-          <% }); %>
+          <% }else{ %>
+            <tr>
+              <td><%= booking.hotel.hotelName %></td>
+              <td><%= booking.hotel.hotelAddress %></td>
+              <td><%= new Date(booking.checkIn).toDateString() %></td>
+              <td><%= new Date(booking.checkOut).toDateString() %></td>
+              <td><%= booking.roomType %></td>
+              <td><%= booking.status %></td>
+              <td><%= booking.totalPrice %></td>
+              
+          </tr>
+         <% }}); %>
       </tbody>
       </table>
     </div>
@@ -93,5 +119,7 @@
 
   <script src="https://kit.fontawesome.com/5050694ff5.js" crossorigin="anonymous"></script>
   <!-- <script src="js/userdashboard.js"></script> -->
+
+  
   </body>
   </html>

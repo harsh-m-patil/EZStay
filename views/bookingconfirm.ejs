@@ -59,13 +59,17 @@
                                 <td><%= new Date(bookings[bookings.length - 1].checkOut).toDateString() %></td>
 
                                 <td>single</td>
-                                <td></td>
+
+                                <td><%= bookings[bookings.length - 1].totalPrice %></td>
+
+                                <td><%= bookings[bookings.length - 1].status %></td>
                             </tr>
                         
 
                     </tbody>
                     </table>
             </div>
+            <a href="/index">Go back to home</a>
         </div>
       </section>
 

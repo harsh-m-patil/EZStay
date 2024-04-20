@@ -132,3 +132,12 @@ a {
 .all-bookings tbody tr:nth-child(even) {
     background-color: #e9ecef;
 }
+
+.btn{
+    padding: 5px 4px;
+    font-size: 16px;
+    background-color: #FDDB32 ;
+    border: none;
+    border-radius: 10px;
+    
+}
