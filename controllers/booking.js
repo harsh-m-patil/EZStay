@@ -15,17 +15,23 @@ exports.booked = async (req, res) => {
         console.log("User ID:", userId);
           
         const clickedHotel = req.session.clickedHotel;
+        const dates = req.session.dates
+
+        
 
         const hotelId = clickedHotel._id;
 
         console.log("Hotel ID:", hotelId);
     
-        
+        console.log("checkIn:",dates.checkIn);
+        console.log("checkOut:",dates.checkOut);
     
         // Create a new booking document
         const booking = new Booking({
           user: userId,
-          hotel: hotelId
+          hotel: hotelId,
+          checkIn:dates.checkIn,
+          checkOut:dates.checkOut
         });
     
         // Save the booking to the database

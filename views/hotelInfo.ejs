@@ -21,98 +21,60 @@
         const checkOutInput = document.querySelector(".checkOutInput");
         const hotelPriceInDB = document.querySelector(".hotelPriceInDB");
         const nights = document.querySelector(".nights");
-        const  hotelPrice = hotelPriceInDB.innerHTML.replace(/,/g, '');
-
-
+        const hotelPrice = parseInt(hotelPriceInDB.textContent.replace(/,/g, ''));
+  
         // Function to calculate and update total price and nights
         function updatePriceAndNights() {
           const checkInDate = new Date(checkInInput.value);
           const checkOutDate = new Date(checkOutInput.value);
-
-          // *******************************************
-          console.log(checkInDate);
-          console.log(checkOutDate);
-
-          // ***********************************************
-
-// passing data to backend(hotel.controller.js)**********************************************************************************************
-
-
-async function sendDataToServer(checkInDate, checkOutDate) {
-    const dataToSend = {
-      checkIn: checkInDate,
-      checkOut: checkOutDate
-    };
-
-    // console.log("Hi: ",dataToSend.checkIn);
-    // console.log("Hello: ",dataToSend.checkOut);
-
-    await fetch('/hotelInfo', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(dataToSend)
-    })
-    .then(response => {
-      if (response.ok) {
-        console.log('Data sent successfully');
-      } else {
-        console.error('Failed to send data you want');
-      }
-    })
-    .catch(error => {
-      console.error('Error sending data:', error);
-    });
-  }
-
-  checkInInput.addEventListener("change", function () {
-    sendDataToServer(checkInInput.value, checkOutInput.value);
-  });
-
-  checkOutInput.addEventListener("change", function () {
-    sendDataToServer(checkInInput.value, checkOutInput.value);
-  });
   
-// passing data to backend(hotel.controller.js)**********************************************************************************************
-
-          
-
           // Calculate number of nights
-          const numberOfNights = Math.round(
-            (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24)
-          );
-
-
+          const numberOfNights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+  
           // Calculate total price
           const totalPrice = hotelPrice * numberOfNights;
-          
-
+  
           // Update HTML elements with new values
-          document.querySelector(
-            ".total-amt p:last-child"
-          ).textContent = `₹ ${totalPrice.toLocaleString("en-IN")}`;
-          document.querySelector(
-            ".nights"
-          ).textContent = `${numberOfNights}`;
-          document.querySelector(
-            ".amt-before-tax p:last-child"
-          ).textContent = `₹ ${totalPrice.toLocaleString("en-IN")}`;
+          document.querySelector(".total-amt p:last-child").textContent = `₹ ${totalPrice.toLocaleString("en-IN")}`;
+          document.querySelector(".nights").textContent = `${numberOfNights}`;
+          document.querySelector(".amt-before-tax p:last-child").textContent = `₹ ${totalPrice.toLocaleString("en-IN")}`;
+  
+          // Send data to backend
+          sendDataToServer(checkInDate, checkOutDate);
         }
-
+  
         // Initial calculation when page loads
         updatePriceAndNights();
-
-        // Event listener for checkInInput change
-        checkInInput.addEventListener("change", function () {
-          updatePriceAndNights();
-        });
-
-        // Event listener for checkOutInput change
-        checkOutInput.addEventListener("change", function () {
-          updatePriceAndNights();
-        });
+  
+        // Event listeners for input changes
+        checkInInput.addEventListener("change", updatePriceAndNights);
+        checkOutInput.addEventListener("change", updatePriceAndNights);
       });
+  
+      async function sendDataToServer(checkInDate, checkOutDate) {
+        const dataToSend = {
+          checkIn: checkInDate,
+          checkOut: checkOutDate
+        };
+  
+        try {
+          const response = await fetch('/hotelInfo', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataToSend)
+          });
+          
+          if (response.ok) {
+            console.log('Data sent successfully');
+          } else {
+            console.error('Failed to send data you want');
+          }
+        } catch (error) {
+          console.error('Error sending data:', error);
+        }
+      }
     </script>
   </head>
   <body>
