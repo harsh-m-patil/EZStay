@@ -1,17 +1,19 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const business = require("../controllers/business");
-const { verifyToken } = require("../middleware/business");
+const business = require('../controllers/business');
+const { verifyToken } = require('../middleware/business');
 
-router.get("/signup", business.newBusinesses);
-router.post("/signup", business.createBusiness);
+router.get('/', business.index);
+
+router.get('/signup', business.newBusinesses);
+router.post('/signup', business.createBusiness);
 
 // login handler
-router.get("/login", business.getBusinesses);
-router.post("/login", business.accessBusiness);
+router.get('/login', business.getBusinesses);
+router.post('/login', business.accessBusiness);
 
-router.get('/dashboard',verifyToken,business.businessDashboard)
+router.get('/dashboard', verifyToken, business.businessDashboard);
 // Logout
-router.get("/logout", business.logout);
+router.get('/logout', business.logout);
 
 module.exports = router;

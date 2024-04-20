@@ -1,18 +1,16 @@
 const Hotel = require("../models/hotel.model");
 
-
 const handleSearchHotel = async (req, res) => {
   try {
     let { destination, checkIn, checkOut, guests, clickedHotelName } =
       req.query;
 
-    
-
     if (!destination) {
       return res.redirect("index");
-    } 
+    }
 
-    destination = destination.charAt(0).toUpperCase() + destination.slice(1).toLowerCase();
+    destination =
+      destination.charAt(0).toUpperCase() + destination.slice(1).toLowerCase();
 
     const searchedHotels = await Hotel.find({ hotelAddress: destination });
 
@@ -37,11 +35,11 @@ async function handleClickedHotel(req, res) {
   req.session.clickedHotel = clickedHotel;
 
   // return hotelId;
- 
+
   console.log(checkIn);
   console.log(checkOut);
 
-   res.render("hotelInfo", {
+  res.render("hotelInfo", {
     clickedHotel: clickedHotel,
     checkIn: checkIn,
     checkOut: checkOut,
@@ -50,8 +48,6 @@ async function handleClickedHotel(req, res) {
   return clickedHotel;
 }
 
-
-
 const handleHotelInfo = async (req, res) => {
   try {
     const { checkIn, checkOut } = req.body;
@@ -59,20 +55,16 @@ const handleHotelInfo = async (req, res) => {
     console.log("Check-in date from client:", checkIn);
     console.log("Check-out date from client:", checkOut);
 
-
-    res.status(200).json({ message: 'Data received successfully' });
+    res.status(200).json({ message: "Data received successfully" });
   } catch (error) {
     console.error("Error handling hotel info:", error);
     res.status(500).json({ message: "Internal server error." });
   }
 };
 
-
-
-
 module.exports = {
   handleSearchHotel,
   handleClickedHotel,
-  handleHotelInfo
+  handleHotelInfo,
   // clickedHotel
 };
