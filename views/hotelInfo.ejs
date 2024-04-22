@@ -40,7 +40,7 @@
           document.querySelector(".amt-before-tax p:last-child").textContent = `₹ ${totalPrice.toLocaleString("en-IN")}`;
   
           // Send data to backend
-          sendDataToServer(checkInDate, checkOutDate);
+          sendDataToServer(checkInDate, checkOutDate,totalPrice);
         }
   
         // Initial calculation when page loads
@@ -51,10 +51,11 @@
         checkOutInput.addEventListener("change", updatePriceAndNights);
       });
   
-      async function sendDataToServer(checkInDate, checkOutDate) {
+      async function sendDataToServer(checkInDate, checkOutDate,totalPrice) {
         const dataToSend = {
           checkIn: checkInDate,
-          checkOut: checkOutDate
+          checkOut: checkOutDate,
+          totalPrice:totalPrice
         };
   
         try {
@@ -319,6 +320,7 @@
                     class="checkInInput"
                     type="date"
                     value="<%=checkIn%>"
+                    required
                   />
                 </div>
                 <div id="checkOut">
@@ -327,6 +329,7 @@
                     class="checkOutInput"
                     type="date"
                     value="<%=checkOut%>"
+                    required
                   />
                 </div>
               </div>

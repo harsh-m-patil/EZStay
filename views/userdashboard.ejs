@@ -66,7 +66,7 @@
           <tr>
             <th>Hotel</th>
             <!-- <th>Gender</th> -->
-            <th>Email</th>
+            <th>Address</th>
             <th>Arrival</th>
             <th>Departure</th>
             <th>RoomType</th>
@@ -75,23 +75,48 @@
           </tr>
         </thead>
         <tbody>
-          <% bookings.forEach(booking => { %>
+          <% bookings.forEach(booking => {
+            if (new Date(booking.checkIn) > new Date()) { %>
               <tr>
                   <td><%= booking.hotel.hotelName %></td>
-                  <td><%= booking.user.email %></td>
-                  <td><%= booking.checkIn %></td>
-                  <td><%= booking.checkOut %></td>
-                  <!-- <td><%= booking.roomType %></td>
+                  <td><%= booking.hotel.hotelAddress %></td>
+                  <td><%= new Date(booking.checkIn).toDateString() %></td>
+                  <td><%= new Date(booking.checkOut).toDateString() %></td>
+                  <td><%= booking.roomType %></td>
                   <td><%= booking.status %></td>
-                  <td><%= booking.paymentMethod %> -->
+                  <td><%= booking.totalPrice %></td>
+                  
+                  <% if (booking.status !== 'cancelled') { %>
+                  <td>
+                    <form action="/cancelbooking" method="post">
+                      <input type="hidden" name="bookingId" value="<%= booking._id %>">
+                      <button type="submit" class="btn">Cancel</button>
+                    </form>
+                  </td>
+                  <% } %>
+                  
+                
               </tr>
-          <% }); %>
+          <% }else{ %>
+            <tr>
+              <td><%= booking.hotel.hotelName %></td>
+              <td><%= booking.hotel.hotelAddress %></td>
+              <td><%= new Date(booking.checkIn).toDateString() %></td>
+              <td><%= new Date(booking.checkOut).toDateString() %></td>
+              <td><%= booking.roomType %></td>
+              <td><%= booking.status %></td>
+              <td><%= booking.totalPrice %></td>
+              
+          </tr>
+         <% }}); %>
       </tbody>
       </table>
     </div>
   </section>
 
   <script src="https://kit.fontawesome.com/5050694ff5.js" crossorigin="anonymous"></script>
-  <!-- <script src="js/userdashboard.js"></script> -->
+ 
+
+  
   </body>
   </html>

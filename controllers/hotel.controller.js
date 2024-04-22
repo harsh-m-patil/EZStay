@@ -48,10 +48,10 @@ async function handleClickedHotel(req, res) {
 
 const handleHotelInfo = async (req, res) => {
   try {
-    const { checkIn, checkOut } = req.body;
+    const { checkIn, checkOut ,totalPrice} = req.body;
 
-    console.log("Check-in date from client:", checkIn);
-    console.log("Check-out date from client:", checkOut);
+    // console.log("Check-in date from client:", checkIn);
+    // console.log("Check-out date from client:", checkOut);
 
     const dates = {
       checkIn:checkIn,
@@ -59,6 +59,7 @@ const handleHotelInfo = async (req, res) => {
     }
 
     req.session.dates = dates;
+    req.session.totalPrice = totalPrice;
 
     res.status(200).json({ message: "Data received successfully" });
   } catch (error) {

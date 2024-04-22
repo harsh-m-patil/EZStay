@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed</title>
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/bookingconfirm.css" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+</head>
+<body>
+
+      <!-- Navigation Bar Start -->
+      <nav>
+        <!-- Left side of navigation bar -->
+        <div class="nav-leftside">
+          <img class="logo" src="images/logo.svg" alt="img" />
+        </div>
+  
+      
+      </nav>
+
+      <section>
+        <div class="container">
+            <div class="imgbox">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <!-- booking confirm message -->
+            <h1>Booking Confirmed</h1>
+            <p>we are pleased to inform you that your reservation request has been received and confirmed</p>
+            <p>Thank you</p>
+
+            <div class="box">
+                <h3>Booking Details :</h3>
+                <table>
+                    <thead>
+                      <tr>
+                        <th>Booking Id</th>
+                        <th>check-in</th>
+                        <th>check-out</th>
+                        <th>RoomType</th>
+                        <th>Payment</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        
+                            <tr>
+                                <td><%= bookings[bookings.length - 1]._id %></td>
+        
+                                
+                                <td><%= new Date(bookings[bookings.length - 1].checkIn).toDateString() %></td>
+
+                                <td><%= new Date(bookings[bookings.length - 1].checkOut).toDateString() %></td>
+
+                                <td>single</td>
+
+                                <td><%= bookings[bookings.length - 1].totalPrice %></td>
+
+                                <td><%= bookings[bookings.length - 1].status %></td>
+                            </tr>
+                        
+
+                    </tbody>
+                    </table>
+            </div>
+            <a href="/index">Go back to home</a>
+        </div>
+      </section>
+
+
+
+      <script
+      src="https://kit.fontawesome.com/5050694ff5.js"
+      crossorigin="anonymous"
+    ></script>
+</body>
+</html>
