@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
+    <title>Sign up</title>
     <link rel="stylesheet" href="css/fonts.css">
     <link href="css/login.css" rel="stylesheet">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
@@ -12,40 +12,44 @@
 
 <body>
     <div class="container-login">
-        <img src="images/logo.svg" alt="EZ Stay logo">
-
-        <div class="login-form" style="height: max-content;">
+        <div class="login-form" style="height: max-content; margin-top: 0;">
 
             <h3 style="font-weight: 600; font-size: 25px;">Create your business account</h3>
             <br>
 
             <form method="post" action="/business/signup">
-                <label for="hotelname">Hotel Name</label><br>
-                <input type="text" name="hotelname" id="hotelname" placeholder="Hotel Name" required><br>
+          <label for="fullname">Business name</label><br>
+          <input type="text" name="fullname" id="fullname" placeholder="full name" required>
 
-                <label for="username">User Name</label><br>
-                <input type="text" name="username" id="username" placeholder="Username" required><br>
+          <label for="username">Username</label><br>
+          <input type="text" name="username" id="username" placeholder="username" required>
 
-                <label for="email">Email</label><br>
-                <input type="email" name="email" id="email" placeholder="Email" required><br>
+          <label for="email">Email</label><br>
+          <input type="email" name="email" id="email" placeholder="your_emailid@gmail.com" required>
 
-                <label for="password">Password</label><br>
-                <input type="password" name="password" id="password" placeholder="Password" required><br>
+          <label for="phone">Phone Number</label>
+          <input type="tel" name="phone"  id="phone" placeholder="123456789"> 
 
-                <button type="submit" class="btn-sign">Sign up</button>
+          <label for="dob">Date of Birth</label>
+          <input type="date" name="dob" id="dob">  
+
+            <label for="password">Password</label>
+          <input type="password" name="password" id="password" placeholder="password" required>
+
+          <button class="btn-sign">Sign up</button>
             </form>
 
 
         </div>
     </div>
     <img src="images/loginPageBackground.svg" alt="" id="background-login">
-    <!-- <script>
+    <script>
         const loginBtn = document.querySelector('.btn-sign');
 
         loginBtn.addEventListener('click', function () {
-            window.location.href = 'dashboard.html';
+            window.location.href = '/business/login';
         });
-    </script> -->
+    </script>
 </body>
 
 </html>
