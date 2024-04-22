@@ -30,3 +30,15 @@ exports.checkGuestUser = (req, res, next) => {
 
   next();
 };
+
+
+exports.checkSuperuser = (req, res, next) => {
+ 
+ if (req.user && req.user.role === 'superuser') {
+  
+  next();
+} else {
+  // If not a superuser, deny access
+  res.status(403).send('Access denied. Only superusers can access this page.');
+}
+};

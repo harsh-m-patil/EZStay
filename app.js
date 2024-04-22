@@ -61,3 +61,6 @@ app.use('/', guestroutes);
 const bookingroutes = require('./routes/booking');
 app.use('/', bookingroutes);
 
+const superuserroutes = require('./routes/superuser');
+app.use('/', superuserroutes);
+
