@@ -22,4 +22,11 @@ router.get('/superuserBusinesses', superuser.superuserBusinesses);
 router.get('/superuserlogout', superuser.superuserlogout);
 
 
+router.post('/updateUserRole', superuser.updateUserRole);
+
+router.post('/deletingUser', superuser.Userdeleted);
+
+
+
+
 module.exports = router;

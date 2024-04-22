@@ -572,3 +572,58 @@ section {
 .profile-rectangle h1 {
     font-weight: 500;
 }
+
+.btn{
+    padding: 5px 4px;
+    font-size: 16px;
+    background-color: #FDDB32 ;
+    border: none;
+    border-radius: 10px;
+    
+}
+
+.deletebtn{
+    background-color: red;
+}
+
+.modal{
+    position: absolute;
+    width: 50%;
+    /* top: 50%;
+    left: 50%; */
+    transform: translate(-116%, 208%);
+    background-color: white;
+    /* border: 1px solid black; */
+    height: 4rem;
+    z-index: 2;
+    margin-top: 48px;
+    margin-left: 82%;
+}
+
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(3px);
+	z-index: 1;
+}
+
+.hidden{
+    display: none;
+}
+
+.updatebtn {
+    position: absolute;
+    padding: 6px 7px;
+    margin-top: 15px;
+    margin-left: 64%;
+}
+
+select {
+    margin: 10px;
+    padding: 10px;
+    font-size: medium;
+}
