@@ -268,10 +268,8 @@ function hideAllSections() {
 for (let i = 0; i < sidebarButtons.length; i++) {
     sidebarButtons[i].addEventListener('click', function () {
         hideAllSections();
-        if(i !== 3) {
             sections[i].classList.remove('hidden');
-            sidebarButtons[i].classList.add('active');
-        }       
+            sidebarButtons[i].classList.add('active');      
     });
 }
 
@@ -290,23 +288,23 @@ bookings.forEach(booking => { // render bookings in dashboard
 
 
 // Bookings Section
-const bookingTable = document.querySelector('#all-bookings-list tbody'); // Booking section
-
-bookings.forEach(booking => { // render bookings in booking section
-    const bookingRow = document.createElement('tr');
-    const RowContent = ` 
-      <td>${booking.firstName} ${booking.lastName}</td>
-      <td>${booking.gender}</td>
-      <td>${booking.email}</td>
-      <td>${booking.arrivalDate}</td>
-      <td>${booking.departureDate}</td>
-      <td>${booking.roomType}</td>
-      <td><div class="status ${booking.status === 'Booked' ? 'booked' : booking.status === 'Pending' ? 'pending' : 'canceled'}">${booking.status}</div></td>
-      <td>${booking.paymentMode}</td>
-    `;
-    bookingRow.innerHTML = RowContent;
-    bookingTable.appendChild(bookingRow);
-});
+// const bookingTable = document.querySelector('#all-bookings-list tbody'); // Booking section
+// 
+// bookings.forEach(booking => { // render bookings in booking section
+    // const bookingRow = document.createElement('tr');
+    // const RowContent = ` 
+      // <td>${booking.firstName} ${booking.lastName}</td>
+      // <td>${booking.gender}</td>
+      // <td>${booking.email}</td>
+      // <td>${booking.arrivalDate}</td>
+      // <td>${booking.departureDate}</td>
+      // <td>${booking.roomType}</td>
+      // <td><div class="status ${booking.status === 'Booked' ? 'booked' : booking.status === 'Pending' ? 'pending' : 'canceled'}">${booking.status}</div></td>
+      // <td>${booking.paymentMode}</td>
+    // `;
+    // bookingRow.innerHTML = RowContent;
+    // bookingTable.appendChild(bookingRow);
+// });
 
 // Review Section
 
