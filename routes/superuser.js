@@ -21,5 +21,12 @@ router.get('/superuserBusinesses', superuser.superuserBusinesses);
 
 router.get('/superuserlogout', superuser.superuserlogout);
 
+router.get('/searchUsers', superuser.searchUsers);
+
+router.get('/searchedSuperuserBooking', superuser.searchedSuperuserBooking);
+
+router.get('/searchedSuperuserBussiness', superuser.searchedSuperuserBussiness);
+
+router.get('/searchedSuperuserHotel', superuser.searchedSuperuserHotel);
 
 module.exports = router;

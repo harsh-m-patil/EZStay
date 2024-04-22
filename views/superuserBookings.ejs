@@ -15,17 +15,79 @@
 </head>
 
 <body>
-  
+  <!-- Sidebar section -->
+  <div class="sidebar">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="images/logo.svg" alt="">
+    </div>
+    <!-- Menu items -->
+    <ul class="menu">
+      <li class="active">
+        <a href="#">
+          <i class="fas fa-tachometer-alt"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <!-- <li>
+        <a href="#">
+          <i class="fas fa-user"></i>
+          <span>Profile</span>
+        </a>
+      </li> -->
+      <li>
+        <a href="/superuserUsers">
+          <i class="fa-solid fa-user-group"></i>
+          <span>Users</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="/superuserBookings">
+          <i class="fa-solid fa-user-group"></i>
+          <span>Bookings</span>
+        </a>
+      </li>
+      <li>
+        <a href="/superuserBusinesses">
+          <i class="fa-solid fa-user-group"></i>
+          <span>Businesses</span>
+        </a>
+      </li>
+     
+      <li>
+        <a href="/superuserHotels">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Hotels</span>
+        </a>
+      </li>
+
+      <!-- <li>
+        <a href="#">
+          <i class="fas fa-cog"></i>
+          <span>Setting</span>
+        </a>
+      </li> -->
+      <!-- Logout button -->
+      <li class="logout">
+        <a href="/superuserlogout">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Sign Out</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
   <section class="all-bookings">
     
     <div class="header-wrapper">
       <div class="header-title">
         <h1>Bookings</h1>
       </div>
-      <div class="search">
+      <form class="search" action="/searchedSuperuserBooking" method="get">
         <input type="text" name="search" placeholder="Search">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </div>
+        <button style="border: none;background: transparent;" type="submit" ><i class="fa-solid fa-magnifying-glass"></i></button>
+      </form>
     </div>
     <div id="all-bookings-list">
       <table>

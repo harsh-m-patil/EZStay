@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Meta tags for character set and viewport -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Title of the webpage -->
+  <title>Bookings</title>
+  <!-- Link to external CSS files -->
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <!-- Link to favicon -->
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <!-- Sidebar section -->
+  <div class="sidebar">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="images/logo.svg" alt="">
+    </div>
+    <!-- Menu items -->
+    <ul class="menu">
+      <li class="active">
+        <a href="#">
+          <i class="fas fa-tachometer-alt"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <!-- <li>
+        <a href="#">
+          <i class="fas fa-user"></i>
+          <span>Profile</span>
+        </a>
+      </li> -->
+      <li>
+        <a href="/superuserUsers">
+          <i class="fa-solid fa-user-group"></i>
+          <span>Users</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="/superuserBookings">
+          <i class="fa-solid fa-user-group"></i>
+          <span>Bookings</span>
+        </a>
+      </li>
+      <li>
+        <a href="/superuserBusinesses">
+          <i class="fa-solid fa-user-group"></i>
+          <span>Businesses</span>
+        </a>
+      </li>
+     
+      <li>
+        <a href="/superuserHotels">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Hotels</span>
+        </a>
+      </li>
+
+      <!-- <li>
+        <a href="#">
+          <i class="fas fa-cog"></i>
+          <span>Setting</span>
+        </a>
+      </li> -->
+      <!-- Logout button -->
+      <li class="logout">
+        <a href="/superuserlogout">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Sign Out</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+  <section class="all-bookings">
+    
+    <div class="header-wrapper">
+      <div class="header-title">
+        <h1>Users</h1>
+      </div>
+      <form class="search" action="/searchUsers" method="get">
+        <input type="text" name="search" placeholder="Search">
+        <button style="border: none;background: transparent;" type="submit"><i  class="fa-solid fa-magnifying-glass"></i></button>
+      </form>
+    </div>
+    <div id="all-bookings-list">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Phone No</th>
+            <th>DOB</th>
+            <th>Role</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <% searchedUsers.forEach(user => { %>
+            <tr>
+              <td><%= user.fullname %></td>
+              <td><%= user.username %></td>
+              <td><%= user.email %></td>
+              <td><%= user.phone %></td>
+              <td><%= new Date(user.dob).toDateString() %></td>
+              <td><%= user.role %></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+ 
+ 
+  <script src="https://kit.fontawesome.com/5050694ff5.js" crossorigin="anonymous"></script>
+  
+</body>
+
+</html>
