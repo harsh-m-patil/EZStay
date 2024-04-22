@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login</title>
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link href="css/login.css" rel="stylesheet" />
+   
+
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+  </head>
+
+<body>
+  <div class="container-login">
+    <img src="images/logo.svg" alt="EZ Stay logo">
+    <div class="login-form">
+      <h3 style="font-weight: 600; font-size: 25px;">Admin login</h3>
+      <br>
+      <form action="/superuserlogin" method="post">
+        <label for="username">Username</label><br>
+        <input type="text" name="username" id="username" placeholder="username" required>
+        <label for="password">Password</label><br>
+        <input type="password" name="password" id="password" placeholder="password" required>
+        <button type="submit" class="btn-login">Sign in</button>
+        <div class="login-text">
+          <a href="/superusersignup">Create Account</a>
+          
+        </div>
+        
+    
+      </form>
+        </div>
+  </div>
+  <img src="images/loginPageBackground.svg" alt="" id="background-login">
+
+    <!-- <script>
+    const loginBtn = document.querySelector('.btn-login');
+    loginBtn.addEventListener('click',function() {
+      window.location.href = 'index.html';
+    });
+  </script> -->
+  </body>
+</html>

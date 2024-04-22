@@ -35,6 +35,7 @@ exports.createUser = async (req, res) => {
       phone,
       dob,
       password: passwordHash,
+      role: "user"
     });
     await user.save();
     res.redirect("/login");
@@ -70,6 +71,7 @@ exports.accessUser = async (req, res) => {
       email: user.email,
       phone: user.phone,
       dob: user.dob,
+      role: user.role,
     };
 
     const token = jwt.sign(userPayload, process.env.JWT_SECRET, {

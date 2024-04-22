@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Meta tags for character set and viewport -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Title of the webpage -->
+  <title>Bookings</title>
+  <!-- Link to external CSS files -->
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <!-- Link to favicon -->
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  
+  <section class="all-bookings">
+    
+    <div class="header-wrapper">
+      <div class="header-title">
+        <h1>Businesses</h1>
+      </div>
+      <div class="search">
+        <input type="text" name="search" placeholder="Search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+    </div>
+    <div id="all-bookings-list">
+      <table>
+        <thead>
+          <tr>
+            <th>Hotel</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% businesses.forEach(business => { %>
+            <tr>
+              <td><%= business.hotelname %></td>
+              <td><%= business.username %></td>
+              <td><%= business.email %></td>
+              <td><%= business.location %></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+ 
+ 
+  <script src="https://kit.fontawesome.com/5050694ff5.js" crossorigin="anonymous"></script>
+  
+</body>
+
+</html>
