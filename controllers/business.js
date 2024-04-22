@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Business = require('../models/business');
 const Booking = require('../models/booking');
+const User = require('../models/user');
 
 exports.index = async (req, res) => {
 	res.render('business');
@@ -12,35 +13,38 @@ exports.newBusinesses = async (req, res) => {
 };
 
 exports.createBusiness = async (req, res) => {
-	const { hotelname, username, email, contactNo, location, password } = req.body;
+  const { fullname, username, email, phone, dob, password } = req.body;
 
-	try {
-		// Check if the username already exists
-		const existingBusiness = await Business.findOne({ username });
-		if (existingBusiness) {
-			return res.status(400).send('Username already exists. Please choose a different username.');
-		}
+  try {
+    // Check if the username already exists
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res
+        .status(400)
+        .send("Username already exists. Please choose a different username.");
+    }
 
-		// encrypting the password
-		const salt = await bcrypt.genSalt();
-		const passwordHash = await bcrypt.hash(password, salt);
+    // encrypting the password
 
-		// Create a new user
-		const newBusiness = new Business({
-			hotelname,
-			username,
-			email,
-			contactNo,
-			location,
-			password: passwordHash
-		});
+    const salt = await bcrypt.genSalt();
+    const passwordHash = await bcrypt.hash(password, salt);
 
-		await newBusiness.save();
-		res.redirect('/business/login');
-	} catch (err) {
-		console.error(err);
-		res.status(500).send(`Error signing up: ${err.message}`);
-	}
+    // Create a new user
+    const user = new User({
+      fullname,
+      username,
+      email,
+      phone,
+      dob,
+      password: passwordHash,
+      role: "business"
+    });
+    await user.save();
+    res.redirect("/login");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(`Error signing up: ${err.message}`);
+  }
 };
 
 exports.getBusinesses = async (req, res) => {
@@ -50,7 +54,7 @@ exports.getBusinesses = async (req, res) => {
 exports.accessBusiness = async (req, res) => {
 	try {
 		const { username, password } = req.body;
-		const business = await Business.findOne({ username });
+		const business = await User.findOne({ username });
 
 		if (!business) return res.status(401).send('Invalid username');
 
@@ -62,11 +66,12 @@ exports.accessBusiness = async (req, res) => {
 
 		const businessPayload = {
 			id: business._id,
-			hotelname: business.hotelname,
+			hotelname: business.fullname,
 			username: business.username,
-			contactNo: business.contactNo,
-			location: business.location,
-			email: business.email
+			email: business.email,
+			phone: business.phone,
+			dob: business.dob,
+			role : business.role
 		};
 
 		const token = jwt.sign(businessPayload, process.env.JWT_SECRET, {
@@ -91,7 +96,7 @@ exports.businessDashboard = async (req, res) => {
 		const business = await Business.findOne({
 			username: req.business.username
 		}).populate('hotel');
-        const bookings = await Booking.find().populate('user').populate('hotel');
+        const bookings = await Booking.find({hotel: business.hotel }).populate('user').populate('hotel');
 		console.log(business);
 		return res.render('dashboard', { business: business , bookings:bookings});
 	} catch (error) {
