@@ -43,7 +43,7 @@
         </a>
       </li>
       <li>
-        <a href="">
+        <a href="#update-hotel">
           <i class="fa-solid fa-circle-info"></i>
           <span>Hotel Info</span>
         </a>
@@ -76,11 +76,6 @@
     <div class="header-wrapper">
       <div class="header-title">
         <h1>Hotel Admin Dashboard</h1>
-      </div>
-      <!-- Search bar -->
-      <div class="search hover-effect">
-        <input type="text" name="search" placeholder="Search">
-        <i class="fa-solid fa-magnifying-glass"></i>
       </div>
     </div>
     <!-- Info cards -->
@@ -151,17 +146,15 @@
       <div class="header-title">
         <h1>Profile</h1>
       </div>
-      <div class="search">
-        <input type="text" name="search" placeholder="Search">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </div>
     </div>
     <div class="profile-grid">
       <div class="profile-left">
         <div>
           <div class="hotel-profile">
-            <img src="images/HA1.webp" alt="">
-            <h1><%= business.hotelname %></h1>
+            <img src="<%= hotel.imageLinks[1] %>" alt="">
+            <h1>
+              <%= business.hotelname %>
+            </h1>
           </div>
         </div>
         <div class="profile-extra-info">
@@ -170,7 +163,8 @@
               <h2><i class="fa-regular fa-circle-check"></i>&ThickSpace; Verified</h2>
             </li>
             <li>
-              <h2><i class="fa-regular fa-star"></i>&ThickSpace;Rating 4.5 </h2>
+              <h2><i class="fa-regular fa-star"></i>&ThickSpace;Rating <%= hotel.rating %>
+              </h2>
             </li>
             <li>
               <h2><i class="fa-solid fa-hand-holding-dollar"></i>&ThickSpace;Luxury Experience</h2>
@@ -184,13 +178,16 @@
       <div class="profile-right">
         <div class="right-info ">
           <div>
-            <h1><%= business.hotelname %></h1>
+            <h1>
+              <%= business.hotelname %>
+            </h1>
             <h1>Experience An Era Of Magnificence & Splendour</h1>
           </div>
           <p>
-            With its awe-inspiring size and grandeur, <%= business.hotelname %> is a veritable destination unto itself. Located in
-            the heart of Chennai the hotel is a palatial tribute to Southern India's greatest empires - the Imperial
-            Cholas. There are four separate entry points, each with its distinct artistic identity.
+            With its awe-inspiring size and grandeur, <%= business.hotelname %> is a veritable destination unto itself.
+              Located in
+              the heart of Chennai the hotel is a palatial tribute to Southern India's greatest empires - the Imperial
+              Cholas. There are four separate entry points, each with its distinct artistic identity.
           </p>
         </div>
         <div class="pr-three-childs-container">
@@ -205,18 +202,9 @@
             <p>
               <br>
               Contact Numbers <br>
-              +91 44 22200000 <br>
-              +91 44 22200200 <br>
-              Email id: <br>
-              reservations@itchotels.in
-            </p>
-          </div>
-          <div>
-            <h2>Toll Free</h2>
-            <p>
-              <br><br>
-              1-800-419-6444, <br>
-              1-800-102-2333
+              <%= business.contactNo %> <br>
+                Email id: <br>
+                <%= business.email %>
             </p>
           </div>
         </div>
@@ -228,10 +216,6 @@
     <div class="header-wrapper">
       <div class="header-title">
         <h1>Bookings</h1>
-      </div>
-      <div class="search">
-        <input type="text" name="search" placeholder="Search">
-        <i class="fa-solid fa-magnifying-glass"></i>
       </div>
     </div>
     <div id="all-bookings-list">
@@ -254,28 +238,41 @@
       </table>
     </div>
   </section>
-  <section class="hotelInfo hidden">
+  <section class="hotelInfo hidden" id="update-hotel">
     <!-- Hotel info section header and search bar -->
     <div class="header-wrapper">
       <div class="header-title">
         <h1>Hotel Info</h1>
       </div>
-      <div class="search">
-        <input type="text" name="search" placeholder="Search">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </div>
     </div>
-    <h2>Hotel Information</h2>
+    <form action="/update-hotel" method="POST">
+
+      <label for="hotelName">Hotel Name:</label>
+      <input type="text" id="hotelName" name="hotelName" value="<%= business && business.hotelname ? business.hotelname : '' %>" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" value="<%= business && business.email ? business.email : '' %>">
+
+      <label for="contactNo">Contact Number:</label>
+      <input type="text" id="contactNo" name="contactNo" required value="<%= business && business.contactNo ? business.contactNo : '' %>">
+
+      <label for="hotelAddress">Hotel Address:</label>
+      <textarea id="hotelAddress" name="hotelAddress" rows="4" required></textarea>
+
+      <label for="hotelPrice">Hotel Price:</label>
+      <input type="number" id="hotelPrice" name="hotelPrice" required value="<%= hotel && hotel.hotelPrice ? hotel.hotelPrice : '' %>">
+
+      <label for="imageLinks">Image Links (separated by comma):</label>
+      <input type="text" id="imageLinks" name="imageLinks" required>
+
+      <input type="submit" value="Update Hotel">
+    </form>
   </section>
   <section class="reviews hidden">
     <!-- Reviews section header and search bar -->
     <div class="header-wrapper">
       <div class="header-title">
         <h1>Reviews</h1>
-      </div>
-      <div class="search">
-        <input type="text" name="search" placeholder="Search">
-        <i class="fa-solid fa-magnifying-glass"></i>
       </div>
     </div>
     <div class="grid-reviews">

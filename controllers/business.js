@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Business = require('../models/business');
+const Hotel = require('../models/hotel.model');
 
 exports.index = async (req, res) => {
 	res.render('business');
@@ -11,7 +12,7 @@ exports.newBusinesses = async (req, res) => {
 };
 
 exports.createBusiness = async (req, res) => {
-	const { hotelname, username, email, location, password } = req.body;
+	const { hotelname, username, email, contactNo, location, password } = req.body;
 
 	try {
 		// Check if the username already exists
@@ -29,6 +30,7 @@ exports.createBusiness = async (req, res) => {
 			hotelname,
 			username,
 			email,
+			contactNo,
 			location,
 			password: passwordHash
 		});
@@ -62,6 +64,7 @@ exports.accessBusiness = async (req, res) => {
 			id: business._id,
 			hotelname: business.hotelname,
 			username: business.username,
+			contactNo: business.contactNo,
 			location: business.location,
 			email: business.email
 		};
@@ -88,8 +91,11 @@ exports.businessDashboard = async (req, res) => {
 		const business = await Business.findOne({
 			username: req.business.username
 		});
+
+		const hotel = await Hotel.findOne({ _id: business.hotel });
+
 		console.log(business);
-		return res.render('dashboard', { business: business });
+		return res.render('dashboard', { business: business, hotel: hotel });
 	} catch (error) {
 		console.error('Error accessing dashboard');
 	}

@@ -6,7 +6,6 @@ const dotenv = require('dotenv');
 const path = require('path');
 
 
-
 // Configurations
 dotenv.config();
 const app = express();

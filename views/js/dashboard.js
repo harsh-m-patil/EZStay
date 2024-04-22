@@ -268,10 +268,8 @@ function hideAllSections() {
 for (let i = 0; i < sidebarButtons.length; i++) {
     sidebarButtons[i].addEventListener('click', function () {
         hideAllSections();
-        if(i !== 3) {
             sections[i].classList.remove('hidden');
-            sidebarButtons[i].classList.add('active');
-        }       
+            sidebarButtons[i].classList.add('active');      
     });
 }
 
