@@ -131,7 +131,7 @@
           <p>Payment Mode</p>
         </div>
         <div class="bookings-list" id="scrollbar1">
-          <!-- Bookings list will be populated dynamically -->
+
         </div>
       </div>
       <!-- Additional cards (if any) -->
@@ -151,7 +151,7 @@
       <div class="profile-left">
         <div>
           <div class="hotel-profile">
-            <img src="<%= hotel.imageLinks[1] %>" alt="">
+            <img src="<%= business.hotel.imageLinks[1] %>" alt="">
             <h1>
               <%= business.hotelname %>
             </h1>
@@ -163,7 +163,7 @@
               <h2><i class="fa-regular fa-circle-check"></i>&ThickSpace; Verified</h2>
             </li>
             <li>
-              <h2><i class="fa-regular fa-star"></i>&ThickSpace;Rating <%= hotel.rating %>
+              <h2><i class="fa-regular fa-star"></i>&ThickSpace;Rating <%= business.hotel.rating %>
               </h2>
             </li>
             <li>
@@ -223,19 +223,29 @@
         <thead>
           <tr>
             <th>Name</th>
-            <th>Gender</th>
             <th>Email</th>
+            <th>Hotel</th>
             <th>Arrival</th>
             <th>Departure</th>
-            <th>RoomType</th>
+            <!-- <th>RoomType</th> -->
             <th>Status</th>
             <th>Payment</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Booking details will be populated dynamically -->
+            <% bookings.forEach(booking => { %>
+                <tr>
+                  <td><%= booking.user.fullname %></td>
+                  <td><%= booking.user.email %></td>
+                  <td><%= booking.hotel.hotelName %></td>
+                  <td><%= new Date(booking.checkIn).toDateString() %></td>
+                  <td><%= new Date(booking.checkOut).toDateString() %></td>
+                  
+                  <td><%= booking.status %></td>
+                  <td><%= booking.totalPrice %></td>
+                </tr>
+              <% }); %>
         </tbody>
-      </table>
     </div>
   </section>
   <section class="hotelInfo hidden" id="update-hotel">
@@ -260,7 +270,7 @@
       <textarea id="hotelAddress" name="hotelAddress" rows="4" required></textarea>
 
       <label for="hotelPrice">Hotel Price:</label>
-      <input type="number" id="hotelPrice" name="hotelPrice" required value="<%= hotel && hotel.hotelPrice ? hotel.hotelPrice : '' %>">
+      <input type="number" id="hotelPrice" name="hotelPrice" required value="<%= business.hotel && business.hotel.hotelPrice ? business.hotel.hotelPrice : '' %>">
 
       <label for="imageLinks">Image Links (separated by comma):</label>
       <input type="text" id="imageLinks" name="imageLinks" required>

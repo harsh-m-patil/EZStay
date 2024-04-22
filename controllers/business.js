@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Business = require('../models/business');
-const Hotel = require('../models/hotel.model');
+const Booking = require('../models/booking');
 
 exports.index = async (req, res) => {
 	res.render('business');
@@ -90,12 +90,10 @@ exports.businessDashboard = async (req, res) => {
 	try {
 		const business = await Business.findOne({
 			username: req.business.username
-		});
-
-		const hotel = await Hotel.findOne({ _id: business.hotel });
-
+		}).populate('hotel');
+        const bookings = await Booking.find().populate('user').populate('hotel');
 		console.log(business);
-		return res.render('dashboard', { business: business, hotel: hotel });
+		return res.render('dashboard', { business: business , bookings:bookings});
 	} catch (error) {
 		console.error('Error accessing dashboard');
 	}
