@@ -80,7 +80,7 @@ exports.accessBusiness = async (req, res) => {
 			httpOnly: true
 		});
 
-		return res.redirect('/business/dashboard');
+		return res.redirect('/dashboard');
 	} catch (err) {
 		console.error(err);
 
@@ -97,7 +97,7 @@ exports.businessDashboard = async (req, res) => {
 		const bookings = await Booking.find({ hotel: business.hotel })
 			.populate('user')
 			.populate('hotel');
-		console.log(business);
+
 		return res.render('dashboard', { business: business, bookings: bookings });
 	} catch (error) {
 		console.error('Error accessing dashboard');
@@ -105,7 +105,7 @@ exports.businessDashboard = async (req, res) => {
 };
 // Logout
 exports.logout = async (req, res) => {
-	res.clearCookie('token').redirect('/business/login');
+	res.clearCookie('token').redirect('/login');
 };
 
 exports.createHotel = async (req, res) => {
