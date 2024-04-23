@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const Business = require('../models/business');
 const Booking = require('../models/booking');
 const User = require('../models/user');
+const Hotel = require('../models/hotel.model');
 
 exports.index = async (req, res) => {
 	res.render('business');
@@ -13,38 +13,36 @@ exports.newBusinesses = async (req, res) => {
 };
 
 exports.createBusiness = async (req, res) => {
-  const { fullname, username, email, phone, dob, password } = req.body;
+	const { fullname, username, email, phone, dob, password } = req.body;
 
-  try {
-    // Check if the username already exists
-    const existingUser = await User.findOne({ username });
-    if (existingUser) {
-      return res
-        .status(400)
-        .send("Username already exists. Please choose a different username.");
-    }
+	try {
+		// Check if the username already exists
+		const existingUser = await User.findOne({ username });
+		if (existingUser) {
+			return res.status(400).send('Username already exists. Please choose a different username.');
+		}
 
-    // encrypting the password
+		// encrypting the password
 
-    const salt = await bcrypt.genSalt();
-    const passwordHash = await bcrypt.hash(password, salt);
+		const salt = await bcrypt.genSalt();
+		const passwordHash = await bcrypt.hash(password, salt);
 
-    // Create a new user
-    const user = new User({
-      fullname,
-      username,
-      email,
-      phone,
-      dob,
-      password: passwordHash,
-      role: "business"
-    });
-    await user.save();
-    res.redirect("/login");
-  } catch (err) {
-    console.error(err);
-    res.status(500).send(`Error signing up: ${err.message}`);
-  }
+		// Create a new user
+		const user = new User({
+			fullname,
+			username,
+			email,
+			phone,
+			dob,
+			password: passwordHash,
+			role: 'business'
+		});
+		await user.save();
+		res.redirect('business/login');
+	} catch (err) {
+		console.error(err);
+		res.status(500).send(`Error signing up: ${err.message}`);
+	}
 };
 
 exports.getBusinesses = async (req, res) => {
@@ -54,7 +52,7 @@ exports.getBusinesses = async (req, res) => {
 exports.accessBusiness = async (req, res) => {
 	try {
 		const { username, password } = req.body;
-		const business = await User.findOne({ username });
+		const business = await User.findOne({ username: username });
 
 		if (!business) return res.status(401).send('Invalid username');
 
@@ -71,7 +69,7 @@ exports.accessBusiness = async (req, res) => {
 			email: business.email,
 			phone: business.phone,
 			dob: business.dob,
-			role : business.role
+			role: business.role
 		};
 
 		const token = jwt.sign(businessPayload, process.env.JWT_SECRET, {
@@ -93,12 +91,14 @@ exports.accessBusiness = async (req, res) => {
 exports.businessDashboard = async (req, res) => {
 	console.log(req.business);
 	try {
-		const business = await Business.findOne({
+		const business = await User.findOne({
 			username: req.business.username
-		}).populate('hotel');
-        const bookings = await Booking.find({hotel: business.hotel }).populate('user').populate('hotel');
+		});
+		const bookings = await Booking.find({ hotel: business.hotel })
+			.populate('user')
+			.populate('hotel');
 		console.log(business);
-		return res.render('dashboard', { business: business , bookings:bookings});
+		return res.render('dashboard', { business: business, bookings: bookings });
 	} catch (error) {
 		console.error('Error accessing dashboard');
 	}
@@ -106,4 +106,29 @@ exports.businessDashboard = async (req, res) => {
 // Logout
 exports.logout = async (req, res) => {
 	res.clearCookie('token').redirect('/business/login');
+};
+
+exports.createHotel = async (req, res) => {
+	const { hotelName, hotelAddress, hotelPrice, imageLinks } = req.body;
+
+	try {
+		// Check if the username already exists
+		const existingHotel = await Hotel.findOne({ hotelName });
+		if (existingHotel) {
+			return res.status(400).send('Hotelname already exists. Please choose a different username.');
+		}
+
+		// Create a new hotel
+		const hotel = new Hotel({
+			hotelName,
+			hotelAddress,
+			hotelPrice,
+			imageLinks
+		});
+		await hotel.save();
+		res.redirect('dashboard');
+	} catch (err) {
+		console.error(err);
+		res.status(500).send(`Error signing up: ${err.message}`);
+	}
 };

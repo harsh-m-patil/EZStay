@@ -151,7 +151,6 @@
       <div class="profile-left">
         <div>
           <div class="hotel-profile">
-            <img src="<%= business.hotel.imageLinks[1] %>" alt="">
             <h1>
               <%= business.hotelname %>
             </h1>
@@ -163,7 +162,7 @@
               <h2><i class="fa-regular fa-circle-check"></i>&ThickSpace; Verified</h2>
             </li>
             <li>
-              <h2><i class="fa-regular fa-star"></i>&ThickSpace;Rating <%= business.hotel.rating %>
+              <h2><i class="fa-regular fa-star"></i>&ThickSpace;Rating 
               </h2>
             </li>
             <li>
@@ -269,7 +268,7 @@
         <h1>Hotel Info</h1>
       </div>
     </div>
-    <form action="/update-hotel" method="POST">
+    <form action="updatehotel/" method="POST">
 
       <label for="hotelName">Hotel Name:</label>
       <input type="text" id="hotelName" name="hotelName"
