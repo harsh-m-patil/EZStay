@@ -125,14 +125,74 @@ exports.superuserHotels = async (req, res) => {
 };
 
 exports.superuserBusinesses = async (req, res) => {
+    try {
+        
+        const businesses = await Business.find();
+        res.render('superuserBusinesses', {businesses: businesses });
+     } catch (error) {
+        console.error("Error fetching businesses:", error);
+        res.status(500).send("Internal Server Error");
+     }
+}
+
+exports.updateUserRole = async (req, res) => {
+  const { userId, newRole } = req.body;
+
   try {
-    const businesses = await Business.find();
-    res.render("superuserBusinesses", { businesses: businesses });
+
+   
+
+    // Find the user by userId
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    // Update the user's role
+    user.role = newRole;
+
+    await user.save();
+    
+    // Fetch all users after updating the role
+    const users = await User.find();
+
+    // Render the superuserUsers page with the updated user data
+    res.render('superuserUsers', { users: users });
   } catch (error) {
-    console.error("Error fetching businesses:", error);
+    console.error("Error updating user role:", error);
     res.status(500).send("Internal Server Error");
   }
 };
+
+exports.Userdeleted = async (req, res) => {
+  try {
+
+    const userId = req.body.userId
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).send('User not found');
+  }
+
+   await Booking.deleteMany({ user: userId });
+    
+
+    await User.findByIdAndDelete(userId);
+
+     // Fetch all users after updating the role
+     const users = await User.find();
+
+     res.render('superuserUsers', { users: users });
+
+
+  } catch (error) {
+    console.error("Error updating user role:", error);
+    res.status(500).send("Internal Server Error");
+  }
+}
+
 
 exports.superuserlogout = async (req, res) => {
   res.clearCookie("token").redirect("/superuserlogin");
