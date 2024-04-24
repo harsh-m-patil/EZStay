@@ -87,11 +87,13 @@
           <!-- Pill with percentage -->
           <div class="pill">
             <span class="circle">◭</span>
-            <p>20%</p>
+            <p></p>
           </div>
         </div>
-        <h1>24</h1>
-        <h4 class="bookings-details">Details ></h4>
+        <h1>
+          <%= bookings.length %>
+        </h1>
+        <h4 class="bookings-details btn-details">Details ></h4>
       </div>
       <!-- Info card: Total Revenue -->
       <div class="info-card hover-effect">
@@ -100,10 +102,10 @@
           <!-- Pill with currency symbol and percentage -->
           <div class="pill">
             <span class="circle">₹</span>
-            <p>20%</p>
+            <p></p>
           </div>
-          <h1>₹ 10,00,000</h1>
-          <h4 class="revenue-details">Details ></h4>
+          <h1>₹ <%= hotel.revenue %>
+          </h1>
         </div>
       </div>
       <!-- Info card: Total Customers -->
@@ -113,104 +115,141 @@
           <!-- Pill with symbol and percentage -->
           <div class="pill">
             <span class="circle">Ħ</span>
-            <p>20%</p>
+            <p></p>
           </div>
         </div>
-        <h1>10,000</h1>
-        <h4 class="customers-details">Details ></h4>
+        <h1>
+          <%= uniqueUserIds.length %>
+        </h1>
       </div>
     </div>
     <!-- Additional info section -->
     <div class="extra-info">
       <!-- Recent bookings -->
       <div class="recent ex-card hover-effect">
-        <h1>Recent Bookings</h1>
+        <h1>Recent bookings</h1>
         <div class="booking">
-          <p>Booking Name</p>
-          <p>Status</p>
-          <p>Payment Mode</p>
+          <p>booking name</p>
+          <p>status</p>
+          <p>payment</p>
         </div>
         <div class="bookings-list" id="scrollbar1">
 
+          <% bookings.slice(Math.max(bookings.length - 4,0), bookings.length).forEach(booking=> { %>
+            <div class="booking">
+              <p>
+                <%= booking.user.fullname.split(" ")[0] %></p>
+        	<div class=" status <%=booking.status==='booked' ? 'booked' : booking.status==='pending' ? 'pending'
+                  : 'canceled' %>">
+                  <%= booking.status %>
+            </div>
+            <p>
+              <%= booking.totalPrice %>
+            </p>
         </div>
+        <% }); %>
       </div>
-      <!-- Additional cards (if any) -->
-      <div class="ex-card hover-effect"></div>
+    </div>
+    <!-- Additional cards (if any) -->
+    <div class="ex-card hover-effect">
+      <h1>Recent Users</h1>
+      <div class="booking">
+        <p>First name</p>
+        <p>Username</p>
+        <p>phone</p>
+      </div>
+      <div class="bookings-list" id="scrollbar1">
+        <% uniqueUserIds.slice(Math.max(uniqueUserIds.length - 4,0)).forEach(user=> { %>
+          <div class="booking">
+            <p>
+              <%= user.fullname.split(" ")[0] %></p>
+	      <div class='pending status'> 
+                  <%= user.username %>
+            </div>
+            <p>
+              <%= user.phone %>
+            </p>
+        </div>
+        <% }); %>
     </div>
   </section>
 
   <!-- Sections for profile, all bookings, hotel info, reviews, and settings (all initially hidden) -->
-  <section class="profile hidden">
-    <!-- Profile section header and search bar -->
-    <div class="header-wrapper">
-      <div class="header-title">
-        <h1>Profile</h1>
-      </div>
-    </div>
-    <div class="profile-grid">
-      <div class="profile-left">
-        <div>
-          <div class="hotel-profile">
-            <h1>
-              <%= business.hotelname %>
-            </h1>
-          </div>
-        </div>
-        <div class="profile-extra-info">
-          <ul>
-            <li>
-              <h2><i class="fa-regular fa-circle-check"></i>&ThickSpace; Verified</h2>
-            </li>
-            <li>
-              <h2><i class="fa-regular fa-star"></i>&ThickSpace;Rating 
-              </h2>
-            </li>
-            <li>
-              <h2><i class="fa-solid fa-hand-holding-dollar"></i>&ThickSpace;Luxury Experience</h2>
-            </li>
-            <li>
-              <h2><i class="fa-solid fa-clipboard-user"></i> &ThickSpace; Experienced Staff</h2>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="profile-right">
-        <div class="right-info ">
-          <div>
-            <h1>
-              <%= business.hotelname %>
-            </h1>
-            <h1>Experience An Era Of Magnificence & Splendour</h1>
-          </div>
-          <p>
-            With its awe-inspiring size and grandeur, <%= business.hotelname %> is a veritable destination unto itself.
-              Located in
-              the heart of Chennai the hotel is a palatial tribute to Southern India's greatest empires - the Imperial
-              Cholas. There are four separate entry points, each with its distinct artistic identity.
-          </p>
-        </div>
-        <div class="pr-three-childs-container">
-          <div>
-            <h2>Location</h2>
-            <p>
-              63,<br> Anna Salai,<br> Little Mount,<br> Guindy, Chennai,<br> Tamil Nadu 600032,<br>India
-            </p>
-          </div>
-          <div>
-            <h2>Contact</h2>
-            <p>
-              <br>
-              Contact Numbers <br>
-              <%= business.contactNo %> <br>
-                Email id: <br>
-                <%= business.email %>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+  <section class=" profile hidden">
+                <!-- Profile section header and search bar -->
+                <div class="header-wrapper">
+                  <div class="header-title">
+                    <h1>Profile</h1>
+                  </div>
+                </div>
+                <div class="profile-grid">
+                  <div class="profile-left">
+                    <div>
+                      <div class="hotel-profile">
+                        <img src="<%= hotel ? hotel.imageLinks[0] : ''%>">
+                        <h1>
+                          <%= hotel ? hotel.hotelName: '' %>
+                        </h1>
+                      </div>
+                    </div>
+                    <div class="profile-extra-info">
+                      <ul>
+                        <li>
+                          <h2><i class="fa-regular fa-circle-check"></i>&ThickSpace; Verified</h2>
+                        </li>
+                        <li>
+                          <h2><i class="fa-regular fa-star"></i>&ThickSpace;Rating
+                          </h2>
+                        </li>
+                        <li>
+                          <h2><i class="fa-solid fa-hand-holding-dollar"></i>&ThickSpace;Luxury Experience</h2>
+                        </li>
+                        <li>
+                          <h2><i class="fa-solid fa-clipboard-user"></i> &ThickSpace; Experienced Staff</h2>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="profile-right">
+                    <div class="right-info ">
+                      <div>
+                        <h1>
+                          <%= hotel ? hotel.hotelName: '' %>
+                        </h1>
+                        <h1>Experience An Era Of Magnificence & Splendour</h1>
+                      </div>
+                      <p>
+                        With its awe-inspiring size and grandeur, <%= hotel ? hotel.hotelName: '' %> is a veritable
+                          destination unto
+                          itself.
+                          Located in
+                          the heart of Chennai the hotel is a palatial tribute to Southern India's greatest empires -
+                          the Imperial
+                          Cholas. There are four separate entry points, each with its distinct artistic identity.
+                      </p>
+                    </div>
+                    <div class="pr-three-childs-container">
+                      <div>
+                        <h2>Location</h2>
+                        <p>
+                          <%= hotel && hotel.hotelAddress ? hotel.hotelAddress : '' %>
+                        </p>
+                      </div>
+                      <div>
+                        <h2>Contact</h2>
+                        <p>
+                          <br>
+                          Contact Numbers <br>
+                          <%= business.phone %> <br>
+                            Email id: <br>
+                            <%= business.email %>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
   </section>
-  <section class="all-bookings hidden">
+  <section class="all-bookings hidden" id="bookingSection">
     <!-- All bookings section header, search bar, and table -->
     <div class="header-wrapper">
       <div class="header-title">
@@ -258,7 +297,7 @@
             </tr>
             <% }); %>
         </tbody>
-        </table>
+      </table>
     </div>
   </section>
   <section class="hotelInfo hidden" id="update-hotel">
@@ -268,37 +307,72 @@
         <h1>Hotel Info</h1>
       </div>
     </div>
-    <form action="updatehotel/" method="POST">
+    <% if(!hotel) { %>
+      <form action="createhotel/" method="POST">
 
-      <label for="hotelName">Hotel Name:</label>
-      <input type="text" id="hotelName" name="hotelName"
-        value="<%= business && business.hotelname ? business.hotelname : '' %>" required>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username"
+          value="<%= business && business.username ? business.username : '' %>" required>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" value="<%= business && business.email ? business.email : '' %>">
+        <label for="hotelName">Hotel Name:</label>
+        <input type="text" id="hotelName" name="hotelName"
+          value="<%= business && business.hotelname ? business.hotelname : '' %>" required>
 
-      <label for="contactNo">Contact Number:</label>
-      <input type="text" id="contactNo" name="contactNo" required
-        value="<%= business && business.contactNo ? business.contactNo : '' %>">
+        <label for="hotelAddress">Hotel Address:</label>
+        <textarea id="hotelAddress" name="hotelAddress" rows="4" required></textarea>
 
-      <label for="hotelAddress">Hotel Address:</label>
-      <textarea id="hotelAddress" name="hotelAddress" rows="4" required></textarea>
+        <label for="hotelPrice">Hotel Price:</label>
+        <input type="number" id="hotelPrice" name="hotelPrice" required
+          value="<%= business.hotel && business.hotel.hotelPrice ? business.hotel.hotelPrice : '' %>">
 
-      <label for="hotelPrice">Hotel Price:</label>
-      <input type="number" id="hotelPrice" name="hotelPrice" required
-        value="<%= business.hotel && business.hotel.hotelPrice ? business.hotel.hotelPrice : '' %>">
+        <label for="imageLinks">Image Links (separated by comma):</label>
+        <input type="text" id="imageLinks" name="imageLinks" required>
 
-      <label for="imageLinks">Image Links (separated by comma):</label>
-      <input type="text" id="imageLinks" name="imageLinks" required>
+        <label for="rooms">Rooms</label>
+        <input type="number" id="rooms" name="rooms" required min='1'>
 
-      <input type="submit" value="Update Hotel">
-    </form>
+        <input type="submit" value="Create Hotel">
+
+      </form>
+      <% } else { %>
+
+        <form action="updatehotel/" method="POST">
+
+          <label for="hotelName">Hotel Name:</label>
+          <input type="text" id="hotelName" name="hotelName"
+            value="<%= hotel && hotel.hotelName ? hotel.hotelName : '' %>" required>
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" value="<%= business && business.email ? business.email : '' %>">
+
+          <label for="contactNo">Contact Number:</label>
+          <input type="text" id="contactNo" name="contactNo" required
+            value="<%= business && business.phone ? business.phone : '' %>">
+
+          <label for="hotelAddress">Hotel Address:</label>
+          <textarea id="hotelAddress" name="hotelAddress" rows="4" required> <%= hotel.hotelAddress %> </textarea>
+
+          <label for="hotelPrice">Hotel Price:</label>
+          <input type="number" id="hotelPrice" name="hotelPrice" required
+            value="<%= hotel && hotel.hotelPrice ? hotel.hotelPrice : '' %>">
+
+          <label for="imageLinks">Image Links (separated by comma):</label>
+          <input type="text" id="imageLinks" name="imageLinks" required value="<%= hotel.imageLinks.join() %>">
+
+          <label for="rooms">Rooms</label>
+          <input type="number" id="rooms" name="rooms" value="<%= hotel.rooms %>" required min='1'>
+
+          <input type="submit" value="Update Hotel">
+
+        </form>
+
+        <% } %>
   </section>
   <section class="reviews hidden">
-    <!-- Reviews section header and search bar -->
+    <!-- reviews section header and search bar -->
     <div class="header-wrapper">
       <div class="header-title">
-        <h1>Reviews</h1>
+        <h1>reviews</h1>
       </div>
     </div>
     <div class="grid-reviews">
@@ -306,13 +380,13 @@
     </div>
   </section>
   <!-- <section class="settings hidden">
-Settings section header and search bar
+settings section header and search bar
 <div class="header-wrapper">
 <div class="header-title">
-<h1>Settings</h1>
+<h1>settings</h1>
 </div>
 <div class="search">
-<input type="text" name="search" placeholder="Search">
+<input type="text" name="search" placeholder="search">
 <i class="fa-solid fa-magnifying-glass"></i>
 </div>
 </div>

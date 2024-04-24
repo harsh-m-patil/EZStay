@@ -42,3 +42,11 @@ exports.checkSuperuser = (req, res, next) => {
   res.status(403).send('Access denied. Only superusers can access this page.');
 }
 };
+
+exports.checkBusinessUser = (req, res, next) => {
+	if(req.user && req.user.role === 'business') {
+		next();
+	} else {
+		res.status(403).send('Access Denied. Only business user can access this page.')
+	}
+}

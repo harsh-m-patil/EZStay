@@ -28,6 +28,19 @@ const hotelSchema = new mongoose.Schema({
   flag: {
     type: Number,
     // required: true 
+  },
+  revenue: {
+    type:Number,
+    default: 0,
+  },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  rooms: {
+    type: Number,
+    required: true,
   }
 }, { timestamps: true });
 
