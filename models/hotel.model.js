@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const hotelSchema = new mongoose.Schema({
   hotelId: {
     type: Number,
-    required: true
+    // required: true
   },
   hotelName: {
     type: String,
@@ -23,11 +23,11 @@ const hotelSchema = new mongoose.Schema({
   },
   rating: {
     type: Number,
-    required: true
+    // required: true
   },
   flag: {
     type: Number,
-    required: true
+    // required: true 
   }
 }, { timestamps: true });
 

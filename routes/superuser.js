@@ -21,6 +21,13 @@ router.get('/superuserBusinesses', superuser.superuserBusinesses);
 
 router.get('/superuserlogout', superuser.superuserlogout);
 
+
+router.post('/updateUserRole', superuser.updateUserRole);
+
+router.post('/deletingUser', superuser.Userdeleted);
+
+
+
 router.get('/searchUsers', superuser.searchUsers);
 
 router.get('/searchedSuperuserBooking', superuser.searchedSuperuserBooking);

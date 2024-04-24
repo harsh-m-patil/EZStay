@@ -13,6 +13,7 @@ router.get('/login', business.getBusinesses);
 router.post('/login', business.accessBusiness);
 
 router.get('/dashboard', verifyToken, business.businessDashboard);
+router.post('/updatehotel',business.createHotel)
 // Logout
 router.get('/logout', business.logout);
 
