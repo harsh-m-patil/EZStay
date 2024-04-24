@@ -94,9 +94,7 @@ exports.businessDashboard = async (req, res) => {
 		const business = await User.findOne({
 			username: req.business.username
 		});
-		const bookings = await Booking.find({ hotel: business.hotel })
-			.populate('user')
-			.populate('hotel');
+		const bookings = await Booking.find({ hotel: business.hotel }).populate('user').populate('hotel');
 
 		return res.render('dashboard', { business: business, bookings: bookings });
 	} catch (error) {
