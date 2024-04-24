@@ -75,8 +75,7 @@ addReviews();
 
 
 
-console.log("Check-in Date:", checkInDate);
-console.log("Check-out Date:", checkOutDate);
+
 
 
 

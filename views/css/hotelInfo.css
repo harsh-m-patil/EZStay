@@ -1,13 +1,13 @@
 * {
   margin: 0;
-  font-family:Poppins;
+  font-family: Poppins;
 }
 
-.icons{
+.icons {
   font-size: 25px;
 }
 
-.main-body h1{
+.main-body h1 {
   font-size: 28px;
   font-weight: 600;
 }
@@ -33,7 +33,7 @@ nav {
 
 .nav-rightside {
   display: flex;
-  margin-right: 200px; 
+  margin-right: 200px;
   align-items: center;
 }
 
@@ -68,8 +68,7 @@ nav {
 
 /* Main Body */
 .main-body {
-  padding: 100px 210px 0 200px; 
- 
+  padding: 100px 210px 0 200px;
 }
 
 .image-container {
@@ -81,35 +80,30 @@ nav {
   gap: 30px;
   margin: 20px auto;
   border-radius: 8px;
-
 }
 
-.image-container  .img {
- 
-border-radius: 8px;
+.image-container .img {
+  border-radius: 8px;
   box-shadow: 0 8px 20px rgba(0.5, 0.8, 0.8, 0.5);
   width: 350px;
   /* border: 1px solid red; */
-
 }
 
 .hotel-Name-Add {
   width: 100%;
   /* border: 1px solid black; */
   margin: 20px auto;
-  
-
 }
-#hotelName{
+#hotelName {
   font-size: 25px;
   font-weight: 500;
   /* margin-bottom: 0px; */
   padding-left: 5px;
 }
-#hotelAddress{
+#hotelAddress {
   font-size: 18px;
 }
-#hotelAddress span{
+#hotelAddress span {
   margin-right: 5px;
 }
 
@@ -118,30 +112,29 @@ border-radius: 8px;
   width: 100%;
   display: flex;
   gap: 50px;
-  margin-top: 80px ;
+  margin-top: 80px;
 }
 
 .info-text {
   width: 100%;
- 
 }
 
 .info-feature-box {
   display: flex;
   flex-direction: column;
   gap: 30px;
-  padding-bottom: 50px; 
+  padding-bottom: 50px;
 }
 
 .feature-one {
   display: flex;
   gap: 15px;
 }
-.feature-one h3{
+.feature-one h3 {
   font-weight: 500;
   font-size: 18px;
 }
-.feature-one p{
+.feature-one p {
   color: rgba(97, 97, 97, 0.807);
   font-size: 14px;
 }
@@ -149,12 +142,11 @@ border-radius: 8px;
 .info-hotel-para {
   margin: 50px 0; /* Combined margin */
 }
-.info-whatOffers{
+.info-whatOffers {
   margin: 50px 0;
 }
-.info-whatOffers h1{
- font-weight: 500;
-
+.info-whatOffers h1 {
+  font-weight: 500;
 }
 
 .offers {
@@ -172,8 +164,7 @@ border-radius: 8px;
 }
 
 .priceCard {
-  
-  height: 400px;
+  height: 500px;
   width: 370px;
   position: sticky;
   top: 150px;
@@ -182,10 +173,7 @@ border-radius: 8px;
   margin-bottom: 20px;
   border-radius: 8px;
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
-
-
 }
-
 
 .priceCard p {
   margin: 0;
@@ -197,13 +185,9 @@ border-radius: 8px;
 }
 
 .priceCard-dates {
-
-  
-
   display: flex;
   justify-content: space-between;
 }
-
 
 .priceCard-dates label {
   display: block;
@@ -213,7 +197,7 @@ border-radius: 8px;
   margin-bottom: 8px;
 }
 
-.priceCard #checkIn{
+.priceCard #checkIn {
   border: 1px solid #ababab;
 
   border-bottom: none;
@@ -221,11 +205,11 @@ border-radius: 8px;
   height: 60px;
   padding: 3px 8px;
   padding-bottom: 5px;
-  border-radius: 8px 0 0 0 ;
+  border-radius: 8px 0 0 0;
   border-left: none;
   border-top: none;
 }
-.priceCard #checkOut{
+.priceCard #checkOut {
   border: 1px solid #ababab;
   border-bottom: none;
   width: 160px;
@@ -235,21 +219,21 @@ border-radius: 8px;
   border-left: none;
   border-right: none;
   border-top: none;
-  border-radius: 0 8px 0 0 ;
+  border-radius: 0 8px 0 0;
 }
 
 .priceCard-dates input {
   width: 92%;
   padding: 5px;
   border: none;
-  
 }
-.three-box{
+.three-box {
   width: 100%;
   /* border: 1px solid red; */
   border: 1px solid #ababab;
   margin-top: 20px;
   border-radius: 8px;
+  padding-bottom: 2px;
 }
 
 .priceCard select {
@@ -257,7 +241,7 @@ border-radius: 8px;
   padding: 10px;
   margin-top: 0px;
   border: 1px solid #ababab;
-  border-radius: 0 0 8px 8px ;
+  border-radius: 0 0 8px 8px;
   border-left: none;
   border-right: none;
   border-bottom: none;
@@ -267,7 +251,7 @@ border-radius: 8px;
 .priceCard button {
   width: 100%;
   padding: 10px;
-  background-color: #FDDB32;
+  background-color: #fddb32;
   color: #000000;
   border: none;
   cursor: pointer;
@@ -305,21 +289,18 @@ border-radius: 8px;
 }
 
 /* reviews */
-.review{
+.review {
   margin-top: 40px;
 }
 
 .review-card {
-  
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
   margin-top: 20px;
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
-
 }
-
 
 .name {
   display: flex;
@@ -328,9 +309,9 @@ border-radius: 8px;
 }
 
 .name img {
-  width: 50px; 
-  height: 50px; 
-  border-radius: 50%; 
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   margin-right: 10px;
 }
 
@@ -351,62 +332,58 @@ border-radius: 8px;
   color: #333;
 }
 
-.img-name-div{
+.img-name-div {
   display: flex;
   justify-content: space-between;
   /* align-items: center; */
 }
 
 .icon {
-  width: 24px; 
-  height: 24px; 
- 
+  width: 24px;
+  height: 24px;
 }
-.stars{
+.stars {
   display: flex;
   gap: 5px;
   align-items: center;
 }
-.total-amt span{
+.total-amt span {
   font-size: 16px;
   font-weight: normal;
 }
 
-
 /* footer */
 
-body{
-
+body {
   line-height: 1.5;
-  font-family: 'poppins',sans-serif;
+  font-family: "poppins", sans-serif;
 }
-*{
+* {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
 }
-.container{
+.container {
   max-width: 1170px;
   margin: auto;
 }
-ul{
+ul {
   list-style: none;
 }
-.row{
+.row {
   display: flex;
   flex-wrap: wrap;
 }
-.footer{
+.footer {
   background-color: #e1e1e19a;
   padding: 70px 0;
   margin-top: 100px;
 }
-.footer-col{
+.footer-col {
   width: 25%;
   padding: 0 20px;
-  
 }
-.footer-col h4{
+.footer-col h4 {
   font-size: 18px;
   color: black;
   text-transform: capitalize;
@@ -414,67 +391,96 @@ ul{
   font-weight: 500;
   position: relative;
 }
-.footer-col h4::before{
-content: '';
-position: absolute;
-left:0;
-bottom: -10px;
-background-color: #e91e63;
-height: 2px;
-box-sizing: border-box;
-width: 50px;
+.footer-col h4::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  background-color: #e91e63;
+  height: 2px;
+  box-sizing: border-box;
+  width: 50px;
 }
-.footer-col ul li:not(:last-child){
-margin-bottom: 10px;
+.footer-col ul li:not(:last-child) {
+  margin-bottom: 10px;
 }
-.footer-col ul li a{
-font-size: 16px;
-text-transform: capitalize;
-color: black;
-text-decoration: none;
-font-weight: 300;
+.footer-col ul li a {
+  font-size: 16px;
+  text-transform: capitalize;
+  color: black;
+  text-decoration: none;
+  font-weight: 300;
 
-display: block;
-transition: all 0.3s ease;
+  display: block;
+  transition: all 0.3s ease;
 }
-.footer-col ul li a:hover{
+.footer-col ul li a:hover {
   color: black;
   font-weight: 400;
   padding-left: 10px;
 }
-.footer-col .social-links a{
-
+.footer-col .social-links a {
   display: inline-block;
   height: 40px;
   width: 40px;
-  background-color: rgba(255,255,255,0.2);
+  background-color: rgba(255, 255, 255, 0.2);
   margin: 0px 10px 10px 0px;
   text-align: center;
   line-height: 40px;
   border-radius: 50%;
   color: #000000;
   transition: all 0.3s ease;
-  
 }
-.footer-col .social-links a:hover{
+.footer-col .social-links a:hover {
   color: #24262b;
   background-color: #bababa;
 }
 
 /* responsive */
 
-@media(max-width: 767px ){
-  .footer-col{
-      width: 50%;
-      margin-bottom: 30px;
+@media (max-width: 767px) {
+  .footer-col {
+    width: 50%;
+    margin-bottom: 30px;
   }
 }
-@media(max-width: 450px ){
-  .footer-col{
-      width: 100%;
-     
+@media (max-width: 450px) {
+  .footer-col {
+    width: 100%;
   }
 }
 
 
 
+/* total rooms in booking card */
+.guestInput input{
+  border: none;
+  width: 40px;
+}
+
+
+.totalRooms {
+  border: 1px solid rgb(166, 166, 166);
+  border-radius: 8px;
+}
+
+.rooms input {
+  border: none;
+  width: 40px;
+}
+.singleBed input,
+.doubleBed input {
+  border: none;
+  width: 40px;
+  margin: 0px 5px;
+}
+
+#rooms-input {
+}
+
+
+
+.totalRooms{
+  margin-top: 15px;
+  padding: 8px;
+}
