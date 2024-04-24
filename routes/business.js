@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const business = require('../controllers/business');
-const { verifyToken } = require('../middleware/business');
+const { verifyToken, checkBusinessUser } = require('../middleware/auth');
 
 router.get('/', business.index);
 
@@ -12,8 +12,9 @@ router.post('/signup', business.createBusiness);
 router.get('/login', business.getBusinesses);
 router.post('/login', business.accessBusiness);
 
-router.get('/dashboard', verifyToken, business.businessDashboard);
-router.post('/updatehotel',business.createHotel)
+router.get('/dashboard', verifyToken,checkBusinessUser, business.businessDashboard);
+router.post('/createhotel',checkBusinessUser, business.createHotel)
+router.post('/updateHotel',checkBusinessUser, business.updateHotel)
 // Logout
 router.get('/logout', business.logout);
 

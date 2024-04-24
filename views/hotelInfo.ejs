@@ -17,6 +17,41 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+
+      const SBinput = document.querySelector('#SBinput');
+      const DBinput = document.querySelector('#DBinput');
+      const roomsInput = document.querySelector('.rooms-input');
+
+      const guestInput = document.querySelector('#guestInput');
+
+      function checkNonNegative() {
+        const value = parseInt(guestInput.value); 
+        if (value < 0) {
+          guestInput.value = 0; 
+        }
+      }
+
+      guestInput.addEventListener('input', checkNonNegative); 
+
+
+      function updateRoomsInput() {
+        const sbValue = Math.max(0, parseInt(SBinput.value));
+        const dbValue = Math.max(0, parseInt(DBinput.value));
+
+        SBinput.value = sbValue;
+        DBinput.value = dbValue;
+
+        roomsInput.value = sbValue + dbValue;
+      }
+
+      SBinput.addEventListener('input', updateRoomsInput);
+      DBinput.addEventListener('input', updateRoomsInput);
+
+      updateRoomsInput();
+
+
+
+
         const checkInInput = document.querySelector(".checkInInput");
         const checkOutInput = document.querySelector(".checkOutInput");
         const hotelPriceInDB = document.querySelector(".hotelPriceInDB");
@@ -76,6 +111,11 @@
           console.error('Error sending data:', error);
         }
       }
+
+
+
+
+
     </script>
   </head>
   <body>
@@ -334,12 +374,46 @@
                 </div>
               </div>
 
-              <select name="Guests" id="">
-                <option value="">Guests</option>
-                <option value="">2</option>
-                <option value="">3</option>
-              </select>
-            </div>
+              
+              
+
+              </div>
+
+
+              
+              
+              <div class="totalRooms">
+
+                <div class="singleBed">
+                  <label for="SBinput">Guests: </label> 
+                  
+                  <input id="guestInput" type="number" value="0"> 
+                  
+                </div>
+
+
+                <div class="rooms">
+                  <label for="rooms-input">Rooms: </label> 
+                  <input class="rooms-input" value="0"> 
+                </div>
+              
+         
+                <div class="singleBed">
+                  <label for="SBinput">Single Bed: </label> 
+                  
+                  <input id="SBinput" type="number" value="0"> 
+                  
+                </div>
+              
+             
+                <div class="doubleBed">
+                  <label for="DBinput">Double Bed: </label>
+                 
+                  <input id="DBinput" type="number" value="0"> 
+                  
+                </div>
+              </div>
+              
             
             <button>Book</button>
 

@@ -38,7 +38,7 @@ exports.createBusiness = async (req, res) => {
 			role: 'business'
 		});
 		await user.save();
-		res.redirect('business/login');
+		res.redirect('login');
 	} catch (err) {
 		console.error(err);
 		res.status(500).send(`Error signing up: ${err.message}`);
@@ -80,7 +80,7 @@ exports.accessBusiness = async (req, res) => {
 			httpOnly: true
 		});
 
-		return res.redirect('/business/dashboard');
+		return res.redirect('dashboard');
 	} catch (err) {
 		console.error(err);
 
@@ -89,28 +89,32 @@ exports.accessBusiness = async (req, res) => {
 };
 
 exports.businessDashboard = async (req, res) => {
-	console.log(req.business);
 	try {
 		const business = await User.findOne({
-			username: req.business.username
+			username: req.user.username
 		});
-		const bookings = await Booking.find({ hotel: business.hotel })
-			.populate('user')
-			.populate('hotel');
-		// console.log(business);
-		return res.render('dashboard', { business: business, bookings: bookings });
+
+		const hotel = await Hotel.findOne({
+			owner: business.id
+		});
+
+		const bookings = await Booking.find({ hotel: hotel }).populate('user').populate('hotel');
+
+		const uniqueUserIds = [...new Set(bookings.map(booking => booking.user))];
+
+		return res.render('dashboard', { business: business, bookings: bookings ,hotel: hotel, uniqueUserIds:uniqueUserIds});
 	} catch (error) {
 		console.error('Error accessing dashboard');
 	}
 };
 // Logout
 exports.logout = async (req, res) => {
-	res.clearCookie('token').redirect('/business/login');
+	res.clearCookie('token').redirect('login');
 };
 
 exports.createHotel = async (req, res) => {
-	const { hotelName, hotelAddress, hotelPrice, imageLinks } = req.body;
-
+	console.log(req.id)
+	const {username, hotelName, hotelAddress, hotelPrice, imageLinks, rooms } = req.body;
 	try {
 		// Check if the username already exists
 		const existingHotel = await Hotel.findOne({ hotelName });
@@ -118,17 +122,25 @@ exports.createHotel = async (req, res) => {
 			return res.status(400).send('Hotelname already exists. Please choose a different username.');
 		}
 
+		const ownerdb = await User.findOne({ username });
+		const owner = ownerdb.id;
 		// Create a new hotel
 		const hotel = new Hotel({
 			hotelName,
 			hotelAddress,
 			hotelPrice,
-			imageLinks
+			imageLinks,
+			rooms,
+			owner,
 		});
 		await hotel.save();
-		res.redirect('dashboard');
+		res.redirect('/business/dashboard');
 	} catch (err) {
 		console.error(err);
 		res.status(500).send(`Error signing up: ${err.message}`);
 	}
 };
+
+exports.updateHotel = (req,res) => {
+
+}

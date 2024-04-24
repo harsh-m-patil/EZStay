@@ -95,8 +95,7 @@ exports.superuserBookings = async (req, res) => {
   try {
     // Fetch all bookings from the database
     const bookings = await Booking.find().populate("user").populate("hotel");
-    // console.log(bookings);
-    // console.log(bookings);
+
     res.render("superuserBookings", { bookings: bookings });
   } catch (error) {
     console.error("Error fetching bookings:", error);
@@ -265,11 +264,12 @@ exports.searchUsers = async (req, res) => {
         { fullname: { $regex: search, $options: "i" } },
         { email: { $regex: search, $options: "i" } },
         {
-          role: ['user', 'superuser','bussiness'].includes(search) ? search : { $regex: search, $options: "i" },
+          role: ["user", "superuser", "bussiness"].includes(search)
+            ? search
+            : { $regex: search, $options: "i" },
         },
       ],
     });
-    
 
     if (searchedUsers.length === 0) {
       return res.json({ message: "No user" });
@@ -284,32 +284,39 @@ exports.searchUsers = async (req, res) => {
 
 exports.searchedSuperuserBooking = async (req, res) => {
   const { search } = req.query;
+
   try {
     console.log(`Search query: ${search}`);
 
-    const searchedBooking = await Booking.find({
-      $or: [
-        { "user.username": { $regex: search, $options: "i" } },
-        { "user.fullname": { $regex: search, $options: "i" } },
-        { "user.email": { $regex: search, $options: "i" } },
-        { "user.phone": { $regex: search, $options: "i" } },
-      ],
-    })
-      .populate("user")
-      .populate("hotel");
+    // Fetch all bookings and populate user and hotel details
+    const allBookings = await Booking.find({}).populate("user").populate("hotel");
 
-    // console.log("Searched Booking:", searchedBooking);
+    // Filter bookings to find those with matching fullname, email, or hotelName
+    const filteredBookings = allBookings.filter(booking => {
+      return (
+        booking.user.fullname.toLowerCase().includes(search.toLowerCase()) ||
+        booking.user.email.toLowerCase().includes(search.toLowerCase()) ||
+        booking.hotel.hotelName.toLowerCase().includes(search.toLowerCase()) ||
+        booking.status.toLowerCase().includes(search.toLowerCase()) 
+        // booking.checkIn.toISOString().includes(search) || 
+        // booking.checkOut.toISOString().includes(search)
+      );
+    });
 
-    if (searchedBooking.length === 0) {
+    console.log("Filtered Bookings:", filteredBookings);
+
+    if (filteredBookings.length === 0) {
       return res.status(404).json({ message: "No booking found." });
     }
 
-    return res.render("searchedSuperuserBooking", { searchedBooking });
+    // Render the searched bookings
+    return res.render("searchedSuperuserBooking", { searchedBooking: filteredBookings });
   } catch (error) {
     console.error("Error during booking search:", error);
     return res.status(500).json({ message: "Internal server error." });
   }
 };
+
 
 exports.searchedSuperuserBussiness = async (req, res) => {
   const { search } = req.query;
@@ -343,8 +350,6 @@ exports.searchedSuperuserHotel = async (req, res) => {
   const isNumericSearch = !isNaN(parsedRating);
 
   try {
-   
-
     const searchQuery = {
       $or: [
         { hotelName: { $regex: search, $options: "i" } },
