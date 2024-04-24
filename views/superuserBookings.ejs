@@ -104,7 +104,44 @@
           </tr>
         </thead>
         <tbody>
-            <% bookings.forEach(booking => { %>
+          <% bookings.forEach(booking => {
+            if (new Date(booking.checkIn) > new Date()) { %>
+                <tr>
+                  <td><%= booking.user.fullname %></td>
+                  <td><%= booking.user.email %></td>
+                  <td><%= booking.hotel.hotelName %></td>
+                  <td><%= new Date(booking.checkIn).toDateString() %></td>
+                  <td><%= new Date(booking.checkOut).toDateString() %></td>
+                  
+                  <td><%= booking.status %></td>
+                  
+                  <td><%= booking.totalPrice %></td>
+
+                  <td>
+                    <form id="deactivatingbooking_<%= booking._id %>" action="/deletingBookings" method="post">
+                      <input type="hidden" name="bookingId" value="<%= booking._id %>">
+                      <button type="submit" class="btn deletebtn">Delete</button>
+                    </form>
+                  </td>
+
+                  <% if (booking.status !== 'cancelled') { %>
+
+                    
+                    <td>
+                      <form action="/cancelbookingfromsuperuser" method="post">
+                        <input type="hidden" name="bookingId" value="<%= booking._id %>">
+                        <button type="submit" class="btn">Cancel</button>
+                      </form>
+                    </td>
+
+                    
+                    
+                    <% } %>
+
+                    
+                    
+                </tr>
+              <% }else{ %>
                 <tr>
                   <td><%= booking.user.fullname %></td>
                   <td><%= booking.user.email %></td>
@@ -114,14 +151,43 @@
                   
                   <td><%= booking.status %></td>
                   <td><%= booking.totalPrice %></td>
-                </tr>
-              <% }); %>
+                  <td>
+                    <form id="deactivatingbooking_<%= booking._id %>" action="/deletingBookings" method="post">
+                      <input type="hidden" name="bookingId" value="<%= booking._id %>">
+                      <button type="submit" class="btn deletebtn">Delete</button>
+                    </form>
+                  </td>
+              </tr>
+             <% }}); %>
         </tbody>
       </table>
     </div>
   </section>
 
+<script>
+     //alert box
+document.addEventListener('DOMContentLoaded', function () {
+    // Select all forms with IDs starting with "deactivatinguser_"
+    const deactivateForms = document.querySelectorAll('[id^="deactivatingbooking_"]');
 
+    // Add event listener for each form
+    deactivateForms.forEach(form => {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Show alert box when user tries to deactivate their account
+            const confirmMessage = 'Are you sure you want to delete the booking? This action cannot be undone.';
+            if (confirm(confirmMessage)) {
+                // If user confirms, submit the form
+                this.submit();
+            } else {
+                // If user cancels, do nothing
+                return false;
+            }
+        });
+    });
+});
+</script>
  
  
   <script src="https://kit.fontawesome.com/5050694ff5.js" crossorigin="anonymous"></script>

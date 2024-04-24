@@ -119,17 +119,18 @@
                   <select name="newRole">
                     <option value="superuser" <%= user.role === 'superuser' ? 'selected' : '' %>>superuser</option>
                     <option value="user" <%= user.role === 'user' ? 'selected' : '' %>>user</option>
+                    <option value="business" <%= user.role === 'business' ? 'selected' : '' %>>business</option>
                   </select>
                   <button class="btn updatebtn" type="submit">Update Role</button>
                 </form>
                 <td>
-                  <form action="/deletingUser" method="post">
+                  <form id="deactivatinguser_<%= user._id %>" action="/deletingUser" method="post">
                     <input type="hidden" name="userId" value="<%= user._id %>">
                     <button type="submit" class="btn deletebtn">Delete</button>
                   </form>
                 </td>
                 
-                <!-- </td> -->
+                
               </div>
               
 
@@ -151,9 +152,9 @@
       </table>
     </div>
   </section>
-  <div class="overlay hidden">
-  </div>
-
+  
+  
+  <div class="overlay hidden"></div>
   <script>
     // Select all edit buttons and modals
     const overlay = document.querySelector('.overlay');
@@ -179,6 +180,33 @@
             });
         }
     });
+
+
+    //alert box
+document.addEventListener('DOMContentLoaded', function () {
+    // Select all forms with IDs starting with "deactivatinguser_"
+    const deactivateForms = document.querySelectorAll('[id^="deactivatinguser_"]');
+
+    // Add event listener for each form
+    deactivateForms.forEach(form => {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Show alert box when user tries to deactivate their account
+            const confirmMessage = 'Are you sure you want to deactivate the account? This action cannot be undone.';
+            if (confirm(confirmMessage)) {
+                // If user confirms, submit the form
+                this.submit();
+            } else {
+                // If user cancels, do nothing
+                return false;
+            }
+        });
+    });
+});
+
+
+
 </script>
   
  

@@ -96,7 +96,7 @@ exports.superuserBookings = async (req, res) => {
     // Fetch all bookings from the database
     const bookings = await Booking.find().populate("user").populate("hotel");
     // console.log(bookings);
-    console.log(bookings);
+    // console.log(bookings);
     res.render("superuserBookings", { bookings: bookings });
   } catch (error) {
     console.error("Error fetching bookings:", error);
@@ -177,6 +177,7 @@ exports.Userdeleted = async (req, res) => {
   }
 
    await Booking.deleteMany({ user: userId });
+   await Hotel.deleteMany({ user: userId });
     
 
     await User.findByIdAndDelete(userId);
@@ -189,6 +190,62 @@ exports.Userdeleted = async (req, res) => {
 
   } catch (error) {
     console.error("Error updating user role:", error);
+    res.status(500).send("Internal Server Error");
+  }
+}
+
+exports.cancelbooking = async (req, res) => {
+  try {
+    // Get the booking ID from the request parameters
+    const bookingId = req.body.bookingId;
+
+    
+    const updatedBooking = await Booking.findByIdAndUpdate(
+      bookingId,
+      { status: "cancelled" }
+      // { new: true }
+    );
+
+    if (!updatedBooking) {
+      // If booking is not found, return an error response
+      return res.status(404).json({ message: "Booking not found" });
+    }
+  
+  const bookings = await Booking.find().populate('hotel').populate('user');
+    
+    res.render('superuserBookings', { bookings: bookings });
+
+  } catch (error) {
+    // If an error occurs, return an error response
+    console.error("Error canceling booking:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+exports.deletingBookings = async (req, res) => {
+  try {
+
+    const bookingId = req.body.bookingId;
+
+    // const user = await User.findById(userId);
+
+  //   if (!user) {
+  //     return res.status(404).send('User not found');
+  // }
+
+  //  await Booking.deleteMany({ user: userId });
+    
+
+    await Booking.findByIdAndDelete(bookingId);
+
+     // Fetch all users after updating the role
+     const bookings = await Booking.find().populate('hotel').populate('user');
+    
+    res.render('superuserBookings', { bookings: bookings });
+
+
+  } catch (error) {
+    console.error("Error deleting Bookings:", error);
     res.status(500).send("Internal Server Error");
   }
 }
@@ -305,7 +362,7 @@ exports.searchedSuperuserHotel = async (req, res) => {
       return res.json({ message: "No Hotel" });
     }
 
-    console.log(searchedHotels);
+    // console.log(searchedHotels);
 
     return res.render("searchedSuperuserHotel", {
       searchedHotels: searchedHotels,

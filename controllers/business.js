@@ -97,7 +97,7 @@ exports.businessDashboard = async (req, res) => {
 		const bookings = await Booking.find({ hotel: business.hotel })
 			.populate('user')
 			.populate('hotel');
-		console.log(business);
+		// console.log(business);
 		return res.render('dashboard', { business: business, bookings: bookings });
 	} catch (error) {
 		console.error('Error accessing dashboard');
