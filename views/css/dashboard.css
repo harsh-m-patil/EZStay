@@ -575,7 +575,7 @@ section {
 	font-weight: 500;
 }
 
-form {
+.hotelInfo form {
 	max-width: 800px;
 	margin: 0 auto;
 	padding: 20px;
@@ -584,10 +584,10 @@ form {
 	box-shadow: 1px 1px 20px #d4d4d4;
 }
 
-input[type='text'],
-input[type='number'],
-input[type='email'],
-textarea {
+.hotelInfo input[type='text'],
+.hotelInfo input[type='number'],
+.hotelInfo input[type='email'],
+.hotelInfo textarea {
 	width: 100%;
 	padding: 10px;
 	font-size: 1rem;
@@ -598,7 +598,7 @@ textarea {
 	box-sizing: border-box;
 	box-shadow: 1px 1px 5px #d4d4d4;
 }
-input[type='submit'] {
+.hotelInfo input[type='submit'] {
 	background-color: #ff690f; /* Orange */
 	color: white;
 	padding: 10px 20px;
@@ -606,7 +606,7 @@ input[type='submit'] {
 	border-radius: 5px;
 	cursor: pointer;
 }
-input[type='submit']:hover {
+.hotelInfo input[type='submit']:hover {
 	background-color: #ffb534; /* Light orange */
 }
 
@@ -657,7 +657,7 @@ input[type='submit']:hover {
     position: absolute;
     padding: 6px 7px;
     margin-top: 15px;
-    margin-left: 64%;
+    margin-left: 390px;
 }
 
 select {
