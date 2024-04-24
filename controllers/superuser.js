@@ -95,8 +95,7 @@ exports.superuserBookings = async (req, res) => {
   try {
     // Fetch all bookings from the database
     const bookings = await Booking.find().populate("user").populate("hotel");
-    // console.log(bookings);
-    console.log(bookings);
+
     res.render("superuserBookings", { bookings: bookings });
   } catch (error) {
     console.error("Error fetching bookings:", error);
