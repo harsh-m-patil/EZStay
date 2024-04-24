@@ -207,11 +207,12 @@ exports.searchUsers = async (req, res) => {
         { fullname: { $regex: search, $options: "i" } },
         { email: { $regex: search, $options: "i" } },
         {
-          role: ['user', 'superuser','bussiness'].includes(search) ? search : { $regex: search, $options: "i" },
+          role: ["user", "superuser", "bussiness"].includes(search)
+            ? search
+            : { $regex: search, $options: "i" },
         },
       ],
     });
-    
 
     if (searchedUsers.length === 0) {
       return res.json({ message: "No user" });
@@ -231,16 +232,14 @@ exports.searchedSuperuserBooking = async (req, res) => {
 
     const searchedBooking = await Booking.find({
       $or: [
-        { "user.username": { $regex: search, $options: "i" } },
         { "user.fullname": { $regex: search, $options: "i" } },
+        { "hotel.hotelName": { $regex: search, $options: "i" } },
         { "user.email": { $regex: search, $options: "i" } },
         { "user.phone": { $regex: search, $options: "i" } },
       ],
-    })
-      .populate("user")
-      .populate("hotel");
+    }).populate("user").populate("hotel");
 
-    // console.log("Searched Booking:", searchedBooking);
+    console.log("Searched Booking:", searchedBooking);
 
     if (searchedBooking.length === 0) {
       return res.status(404).json({ message: "No booking found." });
@@ -285,8 +284,6 @@ exports.searchedSuperuserHotel = async (req, res) => {
   const isNumericSearch = !isNaN(parsedRating);
 
   try {
-   
-
     const searchQuery = {
       $or: [
         { hotelName: { $regex: search, $options: "i" } },
@@ -304,7 +301,7 @@ exports.searchedSuperuserHotel = async (req, res) => {
       return res.json({ message: "No Hotel" });
     }
 
-    console.log(searchedHotels);
+    // console.log(searchedHotels);
 
     return res.render("searchedSuperuserHotel", {
       searchedHotels: searchedHotels,
