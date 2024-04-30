@@ -95,6 +95,7 @@
         <thead>
           <tr>
             <th>Hotel</th>
+            <th>Owner</th>
             <th>Location</th>
             <th>Rating</th>
           </tr>
@@ -103,6 +104,7 @@
           <% hotels.forEach(hotel => { %>
             <tr>
               <td><%= hotel.hotelName %></td>
+              <td><%= hotel.owner.fullname %></td>
               <td><%= hotel.hotelAddress %></td>
               <td><%= hotel.rating %></td>
             </tr>

@@ -115,7 +115,7 @@ exports.superuserUsers = async (req, res) => {
 
 exports.superuserHotels = async (req, res) => {
   try {
-    const hotels = await Hotel.find();
+    const hotels = await Hotel.find().populate("owner");
     res.render("superuserHotels", { hotels: hotels });
   } catch (error) {
     console.error("Error fetching hotels:", error);
@@ -361,7 +361,7 @@ exports.searchedSuperuserHotel = async (req, res) => {
       searchQuery.$or.push({ rating: parsedRating });
     }
 
-    const searchedHotels = await Hotel.find(searchQuery);
+    const searchedHotels = await Hotel.find(searchQuery).populate("owner");
 
     if (searchedHotels.length === 0) {
       return res.json({ message: "No Hotel" });
