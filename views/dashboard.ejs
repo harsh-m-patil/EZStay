@@ -141,7 +141,7 @@
         </div>
         <div class="bookings-list" id="scrollbar1">
 
-          <% bookings.slice(Math.max(bookings.length - 4,0), bookings.length).forEach(booking=> { %>
+          <% bookings.slice(Math.max(bookings.length - 4,0), bookings.length).reverse().forEach(booking=> { %>
             <div class="booking">
               <p>
                 <%= booking.user.fullname.split(" ")[0] %></p>
@@ -165,7 +165,7 @@
         <p>phone</p>
       </div>
       <div class="bookings-list" id="scrollbar1">
-        <% uniqueUserIds.slice(Math.max(uniqueUserIds.length - 4,0)).forEach(user=> { %>
+        <% uniqueUserIds.slice(Math.max(uniqueUserIds.length - 4,0)).reverse().forEach(user=> { %>
           <div class="booking">
             <p>
               <%= user.fullname.split(" ")[0] %></p>
@@ -337,7 +337,7 @@
           value="<%= business && business.hotelname ? business.hotelname : '' %>" required>
 
         <label for="hotelAddress">Hotel Address:</label>
-        <textarea id="hotelAddress" name="hotelAddress" rows="4" required></textarea>
+        <input id="hotelAddress" name="hotelAddress" rows="4" required>
 
         <label for="hotelPrice">Hotel Price:</label>
         <input type="number" id="hotelPrice" name="hotelPrice" required
@@ -372,8 +372,8 @@
             value="<%= business && business.phone ? business.phone : '' %>">
 
           <label for="hotelAddress">Hotel Address:</label>
-          <textarea id="hotelAddress" name="hotelAddress" rows="4" required> <%= hotel.hotelAddress %> </textarea>
-
+          <input id="hotelAddress" name="hotelAddress" rows="4" required  value="<%= hotel && hotel.hotelAddress ? hotel.hotelAddress : '' %>">
+<br>
           <label for="hotelPrice">Hotel Price:</label>
           <input type="number" id="hotelPrice" name="hotelPrice" required
             value="<%= hotel && hotel.hotelPrice ? hotel.hotelPrice : '' %>">

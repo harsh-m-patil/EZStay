@@ -125,7 +125,7 @@ exports.createHotel = async (req, res) => {
 		if (existingHotel) {
 			return res.status(400).send('Hotelname already exists. Please choose a different username.');
 		}
-
+		
 		const ownerdb = await User.findOne({ username });
 		const owner = ownerdb.id;
 		// Create a new hotel
