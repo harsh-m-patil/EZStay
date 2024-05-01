@@ -12,10 +12,13 @@ router.post('/signup', business.createBusiness);
 router.get('/login', business.getBusinesses);
 router.post('/login', business.accessBusiness);
 
-router.get('/dashboard', verifyToken,checkBusinessUser, business.businessDashboard);
-router.post('/createhotel',checkBusinessUser, business.createHotel)
-router.post('/updateHotel',checkBusinessUser, business.updateHotel)
+router.get('/dashboard', verifyToken, checkBusinessUser, business.businessDashboard);
+router.post('/createhotel', verifyToken, checkBusinessUser, business.createHotel);
+router.post('/updateHotel', verifyToken, checkBusinessUser, business.updateHotel);
 // Logout
+router.get('/update', business.update);
+router.get('/delete', business.deleteOwner);
 router.get('/logout', business.logout);
 
+router.post('/deleteOwner', business.deleteOwnerConfirmed);
 module.exports = router;

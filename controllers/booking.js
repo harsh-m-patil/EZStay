@@ -107,3 +107,47 @@ exports.cancelbooking = async (req, res) => {
 		res.status(500).json({ message: 'Internal server error' });
 	}
 };
+
+
+exports.cancelBookingByHotel = async (req, res) => {
+	try {
+		// Get the booking ID from the request parameters
+		const bookingId = req.body.bookingId;
+
+		// Find the booking in the database by ID and update its status to "canceled"
+		const updatedBooking = await Booking.findByIdAndUpdate(
+			bookingId,
+			{ status: 'cancelled' }
+			// { new: true }
+		);
+
+		if (!updatedBooking) {
+			// If booking is not found, return an error response
+			return res.status(404).json({ message: 'Booking not found' });
+		}
+
+		const updatedHotel = await Hotel.findByIdAndUpdate(
+			updatedBooking.hotel,
+			{ $inc: { revenue: -updatedBooking.totalPrice } }, // Increment totalRevenue by totalPrice
+			{ new: true } // Return the updated hotel document
+		);
+
+		if (!updatedHotel) {
+			// Handle error if hotel not found
+		}
+		const token = req.cookies.token;
+
+		// Verify the token
+		const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+		const userId = decodedToken.id;
+
+		const bookings = await Booking.find({ user: userId }).populate('hotel').populate('user');
+
+		res.redirect('/business/dashboard');
+	} catch (error) {
+		// If an error occurs, return an error response
+		console.error('Error canceling booking:', error);
+		res.status(500).json({ message: 'Internal server error' });
+	}
+};

@@ -54,6 +54,12 @@
           <span>Reviews</span>
         </a>
       </li>
+      <li>
+        <a href="#">
+          <i class="fas fa-gear"></i>
+          <span>Settings</span>
+        </a>
+      </li>
       <!-- <li>
 <a href="#">
 <i class="fas fa-cog"></i>
@@ -267,6 +273,7 @@
             <th>Departure</th>
             <th>Status</th>
             <th>Payment</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -294,11 +301,22 @@
               <td>
                 <%= booking.totalPrice %>
               </td>
+              <%if (!(booking.status==='cancelled' ) && new Date(booking.checkIn)> new Date()) { %>
+                <td>
+                  <div class="cancel-btn">
+                    <form id="cancelingbooking_<%= booking._id %>" action="/cancelBookingByHotel" method="post">
+                      <input type="hidden" name="bookingId" value="<%= booking._id %>">
+                      <button type="submit" class="cancel-btn"><i class="fa-solid fa-xmark"></i></button>
+                    </form>
+                </td>
+                <% } %>
             </tr>
-            <% }); %>
-        </tbody>
-      </table>
     </div>
+
+    <% }); %>
+      </tbody>
+      </table>
+      </div>
   </section>
   <section class="hotelInfo hidden" id="update-hotel">
     <!-- Hotel info section header and search bar -->
@@ -337,6 +355,10 @@
       <% } else { %>
 
         <form action="updatehotel/" method="POST">
+
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username"
+            value="<%= business && business.username ? business.username : '' %>" required>
 
           <label for="hotelName">Hotel Name:</label>
           <input type="text" id="hotelName" name="hotelName"
@@ -377,6 +399,18 @@
     </div>
     <div class="grid-reviews">
       <!-- reviews will be populated dynamically -->
+    </div>
+  </section>
+  <section class="settings hidden">
+    <!-- reviews section header and search bar -->
+    <div class="header-wrapper">
+      <div class="header-title">
+        <h1>Settings</h1>
+      </div>
+    </div>
+    <div class="set-main">
+      <a href="update" class="update-owner">Update Hotel Owner Info</a><br>
+      <a href="delete" class="delete-owner">Delete Business Account</a>
     </div>
   </section>
   <!-- <section class="settings hidden">
