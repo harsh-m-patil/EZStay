@@ -44,7 +44,8 @@ exports.checkSuperuser = (req, res, next) => {
 };
 
 exports.checkBusinessUser = (req, res, next) => {
-	if(req.user && req.user.role === 'business') {
+  // console.log(req.user.role);
+	if(req.user && req.user.role === "business") {
 		next();
 	} else {
 		res.status(403).send('Access Denied. Only business user can access this page.')
