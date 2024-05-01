@@ -146,7 +146,7 @@ section {
 	justify-content: space-between;
 }
 
-.info-header > p {
+.info-header>p {
 	font-weight: 500;
 	color: #777777;
 }
@@ -439,7 +439,7 @@ section {
 	column-gap: 20px;
 }
 
-.pr-three-childs-container > div {
+.pr-three-childs-container>div {
 	border: 0.5px solid #b6b6b6;
 	border-radius: 12px;
 	padding: 1rem;
@@ -474,7 +474,7 @@ section {
 	height: 90%;
 }
 
-.right-info > div {
+.right-info>div {
 	padding: 1rem 0;
 	border-bottom: 1px solid #fe7f5b;
 }
@@ -533,12 +533,10 @@ section {
 	height: 80%;
 	box-shadow: 1px 1px 20px #d4d4d4;
 	background: rgb(253, 219, 50);
-	background: linear-gradient(
-		120deg,
-		rgba(253, 219, 50, 0.5159313725490196) 0%,
-		rgba(250, 250, 250, 1) 40%,
-		rgba(255, 255, 255, 1) 100%
-	);
+	background: linear-gradient(120deg,
+			rgba(253, 219, 50, 0.5159313725490196) 0%,
+			rgba(250, 250, 250, 1) 40%,
+			rgba(255, 255, 255, 1) 100%);
 }
 
 .profile-circle {
@@ -598,16 +596,20 @@ section {
 	box-sizing: border-box;
 	box-shadow: 1px 1px 5px #d4d4d4;
 }
+
 .hotelInfo input[type='submit'] {
-	background-color: #ff690f; /* Orange */
+	background-color: #ff690f;
+	/* Orange */
 	color: white;
 	padding: 10px 20px;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
 }
+
 .hotelInfo input[type='submit']:hover {
-	background-color: #ffb534; /* Light orange */
+	background-color: #ffb534;
+	/* Light orange */
 }
 
 .btn {
@@ -635,6 +637,10 @@ section {
 	z-index: 2;
 	margin-top: 48px;
 	margin-left: 82%;
+	display: flex;
+	justify-content: space-between;
+	padding: 0.7rem;
+	border-radius: 15px;
 }
 
 .overlay {
@@ -667,7 +673,7 @@ section {
 	color: #ac361c;
 }
 
-.settings a{
+.settings a {
 	text-decoration: none;
 	color: #000;
 	font-size: 1.2rem;
@@ -680,6 +686,7 @@ section {
 	border: 1px solid #3b98b6;
 	background-color: #35aeeb28;
 }
+
 .set-main {
 	margin-top: 2rem;
 	padding: 1rem;
@@ -690,5 +697,5 @@ section {
 .delete-owner {
 	background-color: #fd28281d;
 	color: #ac361c;
-	border:1px solid #ac361c;
+	border: 1px solid #ac361c;
 }
