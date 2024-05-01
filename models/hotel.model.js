@@ -25,7 +25,7 @@ const hotelSchema = new mongoose.Schema({
   },
   rating: {
     type: Number,
-    // required: true
+    default: 4,
   },
   flag: {
     type: Number,
@@ -34,6 +34,7 @@ const hotelSchema = new mongoose.Schema({
   revenue: {
     type:Number,
     default: 0,
+    required: true,
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

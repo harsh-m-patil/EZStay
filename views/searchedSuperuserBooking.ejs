@@ -23,8 +23,8 @@
     </div>
     <!-- Menu items -->
     <ul class="menu">
-      <li class="active">
-        <a href="#">
+      <li>
+        <a href="/superadmin">
           <i class="fas fa-tachometer-alt"></i>
           <span>Dashboard</span>
         </a>
@@ -42,7 +42,7 @@
         </a>
       </li>
 
-      <li>
+      <li class="active">
         <a href="/superuserBookings">
           <i class="fa-solid fa-user-group"></i>
           <span>Bookings</span>
@@ -77,16 +77,17 @@
       </li>
     </ul>
   </div>
-  
+
   <section class="all-bookings">
-    
+
     <div class="header-wrapper">
       <div class="header-title">
         <h1>Bookings</h1>
       </div>
       <form class="search" action="/searchedSuperuserBooking" method="get">
         <input type="text" name="search" placeholder="Search">
-        <button style="border: none;background: transparent;" type="submit" ><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button style="border: none;background: transparent;" type="submit"><i
+            class="fa-solid fa-magnifying-glass"></i></button>
       </form>
     </div>
     <div id="all-bookings-list">
@@ -104,28 +105,59 @@
           </tr>
         </thead>
         <tbody>
-            <% searchedBooking.forEach(booking => { %>
-                <tr>
-                  <td><%= booking.user.fullname %></td>
-                  <td><%= booking.user.email %></td>
-                  <td><%= booking.hotel.hotelName %></td>
-                  <td><%= new Date(booking.checkIn).toDateString() %></td>
-                  <td><%= new Date(booking.checkOut).toDateString() %></td>
-                  
-                  <td><%= booking.status %></td>
-                  <td><%= booking.totalPrice %></td>
-                </tr>
-              <% }); %>
+          <% searchedBooking.forEach(booking=> { %>
+            <tr>
+              <td>
+                <%= booking.user.fullname %>
+              </td>
+              <td>
+                <%= booking.user.email %>
+              </td>
+              <td>
+                <%= booking.hotel.hotelName %>
+              </td>
+              <td>
+                <%= new Date(booking.checkIn).toDateString() %>
+              </td>
+              <td>
+                <%= new Date(booking.checkOut).toDateString() %>
+              </td>
+
+              <td>
+                <%= booking.status %>
+              </td>
+              <td>
+                <%= booking.totalPrice %>
+              </td>
+              <td>
+                <form id="deactivatingbooking_<%= booking._id %>" action="/deletingBookings" method="post">
+                  <input type="hidden" name="bookingId" value="<%= booking._id %>">
+                  <button type="submit" class="btn deletebtn">Delete</button>
+                </form>
+              </td>
+
+              <% if (booking.status !=='cancelled' ) { %>
+
+
+                <td>
+                  <form action="/cancelbookingfromsuperuser" method="post">
+                    <input type="hidden" name="bookingId" value="<%= booking._id %>">
+                    <button type="submit" class="btn">Cancel</button>
+                  </form>
+                </td>
+                <% } %>
+            </tr>
+            <% }); %>
         </tbody>
       </table>
     </div>
   </section>
 
 
- 
- 
+
+
   <script src="https://kit.fontawesome.com/5050694ff5.js" crossorigin="anonymous"></script>
-  
+
 </body>
 
 </html>
