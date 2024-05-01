@@ -4,9 +4,11 @@ const User = require("../models/user");
 const Booking = require("../models/booking");
 const nodemailer = require("nodemailer");
 const randomString = require("randomstring");
+const Hotel = require("../models/hotel.model");
 
 // signup handler
 exports.newUsers = async (req, res) => {
+  
   res.sendFile("signup.html", { root: global.staticpath });
 };
 
@@ -47,6 +49,7 @@ exports.createUser = async (req, res) => {
 
 // login handler
 exports.getUsers = async (req, res) => {
+ 
   res.sendFile("login.html", { root: global.staticpath }); 
   
 };
@@ -201,7 +204,13 @@ exports.resetpassword = async (req, res) => {
 //index
 exports.index = async (req, res) => {
   
-  res.render('index', { user: req.user });
+  // res.render('index', { user: req.user });
+
+  const hotels = await Hotel.find();
+  console.log(hotels);
+
+  // Render index.ejs with hotels data
+  res.render('index', { user: req.user, hotels: hotels });
 };
 
 // dasboard

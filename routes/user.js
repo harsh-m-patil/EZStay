@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const user = require('../controllers/user');
-const {verifyToken , checkGuestUser} = require('../middleware/auth');
+const {verifyToken , checkGuestUser, isAuthenticated} = require('../middleware/auth');
 
 
 
@@ -11,7 +11,7 @@ router.post('/signup', user.createUser);
 
 
   // login handler
-router.get('/login', user.getUsers);
+router.get('/login',isAuthenticated, user.getUsers);
 router.post('/login', user.accessUser);
 
 // forgot password

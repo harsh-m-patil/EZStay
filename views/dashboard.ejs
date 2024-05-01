@@ -50,6 +50,12 @@
       </li>
       <li>
         <a href="#">
+          <i class="fa-regular fa-image"></i>
+          <span>Images</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
           <i class="fas fa-star"></i>
           <span>Reviews</span>
         </a>
@@ -192,7 +198,8 @@
                   <div class="profile-left">
                     <div>
                       <div class="hotel-profile">
-                        <img src="<%= hotel ? hotel.imageLinks[0] : ''%>">
+                        <!-- <img src="<%= hotel ? hotel.imageLinks[0] : ''%>"> -->
+                        <img src="/myuploads/<%= hotel.imageLinks[0] %>" alt="Hotel Image">
                         <h1>
                           <%= hotel ? hotel.hotelName: '' %>
                         </h1>
@@ -326,7 +333,7 @@
       </div>
     </div>
     <% if(!hotel) { %>
-      <form action="createhotel/" method="POST" enctype="multipart/form-data">
+      <form action="createhotel/" method="POST">
 
         <label for="username">Username</label>
         <input type="text" id="username" name="username"
@@ -343,21 +350,18 @@
         <input type="number" id="hotelPrice" name="hotelPrice" required
           value="<%= business.hotel && business.hotel.hotelPrice ? business.hotel.hotelPrice : '' %>">
 
-        <label for="imageLinks">Image Links (separated by comma):</label>
-        <!-- <input type="text" id="imageLinks" name="imageLinks" required> -->
-        <input type="file" name="imageLinks" />
-
         <label for="rooms">Rooms</label>
         <input type="number" id="rooms" name="rooms" required min='1'>
 
         <input type="submit" value="Create Hotel">
 
       </form>
+
       <% } else { %>
 
-        <form action="updatehotel/" method="POST" enctype="multipart/form-data>
+        <form action="updatehotel/" method="POST" >
 
-          <label for="username">Username</label>
+          <label for=" username">Username</label>
           <input type="text" id="username" name="username"
             value="<%= business && business.username ? business.username : '' %>" required>
 
@@ -373,14 +377,12 @@
             value="<%= business && business.phone ? business.phone : '' %>">
 
           <label for="hotelAddress">Hotel Address:</label>
-          <input id="hotelAddress" name="hotelAddress" rows="4" required  value="<%= hotel && hotel.hotelAddress ? hotel.hotelAddress : '' %>">
-<br>
+          <input id="hotelAddress" name="hotelAddress" rows="4" required
+            value="<%= hotel && hotel.hotelAddress ? hotel.hotelAddress : '' %>">
+          <br>
           <label for="hotelPrice">Hotel Price:</label>
           <input type="number" id="hotelPrice" name="hotelPrice" required
             value="<%= hotel && hotel.hotelPrice ? hotel.hotelPrice : '' %>">
-
-          <label for="imageLinks">Image upload</label><br>
-          <input type="file" id="imageLinks" name="imageLinks" ><br><br>
 
           <label for="rooms">Rooms</label>
           <input type="number" id="rooms" name="rooms" value="<%= hotel.rooms %>" required min='1'>
@@ -390,6 +392,19 @@
         </form>
 
         <% } %>
+  </section>
+  <section class="images hidden">
+    <h1>Add Images of Your Hotel</h1>
+    <div class="img-container">
+      <form action="uploadimage/" method="post" enctype="multipart/form-data">
+        <label for="imageLinks">Images</label>
+        <br>
+        <br>
+        <input type="file" name="imageLinks" multiple />
+
+        <button>upload</button>
+      </form>
+    </div>
   </section>
   <section class="reviews hidden">
     <!-- reviews section header and search bar -->

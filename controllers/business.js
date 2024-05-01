@@ -4,6 +4,8 @@ const Booking = require('../models/booking');
 const User = require('../models/user');
 const Hotel = require('../models/hotel.model');
 const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 
 exports.index = async (req, res) => {
 	res.render('business');
@@ -118,17 +120,14 @@ exports.logout = async (req, res) => {
 	res.clearCookie('token').redirect('login');
 };
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, '/views/myuploads')  
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, file.fieldname + '-' + uniqueSuffix)
-  }
-})
+// const storage = multer.diskStorage({
+//   destination:"./views/myuploads",  
+//   filename: (req, file, cb) => {
+//     cb(null, file.fieldname +"-"+Date.now()+path.extname(file.originalname));
+//   }
+// })
 
-const upload = multer({ storage: storage })
+// const upload = multer({ storage: storage }).single('imageLinks');
 
 exports.createHotel = async (req, res) => {
   // console.log(req.id);
@@ -142,34 +141,31 @@ exports.createHotel = async (req, res) => {
       return res.status(400).send('Hotelname already exists. Please choose a different username.');
     }
 
-    upload(req,res,async (err) => {
-      if(err){
-        console.log(err);
-      }else{
+   
 
         // Extract filename from uploaded file
-      const imageFilename = req.file.filename;
+      // const imageFilename = req.file.filename;
 
         const ownerdb = await User.findOne({ username });
     const owner = ownerdb.id;
+
+    // const filenames = req.files.map((file) => file.filename);
     // Create a new hotel
     const hotel = new Hotel({
       hotelName,
       hotelAddress,
       hotelPrice,
-      imageLinks:{
-        data: imageFilename,
-        contentType: 'image/jpg'
-      },
+      
       rooms,
       owner
     });
-    console.log(hotel);
+    // console.log(hotel);
+    req.session.hotel = hotel;
+
     await hotel.save();
     res.redirect('/business/dashboard');
 
-      }
-    })
+  
 
     
   } catch (err) {
@@ -178,29 +174,77 @@ exports.createHotel = async (req, res) => {
   }
 };
 
+
+
 exports.updateHotel = async (req, res) => {
-	const { username, hotelName, hotelAddress, hotelPrice, imageLinks, rooms } = req.body;
+  const { username, hotelName, hotelAddress, hotelPrice, rooms } = req.body;
 
-	try {
-		const owner = await User.findOne({ username });
-		const hotel = await Hotel.findOne({ owner: owner._id });
-		if (!hotel) {
-			return res.status(404).send('Hotel not found');
-		}
+  try {
+    const owner = await User.findOne({ username });
+    const hotel = await Hotel.findOne({ owner: owner._id });
 
-		hotel.hotelName = hotelName;
-		hotel.hotelAddress = hotelAddress;
-		hotel.hotelPrice = hotelPrice;
-		hotel.imageLinks = imageLinks;
-		hotel.rooms = rooms;
+    if (!hotel) {
+      return res.status(404).send('Hotel not found');
+    }
 
-		await hotel.save();
+    // const filenames = req.files.map((file) => file.filename);
 
-		res.redirect('/business/dashboard');
-	} catch (error) {
-		console.log(`Error updating hotel`);
-	}
+    // Update hotel fields
+    hotel.hotelName = hotelName;
+    hotel.hotelAddress = hotelAddress;
+    hotel.hotelPrice = hotelPrice;
+    hotel.rooms = rooms;
+
+    if (req.file) {
+      // Update imageLinks if a new file was uploaded
+      hotel.imageLinks = req.file.filename;
+    }
+    
+      //  hotel = new Hotel({
+      //   imageLinks:req.file.filename, 
+      // });
+
+    await hotel.save();
+    res.redirect('/business/dashboard');
+  } catch (error) {
+    console.error(`Error updating hotel ${error}`);
+    res.status(500).send(`Error updating hotel: ${error.message}`);
+  }
 };
+
+exports.uploadimage = async (req, res) => {
+   
+  try {
+    
+    const token = req.cookies.token;
+
+    const businessuser = jwt.verify(token, process.env.JWT_SECRET);
+
+    const userid = businessuser.id;
+
+    const hotel = await Hotel.findOne({ owner: userid });
+    
+
+    const filenames = req.files.map((file) => file.filename);
+    
+    
+      
+      hotel.imageLinks = filenames;
+      
+      
+    await hotel.save();
+    res.redirect('/business/dashboard');
+
+  
+
+    
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(`Error uploading image: ${err.message}`);
+  }
+}
+
+
 
 exports.update = (req, res) => {
 	res.redirect('/personalinfo');

@@ -127,8 +127,8 @@
             </div>
         
             <div class="search-bar-divs Who">
-              <label>Who</label>
-              <input type="text" placeholder="Guests" name="guests" />
+              <label>Rooms</label>
+              <input type="number" placeholder="Rooms" name="Rooms" value="1" min="1"/>
             </div>
         
             <div>
@@ -153,7 +153,34 @@
         </div>
         <h2>Hotels near you</h2>
 
-        <div class="card-container" id="hotels"></div>
+      <!-- card-container -->
+<div class="card-container" id="hotels">
+  <% hotels.forEach(hotel => { %>
+      <div class="card">
+          <div class="card-img-scroll">
+              <% hotel.imageLinks.slice(0, 4).forEach(imageLink => { %>
+                  <img class="card-img" src="/myuploads/<%= imageLink %>" alt="Hotel Image" />
+              <% }) %>
+          </div>
+          <button class="card-img-scroll-right">></button>
+          <button class="card-img-scroll-left"><</button>
+          <button class="card-heart">
+              <i class="ri-heart-fill"></i>
+          </button>
+          <div class="card-name">
+              <h4 class='cardHotelName'><%= hotel.hotelName %></h4>
+              <div class="card-rating">
+                  <i class="ri-star-line"></i>
+                  <p><%= hotel.rating %></p>
+              </div>
+          </div>
+          <p><%= hotel.hotelAddress %></p>
+          <p><span>₹ <%= hotel.hotelPrice %></span> per night</p>
+          <span class="card-comment">Fabulous</span>
+      </div>
+  <% }) %>
+</div>
+
 
         <!-- Drop down on guest in search bar -->
         <div class="guest-box">
@@ -188,8 +215,30 @@
           <button class="crossCut-guest-box">&times;</button>
         </div>
       </div>
+
+
+
+
+
+      <!-- <div class="card-container">
+        
+      </div>
+       -->
+      
+      
+      
     </section>
     <!-- End of Section -->
+
+
+
+
+
+
+
+
+
+    
 
     <footer class="footer">
       <div class="container">

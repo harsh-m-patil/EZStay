@@ -692,3 +692,33 @@ section {
 	color: #ac361c;
 	border:1px solid #ac361c;
 }
+
+.img-container {
+	margin-top: 30vh;
+	width: 500px;
+	margin-inline: auto;
+	background-color: #35aeeb28;
+	border: 1px solid #3b98b6;
+	
+	padding: 1rem;
+	border-radius: 15px;
+}
+
+.img-container label {
+	font-weight: 600;
+	font-size: 1.3rem;
+}
+
+.images {
+	padding: 1rem;
+}
+.images h1{
+	font-size: 2rem;
+	font-weight: 500;
+	padding: 1rem;
+	color: #1cac70;
+	border: 1px solid;
+	background-color: #42ef9822;
+	border-color: #1cac70;
+	border-radius: 20px;
+}
