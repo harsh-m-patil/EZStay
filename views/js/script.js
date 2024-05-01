@@ -73,24 +73,7 @@ menu.addEventListener("click", function () {
 
 //******************************************************* */
 
-// json file data
 
-// Function to fetch hotel data from JSON file
-// const fetchHotelData = async () => {
-//   try {
-//     const response = await fetch('../../HotelData/hotelData.json');
-//     const data = await response.json();
-//     return data;
-//   } catch (error) {
-//     console.error('Error fetching hotel data:', error);
-//   }
-// };
-
-// // Call the function to fetch data
-// fetchHotelData().then(hotelData => {
-
-//   updateCardsWithData(hotelData);
-// });
 
 //******************************************************* */
 // Fetch hotel data from server
@@ -106,46 +89,46 @@ fetch("/hoteldata")
 // ***********************************************************
 
 // creating card
-const createCard = () => {
-  const card = document.createElement("div");
+// const createCard = () => {
+//   const card = document.createElement("div");
 
-  card.innerHTML = `<div class="card">
-                      <div class="card-img-scroll">
-                          <img class="card-img" src="../images/HA2.jpg" alt="" />
-                          <img class="card-img" src="../images/HA1.webp" alt="" />
-                          <img class="card-img" src="../images/HA3.jpg" alt="" />
-                          <img class="card-img" src="../images/HA4.jpg" alt="" />
-                      </div>
+//   card.innerHTML = `<div class="card">
+//                       <div class="card-img-scroll">
+//                           <img class="card-img" src="../images/HA2.jpg" alt="" />
+//                           <img class="card-img" src="../images/HA1.webp" alt="" />
+//                           <img class="card-img" src="../images/HA3.jpg" alt="" />
+//                           <img class="card-img" src="../images/HA4.jpg" alt="" />
+//                       </div>
 
-                      <button class="card-img-scroll-right">></button>
-                      <button class="card-img-scroll-left"><</button>
+//                       <button class="card-img-scroll-right">></button>
+//                       <button class="card-img-scroll-left"><</button>
 
                     
-                      <button class="card-heart">
-                      <i class="ri-heart-fill"></i>
-                      </button>
+//                       <button class="card-heart">
+//                       <i class="ri-heart-fill"></i>
+//                       </button>
 
-                    <div class="card-name">
-                      <h4 class='cardHotelName'>ITC Grand Chola</h4>
+//                     <div class="card-name">
+//                       <h4 class='cardHotelName'>ITC Grand Chola</h4>
 
-                      <div class="card-rating">
-                        <i class="ri-star-line"></i>
-                        <p>4.9</p>
-                      </div>
-                    </div>
+//                       <div class="card-rating">
+//                         <i class="ri-star-line"></i>
+//                         <p>4.9</p>
+//                       </div>
+//                     </div>
 
-                    <p>Chennai</p>
-                    <p><span>₹ 10,000</span> per night</p>
+//                     <p>Chennai</p>
+//                     <p><span>₹ 10,000</span> per night</p>
 
-                    <span class="card-comment">fabulous</span>
-                    </div>`;
+//                     <span class="card-comment">fabulous</span>
+//                     </div>`;
 
-  cardContainer.appendChild(card);
-};
+//   cardContainer.appendChild(card);
+// };
 
-for (let i = 0; i < 12; i++) {
-  createCard();
-}
+// for (let i = 0; i < 14; i++) {
+//   createCard();
+// }
 
 //***************************************************** */
 

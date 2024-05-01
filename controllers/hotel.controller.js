@@ -2,22 +2,26 @@ const Hotel = require("../models/hotel.model");
 
 const handleSearchHotel = async (req, res) => {
   try {
-    let { destination, checkIn, checkOut, guests, clickedHotelName } =
+    let { destination, checkIn, checkOut, Rooms, clickedHotelName } =
       req.query;
 
     if (!destination) {
       return res.redirect("index");
     }
-    
+
     destination =
       destination.charAt(0).toUpperCase() + destination.slice(1).toLowerCase();
 
     const searchedHotels = await Hotel.find({ hotelAddress: destination });
 
+  req.session.Rooms = Rooms;
+
+
     return res.render("searchedHotel", {
       hotels: searchedHotels,
       checkIn: checkIn,
       checkOut: checkOut,
+      Rooms:Rooms
     });
   } catch (error) {
     console.error("Error searching for hotels:", error);
@@ -34,13 +38,15 @@ async function handleClickedHotel(req, res) {
   // console.log(clickedHotel);
   req.session.clickedHotel = clickedHotel;
 
-  // return hotelId;
+  const Rooms = req.session.Rooms;
 
-  
+// return hotelId;
+
   res.render("hotelInfo", {
     clickedHotel: clickedHotel,
     checkIn: checkIn,
     checkOut: checkOut,
+    Rooms:Rooms
   });
 
   return clickedHotel;
@@ -48,15 +54,17 @@ async function handleClickedHotel(req, res) {
 
 const handleHotelInfo = async (req, res) => {
   try {
-    const { checkIn, checkOut ,totalPrice} = req.body;
+    const { checkIn, checkOut, totalPrice, noOfRooms } = req.body;
 
-    // console.log("Check-in date from client:", checkIn);
-    // console.log("Check-out date from client:", checkOut);
 
     const dates = {
-      checkIn:checkIn,
-      checkOut:checkOut
-    }
+      checkIn: checkIn,
+      checkOut: checkOut,
+    };
+
+    // console.log("info:", noOfRooms);
+    req.session.noOfRooms = noOfRooms;
+    
 
     req.session.dates = dates;
     req.session.totalPrice = totalPrice;

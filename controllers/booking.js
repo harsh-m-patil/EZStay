@@ -14,6 +14,7 @@ exports.booked = async (req, res) => {
 		const clickedHotel = req.session.clickedHotel;
 		const dates = req.session.dates;
 		const totalPrice = req.session.totalPrice;
+		const noOfRooms = req.session.noOfRooms;
 
 		const hotelId = clickedHotel._id;
 

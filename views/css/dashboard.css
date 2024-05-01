@@ -622,6 +622,8 @@ section {
 
 .deletebtn{
     background-color: red;
+		margin-top: 4px;
+		color: white;
 }
 
 .modal{

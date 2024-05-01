@@ -286,7 +286,7 @@ exports.searchedSuperuserBooking = async (req, res) => {
   const { search } = req.query;
 
   try {
-    console.log(`Search query: ${search}`);
+    // console.log(`Search query: ${search}`);
 
     // Fetch all bookings and populate user and hotel details
     const allBookings = await Booking.find({}).populate("user").populate("hotel");
@@ -303,7 +303,7 @@ exports.searchedSuperuserBooking = async (req, res) => {
       );
     });
 
-    console.log("Filtered Bookings:", filteredBookings);
+    // console.log("Filtered Bookings:", filteredBookings);
 
     if (filteredBookings.length === 0) {
       return res.status(404).json({ message: "No booking found." });
