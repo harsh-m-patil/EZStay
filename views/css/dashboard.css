@@ -587,7 +587,7 @@ section {
 .hotelInfo input[type='text'],
 .hotelInfo input[type='number'],
 .hotelInfo input[type='email'],
-.hotelInfo textarea {
+.hotelInfo input {
 	width: 100%;
 	padding: 10px;
 	font-size: 1rem;
@@ -610,34 +610,31 @@ section {
 	background-color: #ffb534; /* Light orange */
 }
 
-
-.btn{
-    padding: 5px 4px;
-    font-size: 16px;
-    background-color: #FDDB32 ;
-    border: none;
-    border-radius: 10px;
-    
+.btn {
+	padding: 5px 4px;
+	font-size: 16px;
+	background-color: #fddb32;
+	border: none;
+	border-radius: 10px;
 }
 
-.deletebtn{
-    background-color: red;
+.deletebtn {
+	background-color: red;
 }
 
-.modal{
-    position: fixed;
-    width: 50%;
-    /* top: 50%;
+.modal {
+	position: fixed;
+	width: 50%;
+	/* top: 50%;
     left: 50%; */
-    transform: translate(-141%, 360%);
+	transform: translate(-141%, 360%);
 	/* transform: translate(-50%, -50%); */
-    background-color: white;
-    /* border: 1px solid black; */
-    height: 4rem;
-    z-index: 2;
-    margin-top: 48px;
-    margin-left: 82%;
-	
+	background-color: white;
+	/* border: 1px solid black; */
+	height: 4rem;
+	z-index: 2;
+	margin-top: 48px;
+	margin-left: 82%;
 }
 
 .overlay {
@@ -651,19 +648,47 @@ section {
 	z-index: 1;
 }
 
-.hidden{
-    display: none;
+.hidden {
+	display: none;
 }
 
-.updatebtn {
-    position: absolute;
-    padding: 6px 7px;
-    margin-top: 15px;
-    margin-left: 390px;
+.cancel-btn {
+	text-align: center;
+	color: #ac361c;
+	background-color: #fd28281d;
+	border: 0.5px solid;
+	border-color: #ac361c;
+	border-radius: 50%;
+	width: 25px;
 }
 
-select {
-    margin: 10px;
-    padding: 10px;
-    font-size: medium;
+.cancel-btn a {
+	text-decoration: none;
+	color: #ac361c;
+}
+
+.settings a{
+	text-decoration: none;
+	color: #000;
+	font-size: 1.2rem;
+	padding: 1rem;
+	border-radius: 15px;
+	width: 300px;
+}
+
+.update-owner {
+	border: 1px solid #3b98b6;
+	background-color: #35aeeb28;
+}
+.set-main {
+	margin-top: 2rem;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.delete-owner {
+	background-color: #fd28281d;
+	color: #ac361c;
+	border:1px solid #ac361c;
 }
