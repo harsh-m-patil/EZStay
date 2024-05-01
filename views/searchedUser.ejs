@@ -48,13 +48,13 @@
           <span>Bookings</span>
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a href="/superuserBusinesses">
           <i class="fa-solid fa-user-group"></i>
           <span>Businesses</span>
         </a>
-      </li>
-     
+      </li> -->
+
       <li>
         <a href="/superuserHotels">
           <i class="fa-solid fa-circle-info"></i>
@@ -77,16 +77,17 @@
       </li>
     </ul>
   </div>
-  
+
   <section class="all-bookings">
-    
+
     <div class="header-wrapper">
       <div class="header-title">
         <h1>Users</h1>
       </div>
       <form class="search" action="/searchUsers" method="get">
         <input type="text" name="search" placeholder="Search">
-        <button style="border: none;background: transparent;" type="submit"><i  class="fa-solid fa-magnifying-glass"></i></button>
+        <button style="border: none;background: transparent;" type="submit"><i
+            class="fa-solid fa-magnifying-glass"></i></button>
       </form>
     </div>
     <div id="all-bookings-list">
@@ -99,64 +100,135 @@
             <th>Phone No</th>
             <th>DOB</th>
             <th>Role</th>
-            
+
           </tr>
         </thead>
         <tbody>
-          <% searchedUsers.forEach(user => { 
+          <% searchedUsers.forEach(user=> {
             if (user && user.role !== 'superuser') { %>
             <tr>
-              <td><%= user.fullname %></td>
-              <td><%= user.username %></td>
-              <td><%= user.email %></td>
-              <td><%= user.phone %></td>
-              <td><%= new Date(user.dob).toDateString() %></td>
-              <td><%= user.role %></td>
+              <td>
+                <%= user.fullname %>
+              </td>
+              <td>
+                <%= user.username %>
+              </td>
+              <td>
+                <%= user.email %>
+              </td>
+              <td>
+                <%= user.phone %>
+              </td>
+              <td>
+                <%= new Date(user.dob).toDateString() %>
+              </td>
+              <td>
+                <%= user.role %>
+              </td>
               <td><button class="btn edit">update</button></td>
-              <div class="modal hidden">
+              <div class="modal hidden update-modal">
                 <form action="/updateUserRole" method="post">
                   <input type="hidden" name="userId" value="<%= user._id %>">
                   <select name="newRole">
-                    <option value="superuser" <%= user.role === 'superuser' ? 'selected' : '' %>>superuser</option>
-                    <option value="user" <%= user.role === 'user' ? 'selected' : '' %>>user</option>
+                    <option value="superuser" <%=user.role==='superuser' ? 'selected' : '' %>>superuser</option>
+                    <option value="user" <%=user.role==='user' ? 'selected' : '' %>>user</option>
+                    <option value="business" <%=user.role==='business' ? 'selected' : '' %>>business</option>
                   </select>
                   <button class="btn updatebtn" type="submit">Update Role</button>
                 </form>
                 <td>
-                  <form action="/deletingUser" method="post">
+                  <form id="deactivatinguser_<%= user._id %>" action="/deletingUser" method="post">
                     <input type="hidden" name="userId" value="<%= user._id %>">
                     <button type="submit" class="btn deletebtn">Delete</button>
                   </form>
                 </td>
-                
-                <!-- </td> -->
               </div>
-              
-
-               
-              </td>
-             
             </tr>
-             <% } else { %>
+            <% } else { %>
               <tr>
-              <td><%= user.fullname %></td>
-              <td><%= user.username %></td>
-              <td><%= user.email %></td>
-              <td><%= user.phone %></td>
-              <td><%= new Date(user.dob).toDateString() %></td>
-              <td><%= user.role %></td>
+                <td>
+                  <%= user.fullname %>
+                </td>
+                <td>
+                  <%= user.username %>
+                </td>
+                <td>
+                  <%= user.email %>
+                </td>
+                <td>
+                  <%= user.phone %>
+                </td>
+                <td>
+                  <%= new Date(user.dob).toDateString() %>
+                </td>
+                <td>
+                  <%= user.role %>
+                </td>
               </tr>
-            <% }}); %>
+              <% }}); %>
         </tbody>
       </table>
     </div>
   </section>
 
+  <div class="overlay hidden"></div>
+  <script>
+    // Select all edit buttons and modals
+    const overlay = document.querySelector('.overlay');
+    const editBtns = document.querySelectorAll('.edit');
+    const modals = document.querySelectorAll('.modal');
+    // const table = document.querySelector('table');
+    // Add event listener to each edit button
+    editBtns.forEach((btn, index) => {
+      btn.addEventListener('click', function () {
+        // Toggle the visibility of the corresponding modal
+        modals[index].classList.toggle('hidden');
+        overlay.classList.toggle('hidden');
 
- 
- 
+      });
+    });
+
+    // Close modals when clicking outside
+    document.body.addEventListener('click', function (event) {
+      if (!event.target.classList.contains('edit') && !event.target.closest('.modal')) {
+        modals.forEach(modal => {
+          modal.classList.add('hidden');
+          overlay.classList.add('hidden');
+        });
+      }
+    });
+
+
+    //alert box
+    document.addEventListener('DOMContentLoaded', function () {
+      // Select all forms with IDs starting with "deactivatinguser_"
+      const deactivateForms = document.querySelectorAll('[id^="deactivatinguser_"]');
+
+      // Add event listener for each form
+      deactivateForms.forEach(form => {
+        form.addEventListener('submit', function (event) {
+          event.preventDefault(); // Prevent form submission
+
+          // Show alert box when user tries to deactivate their account
+          const confirmMessage = 'Are you sure you want to deactivate the account? This action cannot be undone.';
+          if (confirm(confirmMessage)) {
+            // If user confirms, submit the form
+            this.submit();
+          } else {
+            // If user cancels, do nothing
+            return false;
+          }
+        });
+      });
+    });
+
+
+
+  </script>
+
+
   <script src="https://kit.fontawesome.com/5050694ff5.js" crossorigin="anonymous"></script>
-  
+
 </body>
 
 </html>

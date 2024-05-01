@@ -54,6 +54,12 @@
           <span>Reviews</span>
         </a>
       </li>
+      <li>
+        <a href="#">
+          <i class="fas fa-gear"></i>
+          <span>Settings</span>
+        </a>
+      </li>
       <!-- <li>
 <a href="#">
 <i class="fas fa-cog"></i>
@@ -135,7 +141,7 @@
         </div>
         <div class="bookings-list" id="scrollbar1">
 
-          <% bookings.slice(Math.max(bookings.length - 4,0), bookings.length).forEach(booking=> { %>
+          <% bookings.slice(Math.max(bookings.length - 4,0), bookings.length).reverse().forEach(booking=> { %>
             <div class="booking">
               <p>
                 <%= booking.user.fullname.split(" ")[0] %></p>
@@ -159,7 +165,7 @@
         <p>phone</p>
       </div>
       <div class="bookings-list" id="scrollbar1">
-        <% uniqueUserIds.slice(Math.max(uniqueUserIds.length - 4,0)).forEach(user=> { %>
+        <% uniqueUserIds.slice(Math.max(uniqueUserIds.length - 4,0)).reverse().forEach(user=> { %>
           <div class="booking">
             <p>
               <%= user.fullname.split(" ")[0] %></p>
@@ -267,6 +273,7 @@
             <th>Departure</th>
             <th>Status</th>
             <th>Payment</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -294,11 +301,22 @@
               <td>
                 <%= booking.totalPrice %>
               </td>
+              <%if (!(booking.status==='cancelled' ) && new Date(booking.checkIn)> new Date()) { %>
+                <td>
+                  <div class="cancel-btn">
+                    <form id="cancelingbooking_<%= booking._id %>" action="/cancelBookingByHotel" method="post">
+                      <input type="hidden" name="bookingId" value="<%= booking._id %>">
+                      <button type="submit" class="cancel-btn"><i class="fa-solid fa-xmark"></i></button>
+                    </form>
+                </td>
+                <% } %>
             </tr>
-            <% }); %>
-        </tbody>
-      </table>
     </div>
+
+    <% }); %>
+      </tbody>
+      </table>
+      </div>
   </section>
   <section class="hotelInfo hidden" id="update-hotel">
     <!-- Hotel info section header and search bar -->
@@ -308,7 +326,7 @@
       </div>
     </div>
     <% if(!hotel) { %>
-      <form action="createhotel/" method="POST">
+      <form action="createhotel/" method="POST" enctype="multipart/form-data">
 
         <label for="username">Username</label>
         <input type="text" id="username" name="username"
@@ -319,14 +337,15 @@
           value="<%= business && business.hotelname ? business.hotelname : '' %>" required>
 
         <label for="hotelAddress">Hotel Address:</label>
-        <textarea id="hotelAddress" name="hotelAddress" rows="4" required></textarea>
+        <input id="hotelAddress" name="hotelAddress" rows="4" required>
 
         <label for="hotelPrice">Hotel Price:</label>
         <input type="number" id="hotelPrice" name="hotelPrice" required
           value="<%= business.hotel && business.hotel.hotelPrice ? business.hotel.hotelPrice : '' %>">
 
         <label for="imageLinks">Image Links (separated by comma):</label>
-        <input type="text" id="imageLinks" name="imageLinks" required>
+        <!-- <input type="text" id="imageLinks" name="imageLinks" required> -->
+        <input type="file" name="imageLinks" />
 
         <label for="rooms">Rooms</label>
         <input type="number" id="rooms" name="rooms" required min='1'>
@@ -336,7 +355,11 @@
       </form>
       <% } else { %>
 
-        <form action="updatehotel/" method="POST">
+        <form action="updatehotel/" method="POST" enctype="multipart/form-data>
+
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username"
+            value="<%= business && business.username ? business.username : '' %>" required>
 
           <label for="hotelName">Hotel Name:</label>
           <input type="text" id="hotelName" name="hotelName"
@@ -350,14 +373,14 @@
             value="<%= business && business.phone ? business.phone : '' %>">
 
           <label for="hotelAddress">Hotel Address:</label>
-          <textarea id="hotelAddress" name="hotelAddress" rows="4" required> <%= hotel.hotelAddress %> </textarea>
-
+          <input id="hotelAddress" name="hotelAddress" rows="4" required  value="<%= hotel && hotel.hotelAddress ? hotel.hotelAddress : '' %>">
+<br>
           <label for="hotelPrice">Hotel Price:</label>
           <input type="number" id="hotelPrice" name="hotelPrice" required
             value="<%= hotel && hotel.hotelPrice ? hotel.hotelPrice : '' %>">
 
-          <label for="imageLinks">Image Links (separated by comma):</label>
-          <input type="text" id="imageLinks" name="imageLinks" required value="<%= hotel.imageLinks.join() %>">
+          <label for="imageLinks">Image upload</label><br>
+          <input type="file" id="imageLinks" name="imageLinks" ><br><br>
 
           <label for="rooms">Rooms</label>
           <input type="number" id="rooms" name="rooms" value="<%= hotel.rooms %>" required min='1'>
@@ -377,6 +400,18 @@
     </div>
     <div class="grid-reviews">
       <!-- reviews will be populated dynamically -->
+    </div>
+  </section>
+  <section class="settings hidden">
+    <!-- reviews section header and search bar -->
+    <div class="header-wrapper">
+      <div class="header-title">
+        <h1>Settings</h1>
+      </div>
+    </div>
+    <div class="set-main">
+      <a href="update" class="update-owner">Update Hotel Owner Info</a><br>
+      <a href="delete" class="delete-owner">Delete Business Account</a>
     </div>
   </section>
   <!-- <section class="settings hidden">
