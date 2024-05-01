@@ -164,8 +164,8 @@ nav {
 }
 
 .priceCard {
-  height: 500px;
-  width: 370px;
+  height: 400px;
+  width: 390px;
   position: sticky;
   top: 150px;
   padding: 30px;
@@ -271,6 +271,7 @@ nav {
 .total-amt p {
   margin: 5px 0;
 }
+
 
 .amt-before-tax {
   margin-top: 10px;

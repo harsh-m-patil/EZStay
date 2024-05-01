@@ -112,7 +112,12 @@
               <td><%= user.phone %></td>
               <td><%= new Date(user.dob).toDateString() %></td>
               <td><%= user.role %></td>
-              <td><button class="btn edit">update</button></td>
+              <td><button class="btn edit">update</button>
+                  <form id="deactivatinguser_<%= user._id %>" action="/deletingUser" method="post">
+                    <input type="hidden" name="userId" value="<%= user._id %>">
+                    <button type="submit" class="btn deletebtn">Delete</button>
+                  </form>
+                </td>
               <div class="modal hidden">
                 <form action="/updateUserRole" method="post">
                   <input type="hidden" name="userId" value="<%= user._id %>">
@@ -123,12 +128,7 @@
                   </select>
                   <button class="btn updatebtn" type="submit">Update Role</button>
                 </form>
-                <td>
-                  <form id="deactivatinguser_<%= user._id %>" action="/deletingUser" method="post">
-                    <input type="hidden" name="userId" value="<%= user._id %>">
-                    <button type="submit" class="btn deletebtn">Delete</button>
-                  </form>
-                </td>
+                
                 
                 
               </div>
