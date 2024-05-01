@@ -1,19 +1,19 @@
-html{
+html {
     scroll-behavior: smooth;
 }
+
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     background-color: white;
 }
 
 header {
-   background-image: url('/images/headnew.jpg'); background-size:100% 100%; background-position: center;
     color: #020b15;
     padding: 10px;
     text-align: center;
-    height: 300px;
+    /* height: 450px; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,24 +21,26 @@ header {
 
 
 nav {
-    background-color:black;
+    background-color: black;
     color: black;
     /* padding: 10px; */
     text-align: center;
-    
+
 }
 
 nav a {
-    color:white;
+    color: white;
     text-decoration: none;
     margin: 0 15px;
     padding: 10px 5px;
     display: inline-block;
 }
-nav a:hover {
-    background-color: gray; /* Change background color on hover */
-border-radius: 8px;  
-}
+
+/* nav a:hover {
+    background-color: gray;
+border-radius: 8px; 
+ 
+} */
 
 section {
     padding: 20px;
@@ -56,32 +58,35 @@ footer {
 }
 */
 .Introduction-Ch {
-    background-color:white;
+    background-color: white;
     padding: 25px;
     border-radius: 10px;
     margin-bottom: 20px;
-    
+
 }
 
 .visit-chennai {
-    background-color:white;
+    background-color: white;
     padding: 15px;
     border-radius: 10px;
     margin-bottom: 20px;
 }
+
 .where-eat {
-    background-color:white;
+    background-color: white;
     padding: 15px;
     border-radius: 10px;
     margin-bottom: 20px;
 }
+
 .what-do {
-    background-color:white;
+    background-color: white;
     padding: 15px;
     border-radius: 10px;
 }
+
 .when-visit {
-    background-color:white;
+    background-color: white;
     padding: 15px;
     border-radius: 10px;
 }
@@ -95,28 +100,33 @@ h3 {
 }
 
 p {
-    margin:0px;
+    margin: 0px;
 }
 
 form {
     max-width: 400px;
-    
+
 
     background-color: #b4d9d6c3;
     padding: 15px;
     border-radius: 10px;
     margin-bottom: 20px;
 }
+
 table {
     width: 100%;
     margin-top: 20px;
     border-collapse: collapse;
 }
-table, th, td {
+
+table,
+th,
+td {
     border: 1px solid #e4d2d2;
     text-align: left;
     padding: 8px;
 }
+
 th {
     background-color: #a5b1b3;
 }
@@ -124,84 +134,92 @@ th {
 label {
     margin-right: 10px;
 }
+
 textarea {
     width: 100%;
     height: 100px;
     margin-bottom: 10px;
 }
+
 #im1 img {
-    
+
     width: 100%;
     height: 300px;
-    
+
     border-radius: 10px;
 
-    
+
 }
 
 .im2 img {
 
     width: 50%;
     height: 300px;
-    
+
     border-radius: 10px;
-   
+
 }
-.im2{
+
+.im2 {
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.im3 img{
+
+.im3 img {
 
     width: 50%;
     height: 300px;
     border-radius: 10px;
 
 }
-#im0 img{
+
+#im0 img {
 
     width: 100%;
     height: 300px;
-    border-radius: 10px;    
-
+    border-radius: 10px;
+    height: 400px;
 }
-#im0{
+
+#im0 {
     margin-top: 20px;
     margin-bottom: 20px;
+
 }
+
 .container {
     text-align: center;
-  }
-  
-  .main-heading {
+}
+
+.main-heading {
     font-size: 32px;
     font-weight: bold;
-  }
-  
-  .subheading {
+}
+
+.subheading {
     font-size: 24px;
-  }
-  
-  .estimated-price {
+}
+
+.estimated-price {
     font-size: 28px;
     font-weight: bold;
     color: rgb(6, 6, 7);
-  }
-  
-  .additional-info {
+}
+
+.additional-info {
     font-size: 16px;
-  }
-  
-  .sbody{
+}
+
+.sbody {
 
 
     padding-left: 200px;
     padding-right: 200px;
 
-  }
-  
-  /*0th nav bar*/
-  /* css for navigation bar */
+}
+
+/*0th nav bar*/
+/* css for navigation bar */
 
 .nav0 {
     background-color: #FFFFFF;
@@ -244,11 +262,11 @@ textarea {
 
 
 /* nav bar ends .................. */
-  
-.hotelsr{
-    display: flex;   
-  margin: 5px;
-  }
+
+.hotelsr {
+    display: flex;
+    margin: 5px;
+}
 
 .info-box {
     flex: 1;
@@ -265,11 +283,12 @@ textarea {
     flex: 1;
     margin: px;
     font-weight: bold;
-   
+
 }
 
 .rating {
-    color: #080808; /* Gold color for stars */
+    color: #080808;
+    /* Gold color for stars */
 }
 
 .price {
@@ -278,33 +297,44 @@ textarea {
 }
 
 #bu1 {
-    background-color:#f5cf11;
+    background-color: #FDDB32;
     color: black;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    font-size:large;
+    font-size: large;
 }
 
 /*Button Cab*/
 .myButton {
-    background-color: #d8b710; /* Green background */
-    border: none; /* No border */
-    color: rgb(14, 14, 14); /* White text color */
-    padding: 15px 32px; /* Padding */
-    text-align: center; /* Center text */
-    text-decoration: none; /* No underline */
-    display: inline-block; /* Display as inline-block */
-    font-size: 16px; /* Font size */
-    margin: 4px 2px; /* Margin */
-    cursor: pointer; /* Cursor pointer on hover */
-    border-radius: 10px; /* Rounded corners */
-  }
+    background-color: #FDDB32;
+    /* Green background */
+    border: none;
+    /* No border */
+    color: rgb(14, 14, 14);
+    /* White text color */
+    padding: 15px 32px;
+    /* Padding */
+    text-align: center;
+    /* Center text */
+    text-decoration: none;
+    /* No underline */
+    display: inline-block;
+    /* Display as inline-block */
+    font-size: 16px;
+    /* Font size */
+    margin: 4px 2px;
+    /* Margin */
+    cursor: pointer;
+    /* Cursor pointer on hover */
+    border-radius: 10px;
+    /* Rounded corners */
+}
 
 
-  /* icons css*/
-  #prcl {
+/* icons css*/
+#prcl {
     margin: 50px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -314,45 +344,46 @@ textarea {
     background-color: #a5b1b3;
     height: min-content;
     margin-top: 105px;
-  }
+}
 
-  .item {
+.item {
     margin-bottom: 10px;
     margin-top: 10px;
 
-  }
-  
-  .icon {
+}
+
+.icon {
     font-size: 24px;
     margin-right: 10px;
-  }
-  
-  .name {
+}
+
+.name {
     font-weight: bold;
     margin-right: 10px;
-  }
-  
-  .price {
+}
+
+.price {
     font-size: 18px;
 
-  }
+}
 
 
 
-  .cont1 {
+.cont1 {
     display: flex;
-  }
-  
-  .price-list {
-    flex: 1; /* Equal width for both boxes */
-    padding: 20px;
-    
-    margin: 10px;
-  }
+}
 
-  .city-list {
+.price-list {
+    flex: 1;
+    /* Equal width for both boxes */
+    padding: 20px;
+
+    margin: 10px;
+}
+
+.city-list {
     text-align: center;
-    background-color:rgb(191, 187, 187) ;
+    background-color: rgb(191, 187, 187);
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -365,9 +396,230 @@ textarea {
     color: rgb(52, 52, 147);
     font-size: larger;
 }
-#img3 img{
+
+#img3 img {
 
 
     width: 850px;
     border-radius: 20px;
+}
+
+
+#aa1 {
+
+
+    border-radius: 50px;
+    padding: 30px;
+}
+
+
+
+
+
+/* Footer Styles*/
+
+
+body {
+
+    line-height: 1.5;
+    font-family: 'poppins', sans-serif;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1170px;
+    margin: auto;
+}
+
+ul {
+    list-style: none;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer {
+    background-color: #24262b;
+    padding: 70px 0;
+
+
+
+}
+
+.footer-col {
+    width: 25%;
+    padding: 0 20px;
+
+}
+
+.footer-col h4 {
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+}
+
+.footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #e91e63;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+}
+
+.footer-col ul li:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    color: #bbbbbb;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: #ffffff;
+    padding-left: 10px;
+}
+
+.footer-col .social-links a {
+
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0px 10px 10px 0px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.3s ease;
+
+}
+
+.footer-col .social-links a:hover {
+    color: #24262b;
+    background-color: #ffffff;
+}
+
+/* responsive */
+
+@media(max-width: 767px) {
+    .footer-col {
+        width: 50%;
+        margin-bottom: 30px;
+    }
+}
+
+@media(max-width: 450px) {
+    .footer-col {
+        width: 100%;
+
+    }
+}
+
+
+
+
+#alltrips {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    text-align: center;
+    font-size: larger;
+    background-color: #a5b1b3;
+}
+
+
+
+
+
+
+.card-row1 {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    /* padding-left: 10px;
+    padding-right: 10px; */
+    padding-bottom: 10px;
+}
+
+.card1 {
+    width: calc(25% - 20px);
+    /* 25% width for each card with 20px gap between */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #a5b1b3;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+#tripG {
+
+    background-image: url("../images/travelGuide1.jpg");
+    background-size: 100% 100%;
+    background-position: center;
+    height: 600px;
+}
+
+
+
+
+#tripB {
+
+    background-image: url("../images/bangHead.jpg");
+    background-size: 100% 100%;
+    background-position: center;
+    height: 450px;
+}
+
+
+#tripC {
+
+    background-image: url("../images/headnew.jpg");
+    background-size: 100% 100%;
+    background-position: center;
+    height: 450px;
+}
+
+
+
+#tripD {
+
+    background-image: url("../images/dillodilli.jpg");
+    background-size: 100% 100%;
+    background-position: center;
+    height: 450px;
+}
+
+
+
+#tripM {
+
+    background-image: url("../images/mumbaheadn.jpg");
+    background-size: 100% 100%;
+    background-position: center;
+    height: 450px;
 }
