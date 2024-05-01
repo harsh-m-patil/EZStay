@@ -308,7 +308,7 @@
       </div>
     </div>
     <% if(!hotel) { %>
-      <form action="createhotel/" method="POST">
+      <form action="createhotel/" method="POST" enctype="multipart/form-data">
 
         <label for="username">Username</label>
         <input type="text" id="username" name="username"
@@ -326,7 +326,8 @@
           value="<%= business.hotel && business.hotel.hotelPrice ? business.hotel.hotelPrice : '' %>">
 
         <label for="imageLinks">Image Links (separated by comma):</label>
-        <input type="text" id="imageLinks" name="imageLinks" required>
+        <!-- <input type="text" id="imageLinks" name="imageLinks" required> -->
+        <input type="file" name="imageLinks" />
 
         <label for="rooms">Rooms</label>
         <input type="number" id="rooms" name="rooms" required min='1'>
@@ -336,7 +337,7 @@
       </form>
       <% } else { %>
 
-        <form action="updatehotel/" method="POST">
+        <form action="updatehotel/" method="POST" enctype="multipart/form-data>
 
           <label for="hotelName">Hotel Name:</label>
           <input type="text" id="hotelName" name="hotelName"
@@ -356,8 +357,8 @@
           <input type="number" id="hotelPrice" name="hotelPrice" required
             value="<%= hotel && hotel.hotelPrice ? hotel.hotelPrice : '' %>">
 
-          <label for="imageLinks">Image Links (separated by comma):</label>
-          <input type="text" id="imageLinks" name="imageLinks" required value="<%= hotel.imageLinks.join() %>">
+          <label for="imageLinks">Image upload</label><br>
+          <input type="file" id="imageLinks" name="imageLinks" ><br><br>
 
           <label for="rooms">Rooms</label>
           <input type="number" id="rooms" name="rooms" value="<%= hotel.rooms %>" required min='1'>

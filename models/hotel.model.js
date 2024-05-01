@@ -18,8 +18,10 @@ const hotelSchema = new mongoose.Schema({
     required: true
   },
   imageLinks: {
-    type: [String],
-    required: true
+    // type: [String],
+    // required: true
+    data: String,
+    contentType: String
   },
   rating: {
     type: Number,

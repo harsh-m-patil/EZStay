@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const Booking = require('../models/booking');
 const User = require('../models/user');
 const Hotel = require('../models/hotel.model');
+const multer = require('multer');
 
 exports.index = async (req, res) => {
   res.render('business');
@@ -117,9 +118,23 @@ exports.logout = async (req, res) => {
   res.clearCookie('token').redirect('login');
 };
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '/views/myuploads')  
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, file.fieldname + '-' + uniqueSuffix)
+  }
+})
+
+const upload = multer({ storage: storage })
+
 exports.createHotel = async (req, res) => {
-  console.log(req.id);
-  const { username, hotelName, hotelAddress, hotelPrice, imageLinks, rooms } = req.body;
+  // console.log(req.id);
+  // storage
+ 
+  const { username, hotelName, hotelAddress, hotelPrice, rooms } = req.body;
   try {
     // Check if the username already exists
     const existingHotel = await Hotel.findOne({ hotelName });
@@ -127,19 +142,36 @@ exports.createHotel = async (req, res) => {
       return res.status(400).send('Hotelname already exists. Please choose a different username.');
     }
 
-    const ownerdb = await User.findOne({ username });
+    upload(req,res,async (err) => {
+      if(err){
+        console.log(err);
+      }else{
+
+        // Extract filename from uploaded file
+      const imageFilename = req.file.filename;
+
+        const ownerdb = await User.findOne({ username });
     const owner = ownerdb.id;
     // Create a new hotel
     const hotel = new Hotel({
       hotelName,
       hotelAddress,
       hotelPrice,
-      imageLinks,
+      imageLinks:{
+        data: imageFilename,
+        contentType: 'image/jpg'
+      },
       rooms,
       owner
     });
+    console.log(hotel);
     await hotel.save();
     res.redirect('/business/dashboard');
+
+      }
+    })
+
+    
   } catch (err) {
     console.error(err);
     res.status(500).send(`Error signing up: ${err.message}`);

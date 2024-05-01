@@ -13,8 +13,8 @@ router.get('/login', business.getBusinesses);
 router.post('/login', business.accessBusiness);
 
 router.get('/dashboard', verifyToken,checkBusinessUser, business.businessDashboard);
-router.post('/createhotel',checkBusinessUser, business.createHotel)
-router.post('/updateHotel',checkBusinessUser, business.updateHotel)
+router.post('/createhotel',verifyToken,checkBusinessUser, business.createHotel)
+router.post('/updateHotel',verifyToken,checkBusinessUser, business.updateHotel)
 // Logout
 router.get('/logout', business.logout);
 

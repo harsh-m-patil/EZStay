@@ -1,6 +1,8 @@
 const Booking = require('../models/booking');
 const jwt = require('jsonwebtoken');
 const Hotel = require('../models/hotel.model');
+
+
 exports.booked = async (req, res) => {
 	try {
 		// Get the token from the request cookies
