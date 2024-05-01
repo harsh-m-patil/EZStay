@@ -88,7 +88,7 @@
                   
                   <% if (booking.status !== 'cancelled') { %>
                   <td>
-                    <form action="/cancelbooking" method="post">
+                    <form id="cancelingbooking_<%= booking._id %>" action="/cancelbooking" method="post">
                       <input type="hidden" name="bookingId" value="<%= booking._id %>">
                       <button type="submit" class="btn">Cancel</button>
                     </form>
@@ -113,6 +113,31 @@
       </table>
     </div>
   </section>
+
+  <script>
+    //alert box
+document.addEventListener('DOMContentLoaded', function () {
+   // Select all forms with IDs starting with "deactivatinguser_"
+   const deactivateForms = document.querySelectorAll('[id^="cancelingbooking_"]');
+
+   // Add event listener for each form
+   deactivateForms.forEach(form => {
+       form.addEventListener('submit', function (event) {
+           event.preventDefault(); // Prevent form submission
+
+           // Show alert box when user tries to deactivate their account
+           const confirmMessage = 'Are you sure you want to Cancel the booking? This action cannot be undone.';
+           if (confirm(confirmMessage)) {
+               // If user confirms, submit the form
+               this.submit();
+           } else {
+               // If user cancels, do nothing
+               return false;
+           }
+       });
+   });
+});
+</script>
 
   <script src="https://kit.fontawesome.com/5050694ff5.js" crossorigin="anonymous"></script>
  

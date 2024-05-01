@@ -115,7 +115,7 @@ exports.superuserUsers = async (req, res) => {
 
 exports.superuserHotels = async (req, res) => {
   try {
-    const hotels = await Hotel.find();
+    const hotels = await Hotel.find().populate("owner");
     res.render("superuserHotels", { hotels: hotels });
   } catch (error) {
     console.error("Error fetching hotels:", error);
@@ -176,6 +176,7 @@ exports.Userdeleted = async (req, res) => {
   }
 
    await Booking.deleteMany({ user: userId });
+   await Hotel.deleteMany({ user: userId });
     
 
     await User.findByIdAndDelete(userId);
@@ -188,6 +189,62 @@ exports.Userdeleted = async (req, res) => {
 
   } catch (error) {
     console.error("Error updating user role:", error);
+    res.status(500).send("Internal Server Error");
+  }
+}
+
+exports.cancelbooking = async (req, res) => {
+  try {
+    // Get the booking ID from the request parameters
+    const bookingId = req.body.bookingId;
+
+    
+    const updatedBooking = await Booking.findByIdAndUpdate(
+      bookingId,
+      { status: "cancelled" }
+      // { new: true }
+    );
+
+    if (!updatedBooking) {
+      // If booking is not found, return an error response
+      return res.status(404).json({ message: "Booking not found" });
+    }
+  
+  const bookings = await Booking.find().populate('hotel').populate('user');
+    
+    res.render('superuserBookings', { bookings: bookings });
+
+  } catch (error) {
+    // If an error occurs, return an error response
+    console.error("Error canceling booking:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+exports.deletingBookings = async (req, res) => {
+  try {
+
+    const bookingId = req.body.bookingId;
+
+    // const user = await User.findById(userId);
+
+  //   if (!user) {
+  //     return res.status(404).send('User not found');
+  // }
+
+  //  await Booking.deleteMany({ user: userId });
+    
+
+    await Booking.findByIdAndDelete(bookingId);
+
+     // Fetch all users after updating the role
+     const bookings = await Booking.find().populate('hotel').populate('user');
+    
+    res.render('superuserBookings', { bookings: bookings });
+
+
+  } catch (error) {
+    console.error("Error deleting Bookings:", error);
     res.status(500).send("Internal Server Error");
   }
 }
@@ -304,7 +361,7 @@ exports.searchedSuperuserHotel = async (req, res) => {
       searchQuery.$or.push({ rating: parsedRating });
     }
 
-    const searchedHotels = await Hotel.find(searchQuery);
+    const searchedHotels = await Hotel.find(searchQuery).populate("owner");
 
     if (searchedHotels.length === 0) {
       return res.json({ message: "No Hotel" });

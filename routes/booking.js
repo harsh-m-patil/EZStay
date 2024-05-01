@@ -7,7 +7,7 @@ router.post('/booked',verifyToken,checkGuestUser, booking.booked);
 
 router.get('/bookingconfirm',booking.bookingconfirmed);
 
-router.post('/cancelbooking',booking.cancelbooking)
+router.post('/cancelbooking',booking.cancelbooking);
 
 
 
