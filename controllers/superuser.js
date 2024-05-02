@@ -169,13 +169,17 @@ exports.Userdeleted = async (req, res) => {
 		const userId = req.body.userId;
 
 		const user = await User.findById(userId);
+		const hotel = await Hotel.find({ owner: userId });
+		console.log(hotel);	
+
 
 		if (!user) {
 			return res.status(404).send('User not found');
 		}
 
 		await Booking.deleteMany({ user: userId });
-		await Hotel.deleteMany({ user: userId });
+		await Booking.deleteMany({ hotel: hotel });
+		await Hotel.deleteMany({ owner: userId });
 
 		await User.findByIdAndDelete(userId);
 

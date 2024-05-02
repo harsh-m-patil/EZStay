@@ -267,8 +267,10 @@ exports.deleteOwnerConfirmed = async (req, res) => {
 
 		delete business.password;
 
+		const hotel = await Hotel.findOne({owner:business._id})
 		await Hotel.deleteOne({ owner: business._id });
 		await User.findByIdAndDelete(business._id);
+		await Booking.deleteMany({hotel:hotel});
 
 		// res.status(200).send('User deleted successfully');
 		res.clearCookie('token').redirect('login');
