@@ -21,6 +21,8 @@ cards.forEach((card, index) => {
       "&checkOut=" +
       encodeURIComponent(checkOutDate);
 
+      console.log(url);
+
     // Navigate to the hotel info page
     window.location.href = url;
   });

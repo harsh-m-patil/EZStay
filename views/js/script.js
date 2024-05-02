@@ -1,3 +1,5 @@
+// import { url } from './searchedHotel.js';
+
 // Script
 const menu = document.querySelector(".menu");
 const side = document.querySelector(".sidebar");
@@ -223,11 +225,29 @@ const updateCardsWithData = (hotelData) => {
       // Making an HTTP GET request to send clickedHotelName to the backend
       fetch(`/search?clickedHotelName=${clickedHotelName}`, {
         method: 'GET',
-      }).then(response => {
+      }).then(response => { 
         if (response.ok) {
           console.log('Clicked hotel name sent to the backend successfully');
           // Redirect to hotelInfo route after sending the hotel name
-          window.location.href = `/hotelInfo?clickedHotelName=${clickedHotelName}`;
+          // window.location.href = `/hotelInfo?clickedHotelName=${clickedHotelName}`;
+
+          
+        
+          // window.location.href = url
+          // window.location.href = `/hotelInfo?clickedHotelName=Oberoi%20Grand&checkIn=2024-05-16&checkOut=2024-05-17`;
+
+          const url = `/hotelInfo?clickedHotelName=${encodeURIComponent(
+            clickedHotelName
+          )}&checkIn=2024-05-02&checkOut=2024-05-03`;
+
+          window.location.href = url;
+          // const url = `/hotelInfo?clickedHotelName=${encodeURIComponent(
+          //   clickedHotelName
+          // )}&checkIn=${encodeURIComponent(checkInDate)}&checkOut=${encodeURIComponent(checkOutDate)}`;
+          
+      
+          // Redirect to hotelInfo with the correct hotel name
+          
         } else {
           console.error('Failed to send clicked hotel name to the backend');
         }
@@ -316,55 +336,55 @@ main.addEventListener("click", closemodal);
 //************************************************* */
 // Drop down for guest in search bar
 
-const guestBox = document.querySelector(".guest-box");
-const addGuestBtn = document.querySelectorAll(".addGuest");
-const subGuestBtn = document.querySelectorAll(".subGuest");
-const noOfGuests = document.querySelectorAll(".noOfGuest");
-const Who = document.querySelector(".Who");
-const crossCutGuestBox = document.querySelector(".crossCut-guest-box");
+// const guestBox = document.querySelector(".guest-box");
+// const addGuestBtn = document.querySelectorAll(".addGuest");
+// const subGuestBtn = document.querySelectorAll(".subGuest");
+// const noOfGuests = document.querySelectorAll(".noOfGuest");
+// const Who = document.querySelector(".Who");
+// const crossCutGuestBox = document.querySelector(".crossCut-guest-box");
 
-const who = document.querySelector(".Who");
-const adult = document.querySelector(".adult");
-const children = document.querySelector(".children");
+// const who = document.querySelector(".Who");
+// const adult = document.querySelector(".adult");
+// const children = document.querySelector(".children");
 
-addGuestBtn.forEach((button, index) => {
-  button.addEventListener("click", () => {
-    noOfGuests[index].innerHTML++;
+// addGuestBtn.forEach((button, index) => {
+//   button.addEventListener("click", () => {
+//     noOfGuests[index].innerHTML++;
 
-    const guestInput = document.querySelector(
-      '.search-bar-divs.Who input[type="text"]'
-    );
-    guestInput.value = 1;
-    guestInput.value = adult.innerHTML;
-  });
-});
+//     const guestInput = document.querySelector(
+//       '.search-bar-divs.Who input[type="text"]'
+//     );
+//     guestInput.value = 1;
+//     guestInput.value = adult.innerHTML;
+//   });
+// });
 
-subGuestBtn.forEach((button, index) => {
-  button.addEventListener("click", () => {
-    if (noOfGuests[index].innerHTML > 0) {
-      noOfGuests[index].innerHTML--;
-    }
-  });
-});
+// subGuestBtn.forEach((button, index) => {
+//   button.addEventListener("click", () => {
+//     if (noOfGuests[index].innerHTML > 0) {
+//       noOfGuests[index].innerHTML--;
+//     }
+//   });
+// });
 
-let flag = 0;
-guestBox.style.display = "none";
+// let flag = 0;
+// guestBox.style.display = "none";
 
-Who.addEventListener("click", () => {
-  const guestInput = document.querySelector(
-    '.search-bar-divs.Who input[type="text"]'
-  );
-  guestInput.value = 1;
-  if (flag === 0) {
-    guestBox.style.display = "block";
-    flag = 1;
-  } else if (flag === 1) {
-    guestBox.style.display = "none";
-    flag = 0;
-  }
-});
+// Who.addEventListener("click", () => {
+//   const guestInput = document.querySelector(
+//     '.search-bar-divs.Who input[type="text"]'
+//   );
+//   guestInput.value = 1;
+//   if (flag === 0) {
+//     guestBox.style.display = "block";
+//     flag = 1;
+//   } else if (flag === 1) {
+//     guestBox.style.display = "none";
+//     flag = 0;
+//   }
+// });
 
-crossCutGuestBox.addEventListener("click", () => {
-  guestBox.style.display = "none";
-});
+// crossCutGuestBox.addEventListener("click", () => {
+//   guestBox.style.display = "none";
+// });
 
