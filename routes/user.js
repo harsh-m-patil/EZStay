@@ -6,7 +6,7 @@ const {verifyToken , checkGuestUser, isAuthenticated} = require('../middleware/a
 
 
 // signup handler
-router.get('/signup', user.newUsers);
+router.get('/signup',isAuthenticated, user.newUsers);
 router.post('/signup', user.createUser);
 
 

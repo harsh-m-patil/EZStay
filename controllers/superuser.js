@@ -205,6 +205,16 @@ exports.cancelbooking = async (req, res) => {
 			return res.status(404).json({ message: 'Booking not found' });
 		}
 
+		const updatedHotel = await Hotel.findByIdAndUpdate(
+			updatedBooking.hotel,
+			{ $inc: { revenue: -updatedBooking.totalPrice } }, // Increment totalRevenue by totalPrice
+			{ new: true } // Return the updated hotel document
+		);
+
+		if (!updatedHotel) {
+			// Handle error if hotel not found
+		}
+
 		const bookings = await Booking.find().populate('hotel').populate('user');
 
 		res.render('superuserBookings', { bookings: bookings });
@@ -219,6 +229,29 @@ exports.deletingBookings = async (req, res) => {
 	try {
 		const bookingId = req.body.bookingId;
 
+		const updatedBooking = await Booking.findById(
+			bookingId
+			// { new: true }
+		);
+
+		if (!updatedBooking) {
+			// If booking is not found, return an error response
+			return res.status(404).json({ message: 'Booking not found' });
+		}
+
+		if(!(updatedBooking.status==='cancelled')){
+
+			const updatedHotel = await Hotel.findByIdAndUpdate(
+				updatedBooking.hotel,
+				{ $inc: { revenue: -updatedBooking.totalPrice } }, // Increment totalRevenue by totalPrice
+				{ new: true } // Return the updated hotel document
+			);
+			
+			if (!updatedHotel) {
+				// Handle error if hotel not found
+			}
+			
+		}
 		// const user = await User.findById(userId);
 
 		//   if (!user) {

@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const superuser = require('../controllers/superuser');
-const {verifyToken , checkSuperuser} = require('../middleware/auth');
+const {verifyToken , checkSuperuser, isAuthenticated} = require('../middleware/auth');
 
-router.get('/superusersignup',verifyToken,checkSuperuser, superuser.newsuperuser);
+router.get('/superusersignup', verifyToken,checkSuperuser, superuser.newsuperuser);
 router.post('/superusersignup', superuser.createsuperuser);
 
-router.get('/superuserlogin', superuser.getsuperuser);
+router.get('/superuserlogin',isAuthenticated, superuser.getsuperuser);
 router.post('/superuserlogin', superuser.accesssuperuser);
 
 router.get('/superadmin',verifyToken,checkSuperuser, superuser.superadmin);

@@ -227,27 +227,13 @@ const updateCardsWithData = (hotelData) => {
         method: 'GET',
       }).then(response => { 
         if (response.ok) {
-          console.log('Clicked hotel name sent to the backend successfully');
+          // console.log('Clicked hotel name sent to the backend successfully');
           // Redirect to hotelInfo route after sending the hotel name
-          // window.location.href = `/hotelInfo?clickedHotelName=${clickedHotelName}`;
-
-          
-        
-          // window.location.href = url
-          // window.location.href = `/hotelInfo?clickedHotelName=Oberoi%20Grand&checkIn=2024-05-16&checkOut=2024-05-17`;
-
           const url = `/hotelInfo?clickedHotelName=${encodeURIComponent(
             clickedHotelName
           )}&checkIn=2024-05-02&checkOut=2024-05-03`;
 
           window.location.href = url;
-          // const url = `/hotelInfo?clickedHotelName=${encodeURIComponent(
-          //   clickedHotelName
-          // )}&checkIn=${encodeURIComponent(checkInDate)}&checkOut=${encodeURIComponent(checkOutDate)}`;
-          
-      
-          // Redirect to hotelInfo with the correct hotel name
-          
         } else {
           console.error('Failed to send clicked hotel name to the backend');
         }
