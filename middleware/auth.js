@@ -54,14 +54,7 @@ exports.checkBusinessUser = (req, res, next) => {
 	}
 }
 
-// const storage = multer.diskStorage({
-//   destination:"./views/myuploads",  
-//   filename: (req, file, cb) => {
-//     cb(null, file.fieldname +"-"+Date.now()+path.extname(file.originalname));
-//   }
-// })
 
-// exports.upload = multer({ storage: storage }).array("imageLinks", 5);
 
 const storage = multer.diskStorage({
   destination: "./views/myuploads",
@@ -90,6 +83,7 @@ exports.upload = (req, res, next) => {
 };
 
 
+
 exports.isAuthenticated = (req, res, next) => {
   // Check for the presence of the token in cookies
   const token = req.cookies.token;
@@ -107,8 +101,18 @@ exports.isAuthenticated = (req, res, next) => {
 
     // If user is authenticated, store user information in req.user
     req.user = decodedToken;
-    
-    // Redirect authenticated user to another route (e.g., dashboard)
-    res.redirect('/index'); // Change '/index' to your desired authenticated route
+
+    if(req.user && req.user.role === "user") {
+      return res.redirect('/index');
+    }else if(req.user && req.user.role === "business"){
+      return res.redirect('/business/dashboard');
+    }else if(req.user && req.user.role === "superuser"){
+      return res.redirect('/superadmin');
+    }
+    // Check if the user is a guest user
+   
+    return next();
+    // For other authenticated users, redirect to a different route
+    ; // Change '/index' to your desired authenticated route
   });
 };

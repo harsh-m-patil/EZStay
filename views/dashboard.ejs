@@ -54,12 +54,7 @@
           <span>Images</span>
         </a>
       </li>
-      <li>
-        <a href="#">
-          <i class="fas fa-star"></i>
-          <span>Reviews</span>
-        </a>
-      </li>
+      
       <li>
         <a href="#">
           <i class="fas fa-gear"></i>
@@ -199,10 +194,12 @@
                     <div>
                       <div class="hotel-profile">
                         <!-- <img src="<%= hotel ? hotel.imageLinks[0] : ''%>"> -->
+                        <%if(hotel) {%>
                         <img src="/myuploads/<%= hotel.imageLinks[0] %>" alt="Hotel Image">
                         <h1>
                           <%= hotel ? hotel.hotelName: '' %>
                         </h1>
+                        <% } %>
                       </div>
                     </div>
                     <div class="profile-extra-info">
@@ -236,9 +233,7 @@
                           destination unto
                           itself.
                           Located in
-                          the heart of Chennai the hotel is a palatial tribute to Southern India's greatest empires -
-                          the Imperial
-                          Cholas. There are four separate entry points, each with its distinct artistic identity.
+                          the heart of <%= hotel ? hotel.hotelAddress: '' %> the hotel is a palatial tribute to  India.
                       </p>
                     </div>
                     <div class="pr-three-childs-container">
@@ -359,7 +354,7 @@
 
       <% } else { %>
 
-        <form action="updatehotel/" method="POST" >
+        <form action="updatehotel/" method="POST">
 
           <label for=" username">Username</label>
           <input type="text" id="username" name="username"
@@ -406,17 +401,7 @@
       </form>
     </div>
   </section>
-  <section class="reviews hidden">
-    <!-- reviews section header and search bar -->
-    <div class="header-wrapper">
-      <div class="header-title">
-        <h1>reviews</h1>
-      </div>
-    </div>
-    <div class="grid-reviews">
-      <!-- reviews will be populated dynamically -->
-    </div>
-  </section>
+ 
   <section class="settings hidden">
     <!-- reviews section header and search bar -->
     <div class="header-wrapper">

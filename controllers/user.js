@@ -207,7 +207,7 @@ exports.index = async (req, res) => {
   // res.render('index', { user: req.user });
 
   const hotels = await Hotel.find();
-  console.log(hotels);
+  // console.log(hotels);
 
   // Render index.ejs with hotels data
   res.render('index', { user: req.user, hotels: hotels });
