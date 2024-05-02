@@ -18,64 +18,51 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
 
-      const SBinput = document.querySelector('#SBinput');
-      const DBinput = document.querySelector('#DBinput');
-      const roomsInput = document.querySelector('.rooms-input');
-
-      const guestInput = document.querySelector('#guestInput');
-
-      function checkNonNegative() {
-        const value = parseInt(guestInput.value); 
-        if (value < 0) {
-          guestInput.value = 0; 
-        }
-      }
-
-      guestInput.addEventListener('input', checkNonNegative); 
-
-
-      function updateRoomsInput() {
-        const sbValue = Math.max(0, parseInt(SBinput.value));
-        const dbValue = Math.max(0, parseInt(DBinput.value));
-
-        SBinput.value = sbValue;
-        DBinput.value = dbValue;
-
-        roomsInput.value = sbValue + dbValue;
-      }
-
-      SBinput.addEventListener('input', updateRoomsInput);
-      DBinput.addEventListener('input', updateRoomsInput);
-
-      updateRoomsInput();
-
-
-
-
         const checkInInput = document.querySelector(".checkInInput");
         const checkOutInput = document.querySelector(".checkOutInput");
         const hotelPriceInDB = document.querySelector(".hotelPriceInDB");
         const nights = document.querySelector(".nights");
         const hotelPrice = parseInt(hotelPriceInDB.textContent.replace(/,/g, ''));
-  
-        // Function to calculate and update total price and nights
+        
+
+
         function updatePriceAndNights() {
           const checkInDate = new Date(checkInInput.value);
           const checkOutDate = new Date(checkOutInput.value);
+         
+
+          const minCheckOutDate = new Date(checkInDate);
+          minCheckOutDate.setDate(checkInDate.getDate() + 1);
+          
+          checkOutInput.min = minCheckOutDate.toISOString().split('T')[0];
+          
+          if (checkOutInput.value < checkOutInput.min) {
+              checkOutInput.value = checkOutInput.min;
+          }
   
+          console.log(checkInDate);
+          console.log(checkOutDate);
+          
           // Calculate number of nights
           const numberOfNights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
   
+          Rooms = document.querySelector(".roomSpan").textContent 
+          console.log(Rooms);
+
           // Calculate total price
-          const totalPrice = hotelPrice * numberOfNights;
+          const totalPrice = hotelPrice * numberOfNights*Rooms;
   
           // Update HTML elements with new values
           document.querySelector(".total-amt p:last-child").textContent = `₹ ${totalPrice.toLocaleString("en-IN")}`;
           document.querySelector(".nights").textContent = `${numberOfNights}`;
           document.querySelector(".amt-before-tax p:last-child").textContent = `₹ ${totalPrice.toLocaleString("en-IN")}`;
+          
+          // document.querySelector(".amt-before-tax p:last-child").textContent = `₹ ${totalPrice.toLocaleString("en-IN")}`;
+          console.log("totaol:",totalPrice);
   
           // Send data to backend
           sendDataToServer(checkInDate, checkOutDate,totalPrice);
+          
         }
   
         // Initial calculation when page loads
@@ -84,13 +71,17 @@
         // Event listeners for input changes
         checkInInput.addEventListener("change", updatePriceAndNights);
         checkOutInput.addEventListener("change", updatePriceAndNights);
+      
       });
+
+      
   
       async function sendDataToServer(checkInDate, checkOutDate,totalPrice) {
         const dataToSend = {
           checkIn: checkInDate,
           checkOut: checkOutDate,
-          totalPrice:totalPrice
+          totalPrice:totalPrice,
+          
         };
   
         try {
@@ -123,7 +114,8 @@
     <nav>
       <!-- Left side of navigation bar -->
       <div class="nav-leftside">
-        <img class="logo" src="images/logo.svg" alt="img" />
+        
+        <a href="/index"><img class="logo" src="images/logo.svg" alt="img" /></a>
       </div>
 
       <!-- Right side of navigation bar -->
@@ -382,53 +374,52 @@
 
               
               
-              <div class="totalRooms">
+              <form class="totalRooms" method="post" action='/search'>
 
-                <div class="singleBed">
+                <!-- <div class="singleBed">
                   <label for="SBinput">Guests: </label> 
                   
                   <input id="guestInput" type="number" value="0"> 
                   
-                </div>
+                </div> -->
 
 
-                <div class="rooms">
+                <!-- <div class="rooms">
                   <label for="rooms-input">Rooms: </label> 
-                  <input class="rooms-input" value="0"> 
-                </div>
+                  <input class="rooms-input" type="number" value="1"> 
+                </div> -->
               
          
-                <div class="singleBed">
+                <!-- <div class="singleBed">
                   <label for="SBinput">Single Bed: </label> 
-                  
                   <input id="SBinput" type="number" value="0"> 
                   
-                </div>
+                </div> -->
               
              
-                <div class="doubleBed">
+                <!-- <div class="doubleBed">
                   <label for="DBinput">Double Bed: </label>
                  
                   <input id="DBinput" type="number" value="0"> 
                   
-                </div>
-              </div>
+                </div> -->
+              </form>
               
             
-            <button>Book</button>
+            <button>Book</button> 
 
             <div class="total-amt">
               <% if (checkOut && checkIn) { %>
-              <p>
-                ₹ <%= clickedHotel.hotelPrice.toLocaleString('en-IN') %> × <span class="nights"><%=
-                  Math.round((new Date(checkOut) - new Date(checkIn)) / (1000 * 60
-                  * 60 * 24)) %></span> nights
-              </p>
-              <p>
-                ₹ <%= (clickedHotel.hotelPrice * Math.round((new Date(checkOut)
-                - new Date(checkIn)) / (1000 * 60 * 60 *
-                24))).toLocaleString('en-IN') %>
-              </p>
+                <p>
+                  ₹ <%= clickedHotel.hotelPrice.toLocaleString('en-IN') %> × <span class="nights"><%=
+                    Math.max(1, Math.round((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24))) %></span> nights
+                  × <span class="roomSpan"><%= typeof Rooms !== 'undefined' ? Rooms : 1 %></span> rooms
+                </p>
+                <p>
+                  ₹ <%= (typeof Rooms !== 'undefined' ? Rooms : 1) * 
+                    (clickedHotel.hotelPrice * Math.max(1, Math.round((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24)))) %>
+                </p>
+                
               <% } else { %>
               <p>
                 ₹ <%= clickedHotel.hotelPrice.toLocaleString('en-IN') %> × 1
@@ -439,12 +430,12 @@
             </div>
 
             <div class="amt-before-tax">
-              <p id="txt">Total before taxes</p>
+              <p id="txt">Total Amount</p>
               <% if (checkOut && checkIn) { %>
               <p>
-                ₹ <%= (clickedHotel.hotelPrice * Math.round((new Date(checkOut)
+                ₹ <%= (Rooms*(clickedHotel.hotelPrice * Math.round((new Date(checkOut)
                 - new Date(checkIn)) / (1000 * 60 * 60 *
-                24))).toLocaleString('en-IN') %>
+                24)))).toLocaleString('en-IN') %>
               </p>
               <% } else {%>
               <p>₹<%= clickedHotel.hotelPrice.toLocaleString('en-IN') %></p>
