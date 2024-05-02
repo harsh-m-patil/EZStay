@@ -225,9 +225,13 @@ const updateCardsWithData = (hotelData) => {
         method: 'GET',
       }).then(response => {
         if (response.ok) {
-          console.log('Clicked hotel name sent to the backend successfully');
+          // console.log('Clicked hotel name sent to the backend successfully');
           // Redirect to hotelInfo route after sending the hotel name
-          window.location.href = `/hotelInfo?clickedHotelName=${clickedHotelName}`;
+          const url = `/hotelInfo?clickedHotelName=${encodeURIComponent(
+            clickedHotelName
+          )}&checkIn=2024-05-02&checkOut=2024-05-03`;
+
+          window.location.href = url;
         } else {
           console.error('Failed to send clicked hotel name to the backend');
         }
